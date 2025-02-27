@@ -1,4 +1,4 @@
-﻿namespace HealthHorizon_API.Models
+﻿namespace HealthHorizon_API.Models.PersonTypes
 {
 	public class AIChatLog
 	{

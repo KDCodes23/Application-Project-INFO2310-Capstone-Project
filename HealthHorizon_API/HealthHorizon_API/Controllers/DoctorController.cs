@@ -1,4 +1,5 @@
 ﻿using HealthHorizon_API.Data;
+using HealthHorizon_API.Models.PersonTypes;
 using HealthHorizon_API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<List<StaffRole>>> GetAllDocotrs()
+		public async Task<ActionResult<List<StaffRole>>> GetAllDoctors()
 		{
 			var doctors = await context.Doctors.ToListAsync();
 			if (doctors == null)
@@ -29,7 +30,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<StaffRole>> GetDocotr(int id)
+		public async Task<ActionResult<StaffRole>> GetDoctor(int id)
 		{
 			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == id);
 			if (doctor == null)
@@ -40,15 +41,15 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> PostDocotr(Doctor newDocotr)
+		public async Task<ActionResult> PostDoctor(Doctor newDocotor)
 		{
-			await context.Doctors.AddAsync(newDocotr);
+			await context.Doctors.AddAsync(newDocotor);
 			await context.SaveChangesAsync();
 			return Ok();
 		}
 
 		[HttpPut]
-		public async Task<ActionResult> UpdateDocotr(Doctor newDoctor)
+		public async Task<ActionResult> UpdateDoctor(Doctor newDoctor)
 		{
 			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == newDoctor.Id);
 			if (doctor == null)
@@ -65,7 +66,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpDelete]
-		public async Task<ActionResult> DeleteDocotr(int id)
+		public async Task<ActionResult> DeleteDoctor(int id)
 		{
 			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == id);
 			if (doctor == null)
