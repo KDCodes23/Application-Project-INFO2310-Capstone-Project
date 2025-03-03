@@ -13,6 +13,14 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<HealthHorizonContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("HealthHorizonContext")));
 
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("AllowAllOrigins", policy =>
+	{
+		policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyHeader();
+	});
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,6 +33,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors("AllowAllOrigins");
 
 app.MapControllers();
 

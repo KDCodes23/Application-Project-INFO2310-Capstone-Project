@@ -7,5 +7,6 @@ namespace HealthHorizon_API.Controllers
 	[ApiController]
 	public class AIChatController : ControllerBase
 	{
+	
 	}
 }
