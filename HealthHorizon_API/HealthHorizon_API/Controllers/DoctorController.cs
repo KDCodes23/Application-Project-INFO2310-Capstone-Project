@@ -41,7 +41,6 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPost]
-		[Route("Update-Doctor")]
 		public async Task<ActionResult> PostDoctor(Doctor newDocotor)
 		{
 			await context.Doctors.AddAsync(newDocotor);

@@ -51,7 +51,6 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPut]
-		[Route("Update-Appointment")]
 		public async Task<ActionResult> UpdateAppointment(Appointment appointment)
 		{
 			var appointmentDB = await context.Appointments.FirstOrDefaultAsync(a => a.Id == appointment.Id);

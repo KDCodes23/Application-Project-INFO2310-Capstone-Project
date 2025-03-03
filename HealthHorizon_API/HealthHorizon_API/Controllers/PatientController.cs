@@ -48,7 +48,6 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPut]
-		[Route("Update-Patient")]
 		public async Task<ActionResult> UpdatePatient(Patient newPatient)
 		{
 			var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == newPatient.Id);
