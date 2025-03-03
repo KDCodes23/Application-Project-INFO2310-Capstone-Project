@@ -41,6 +41,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPost]
+		[Route("Update-Doctor")]
 		public async Task<ActionResult> PostDoctor(Doctor newDocotor)
 		{
 			await context.Doctors.AddAsync(newDocotor);
@@ -65,7 +66,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[HttpDelete]
+		[HttpDelete("{id}")]
 		public async Task<ActionResult> DeleteDoctor(int id)
 		{
 			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == id);
