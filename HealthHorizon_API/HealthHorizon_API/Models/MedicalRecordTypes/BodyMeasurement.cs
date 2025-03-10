@@ -1,13 +1,21 @@
 ﻿using HealthHorizon_API.Models.PersonTypes;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace HealthHorizon_API.Models.Medical_Record_Types
 {
 	public class BodyMeasurement
 	{
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int Id { get; set; }
 		public DateTime Date { get; set; }
 
 		public int DoctorId { get; set; }
 		public Doctor Doctor { get; set; } = null!;
+
+		public int MedicalRecordId { get; set; }
+		public MedicalRecord MedicalRecord { get; set; } = null!;
 
 		public double Height { get; set; } = 0;
 		public double Weight { get; set; } = 0;
@@ -21,5 +29,6 @@ namespace HealthHorizon_API.Models.Medical_Record_Types
 		public double CalfCircumference { get; set; } = 0;
 		public double BodyFatPercentage { get; set; } = 0;
 		public double MuscleMass { get; set; } = 0;
+		public string Notes { get; set; } = string.Empty;
 	}
 }

@@ -1,13 +1,21 @@
 ﻿using HealthHorizon_API.Models.PersonTypes;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace HealthHorizon_API.Models.Medical_Record_Types
 {
 	public class CardiacTest
 	{
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int Id { get; set; }
 		public DateTime Date { get; set; }
 
 		public int DoctorId { get; set; }
 		public Doctor Doctor { get; set; } = null!;
+
+		public int MedicalRecordId { get; set; }
+		public MedicalRecord MedicalRecord { get; set; } = null!;
 
 		public bool Electrocardiogram { get; set; } = false;
 		public bool Echocardiogram { get; set; } = false;
@@ -31,5 +39,6 @@ namespace HealthHorizon_API.Models.Medical_Record_Types
 		public double HDLCholesterol { get; set; } = 0;
 		public double EjectionFraction { get; set; } = 0;
 		public double CoronaryCalciumScore { get; set; } = 0;
+		public string Notes { get; set; } = string.Empty;	
 	}
 }

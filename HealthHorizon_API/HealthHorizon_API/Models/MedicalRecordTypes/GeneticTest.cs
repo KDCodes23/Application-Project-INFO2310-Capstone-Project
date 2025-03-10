@@ -1,13 +1,21 @@
 ﻿using HealthHorizon_API.Models.PersonTypes;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace HealthHorizon_API.Models.Medical_Record_Types
 {
 	public class GeneticTest
 	{
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int Id { get; set; }
 		public DateTime Date { get; set; }
 
 		public int DoctorId { get; set; }
 		public Doctor Doctor { get; set; } = null!;
+
+		public int MedicalRecordId { get; set; }
+		public MedicalRecord MedicalRecord { get; set; } = null!;
 
 		public bool CarrierScreening { get; set; } = false;
 		public bool WholeExomeSequencing { get; set; } = false;
@@ -32,5 +40,6 @@ namespace HealthHorizon_API.Models.Medical_Record_Types
 		public double HeartDiseaseRiskScore { get; set; } = 0;
 		public double AlzheimerRiskScore { get; set; } = 0;
 		public double ObesityRiskScore { get; set; } = 0;
+		public string Notes { get; set; } = string.Empty;
 	}
 }

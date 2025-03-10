@@ -1,13 +1,21 @@
 ﻿using HealthHorizon_API.Models.PersonTypes;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace HealthHorizon_API.Models.Medical_Record_Types
 {
 	public class RespiratoryTest
 	{
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int Id { get; set; }
 		public DateTime Date { get; set; }
 
 		public int DoctorId { get; set; }
 		public Doctor Doctor { get; set; } = null!;
+
+		public int MedicalRecordId { get; set; }
+		public MedicalRecord MedicalRecord { get; set; } = null!;
 
 		public bool SpirometryPerformed { get; set; } = false;
 		public float FEV1 { get; set; } = 0;

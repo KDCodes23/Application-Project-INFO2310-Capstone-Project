@@ -31,7 +31,7 @@ namespace HealthHorizon_API.Controllers
 		[HttpGet("{id}")]
 		public async Task<ActionResult<StaffRole>> GetRole(int id)
 		{
-			var role = await context.Roles.FirstOrDefaultAsync(x => x.Id == id);
+			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == id);
 			if (role == null)
 			{
 				return NotFound();
@@ -42,7 +42,7 @@ namespace HealthHorizon_API.Controllers
 		[HttpPost]
 		public async Task<ActionResult> PostRole(StaffRole newRole)
 		{
-			await context.Roles.AddAsync(newRole);
+			await context.StaffRoles.AddAsync(newRole);
 			await context.SaveChangesAsync();
 			return Ok();
 		}
@@ -50,7 +50,7 @@ namespace HealthHorizon_API.Controllers
 		[HttpPut]
 		public async Task<ActionResult> UpdateRole(StaffRole newRole)
 		{
-			var role = await context.Roles.FirstOrDefaultAsync(x => x.Id == newRole.Id);
+			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == newRole.Id);
 			if (role == null)
 			{
 				return NotFound();
@@ -64,12 +64,12 @@ namespace HealthHorizon_API.Controllers
 		[HttpDelete]
 		public async Task<ActionResult> DeleteRole(int id)
 		{
-			var role = await context.Roles.FirstOrDefaultAsync(x => x.Id == id);
+			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == id);
 			if (role == null)
 			{
 				return NotFound();
 			}
-			context.Roles.Remove(role);
+			context.StaffRoles.Remove(role);
 			await context.SaveChangesAsync();
 			return Ok();
 		}

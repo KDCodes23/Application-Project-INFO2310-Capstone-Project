@@ -333,3 +333,8 @@ D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Pro
 D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\obj\Debug\net9.0\HealthHorizon_API.genruntimeconfig.cache
 D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\obj\Debug\net9.0\ref\HealthHorizon_API.dll
 D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\obj\Debug\net9.0\HealthHorizon_API.sourcelink.json
+D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
+D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll

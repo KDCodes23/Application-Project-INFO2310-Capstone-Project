@@ -1,20 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using HealthHorizon_API.Models.PersonTypes;
 
-namespace HealthHorizon_API.Models.PersonTypes
+namespace HealthHorizon_API.Models
 {
-	public class Appointment
+	public class TimeSlot
 	{
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
-		public DateTime Date { get; set; }
-		public string Status { get; set; } = string.Empty;
-
+		public DateTime Start { get; set; }
+		public DateTime End { get; set; }
 		public int DoctorId { get; set; }
 		public Doctor Doctor { get; set; } = null!;
-
-		public int PatientId { get; set; }
-		public Patient Patient { get; set; } = null!;
 	}
 }

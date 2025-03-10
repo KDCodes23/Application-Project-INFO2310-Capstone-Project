@@ -18,17 +18,6 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<List<StaffRole>>> GetAllPatients()
-		{
-			var patients = await context.Patients.ToListAsync();
-			if (patients == null)
-			{
-				return NotFound();
-			}
-			return Ok(patients);
-		}
-
-		[HttpGet("{id}")]
 		public async Task<ActionResult<StaffRole>> GetPatient(int id)
 		{
 			var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == id);
@@ -64,7 +53,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[HttpDelete("{id}")]
+		[HttpDelete]
 		public async Task<ActionResult> DeletePatient(int id)
 		{
 			var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == id);

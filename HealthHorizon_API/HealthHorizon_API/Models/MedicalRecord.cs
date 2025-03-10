@@ -1,9 +1,13 @@
 ﻿using HealthHorizon_API.Models.Medical_Record_Types;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace HealthHorizon_API.Models.PersonTypes
 {
 	public class MedicalRecord
 	{
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
 		public string Notes { get; set; } = string.Empty;
 		public DateTime Date { get; set; }
@@ -19,7 +23,7 @@ namespace HealthHorizon_API.Models.PersonTypes
 		public List<ImagingReport> ImagingReports { get; set; } = new List<ImagingReport>();
 		public List<InfectiousDiseaseTest> InfectiousDiseaseTests { get; set; } = new List<InfectiousDiseaseTest>();
 		public List<LaboratoryTest> LaboratoryTests { get; set; } = new List<LaboratoryTest>();
-		public List<NeurologicalTests> NeurologicalTests { get; set; } = new List<NeurologicalTests>();
+		public List<NeurologicalTest> NeurologicalTests { get; set; } = new List<NeurologicalTest>();
 		public List<RespiratoryTest> RespiratoryTests { get; set; } = new List<RespiratoryTest>();
 		public List<VitalSign> VitalSigns { get; set; } = new List<VitalSign>();
 	}

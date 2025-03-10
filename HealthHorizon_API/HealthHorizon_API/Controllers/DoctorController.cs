@@ -60,12 +60,11 @@ namespace HealthHorizon_API.Controllers
 			doctor.Specialization = newDoctor.Specialization;
 			doctor.Email = newDoctor.Email;
 			doctor.PhoneNumber = newDoctor.PhoneNumber;
-			doctor.Schedule = newDoctor.Schedule;
 			await context.SaveChangesAsync();
 			return Ok();
 		}
 
-		[HttpDelete("{id}")]
+		[HttpDelete]
 		public async Task<ActionResult> DeleteDoctor(int id)
 		{
 			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == id);
