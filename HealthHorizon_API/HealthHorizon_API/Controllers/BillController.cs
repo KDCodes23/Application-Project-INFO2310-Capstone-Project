@@ -42,7 +42,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> PostBill(Bill bill)
+		public async Task<ActionResult> PostBill([FromBody] Bill bill)
 		{
 			if (bill == null)
 			{
@@ -56,7 +56,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPut]
-		public async Task<ActionResult> UpdateBill(Bill bill)
+		public async Task<ActionResult> UpdateBill([FromBody] Bill bill)
 		{
 			var billDB = await context.Bills.FirstOrDefaultAsync(b => b.Id == bill.Id);
 			if (billDB == null)

@@ -29,7 +29,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> PostPatient(Patient newPatient)
+		public async Task<ActionResult> PostPatient([FromBody] Patient newPatient)
 		{
 			await context.Patients.AddAsync(newPatient);
 			await context.SaveChangesAsync();
@@ -37,7 +37,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPut]
-		public async Task<ActionResult> UpdatePatient(Patient newPatient)
+		public async Task<ActionResult> UpdatePatient([FromBody] Patient newPatient)
 		{
 			var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == newPatient.Id);
 			if (patient == null)

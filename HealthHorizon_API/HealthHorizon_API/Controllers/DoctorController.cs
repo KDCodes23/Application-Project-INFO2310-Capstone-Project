@@ -41,7 +41,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> PostDoctor(Doctor newDocotor)
+		public async Task<ActionResult> PostDoctor([FromBody] Doctor newDocotor)
 		{
 			await context.Doctors.AddAsync(newDocotor);
 			await context.SaveChangesAsync();
@@ -49,7 +49,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPut]
-		public async Task<ActionResult> UpdateDoctor(Doctor newDoctor)
+		public async Task<ActionResult> UpdateDoctor([FromBody] Doctor newDoctor)
 		{
 			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == newDoctor.Id);
 			if (doctor == null)

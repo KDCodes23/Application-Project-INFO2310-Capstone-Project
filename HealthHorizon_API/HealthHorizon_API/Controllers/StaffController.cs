@@ -42,7 +42,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> PostStaff(Staff staff)
+		public async Task<ActionResult> PostStaff([FromBody] Staff staff)
 		{
 			if (staff == null)
 			{
@@ -56,7 +56,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPut]
-		public async Task<ActionResult> UpdateStaff(Staff staff)
+		public async Task<ActionResult> UpdateStaff([FromBody] Staff staff)
 		{
 			var staffDB = await context.Staffs.FirstOrDefaultAsync(s => s.Id == staff.Id);
 			if (staffDB == null)

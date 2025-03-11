@@ -42,7 +42,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> PostFeedback(Feedback feedback)
+		public async Task<ActionResult> PostFeedback([FromBody] Feedback feedback)
 		{
 			if (feedback == null)
 			{
@@ -56,7 +56,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPut]
-		public async Task<ActionResult> UpdateFeddback(Feedback feedback)
+		public async Task<ActionResult> UpdateFeddback([FromBody] Feedback feedback)
 		{
 			var feedbackDB = await context.Feedbacks.FirstOrDefaultAsync(f => f.Id == feedback.Id);
 			if (feedbackDB == null)

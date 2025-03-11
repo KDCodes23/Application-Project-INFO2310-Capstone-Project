@@ -43,7 +43,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> PostAppointment(Appointment appointment)
+		public async Task<ActionResult> PostAppointment([FromBody] Appointment appointment)
 		{
 			await context.Appointments.AddAsync(appointment);
 			await context.SaveChangesAsync();
@@ -51,7 +51,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPut]
-		public async Task<ActionResult> UpdateAppointment(Appointment appointment)
+		public async Task<ActionResult> UpdateAppointment([FromBody] Appointment appointment)
 		{
 			var appointmentDB = await context.Appointments.FirstOrDefaultAsync(a => a.Id == appointment.Id);
 			if (appointmentDB == null)

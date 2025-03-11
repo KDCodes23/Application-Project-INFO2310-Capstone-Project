@@ -43,7 +43,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> PostAiChatLog(AIChatLog log)
+		public async Task<ActionResult> PostAiChatLog([FromBody] AIChatLog log)
 		{
 			if (log == null)
 			{
@@ -56,7 +56,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPut]
-		public async Task<ActionResult> UpdateAiChatLog(AIChatLog log)
+		public async Task<ActionResult> UpdateAiChatLog([FromBody] AIChatLog log)
 		{
 			var logDB = await context.AIChatLogs.FirstOrDefaultAsync(l => l.Id == log.Id);
 			if (logDB == null)

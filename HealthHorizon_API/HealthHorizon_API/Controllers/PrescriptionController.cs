@@ -42,7 +42,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> PostPrescription(Prescription prescription)
+		public async Task<ActionResult> PostPrescription([FromBody] Prescription prescription)
 		{
 			if (prescription == null)
 			{
@@ -56,7 +56,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpPut]
-		public async Task<ActionResult> UpdatePrescription(Prescription prescription)
+		public async Task<ActionResult> UpdatePrescription([FromBody] Prescription prescription)
 		{
 			var prescriptionDB = await context.Prescriptions.FirstOrDefaultAsync(p => p.Id == prescription.Id);
 			if (prescriptionDB == null)
