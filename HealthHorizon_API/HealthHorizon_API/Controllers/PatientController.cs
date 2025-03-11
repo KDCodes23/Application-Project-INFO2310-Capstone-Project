@@ -20,7 +20,7 @@ namespace HealthHorizon_API.Controllers
 		[HttpGet]
 		public async Task<ActionResult<StaffRole>> GetPatient(int id)
 		{
-			var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == id);
+			var patient = await context.Patients.Include(p => p.Address).FirstOrDefaultAsync(x => x.Id == id);
 			if (patient == null)
 			{
 				return NotFound();

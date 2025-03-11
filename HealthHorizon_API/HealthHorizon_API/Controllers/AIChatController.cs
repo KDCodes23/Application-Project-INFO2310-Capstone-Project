@@ -21,7 +21,7 @@ namespace HealthHorizon_API.Controllers
 		[HttpGet]
 		public async Task<ActionResult<List<AIChatLog>>> GetAllAiChatLogs()
 		{
-			var logs = await context.AIChatLogs.ToListAsync();
+			var logs = await context.AIChatLogs.Include(l => l.Patient).ToListAsync();
 			if (logs == null)
 			{
 				return NotFound();
@@ -33,7 +33,7 @@ namespace HealthHorizon_API.Controllers
 		[HttpGet("{id}")]
 		public async Task<ActionResult<AIChatLog>> GetAiChatLog(int id)
 		{
-			var log = await context.AIChatLogs.FirstOrDefaultAsync(l => l.Id == id);
+			var log = await context.AIChatLogs.Include(l => l.Patient).FirstOrDefaultAsync(l => l.Id == id);
 			if (log == null)
 			{
 				return NotFound();

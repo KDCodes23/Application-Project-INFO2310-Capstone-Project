@@ -20,7 +20,7 @@ namespace HealthHorizon_API.Controllers
 		[HttpGet]
 		public async Task<ActionResult<List<Bill>>> GetAllBills()
 		{
-			var bills = await context.Bills.ToListAsync();
+			var bills = await context.Bills.Include(b => b.Appointment).ToListAsync();
 			if (bills == null)
 			{
 				return NotFound();
@@ -32,7 +32,7 @@ namespace HealthHorizon_API.Controllers
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Bill>> GetBill(int id)
 		{
-			var bill = await context.Bills.FirstOrDefaultAsync(b => b.Id == id);
+			var bill = await context.Bills.Include(b => b.Appointment).FirstOrDefaultAsync(b => b.Id == id);
 			if (bill == null)
 			{
 				return NotFound();
