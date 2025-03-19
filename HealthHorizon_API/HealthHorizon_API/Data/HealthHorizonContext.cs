@@ -41,7 +41,7 @@ namespace HealthHorizon_API.Data
 			modelBuilder.Entity<IdentityUserRole<string>>().HasKey(r => new { r.UserId, r.RoleId });
 			modelBuilder.Entity<IdentityUserToken<string>>().HasKey(t => new { t.UserId, t.LoginProvider, t.Name });
 
-			modelBuilder.Entity<Patient>().HasOne(p => p.Address).WithOne().HasForeignKey<Patient>(p => p.AddressId);
+			modelBuilder.Entity<Patient>().HasOne(p => p.Address).WithOne(a => a.Patient).HasForeignKey<Patient>(p => p.AddressId).IsRequired(false); ;
 
 			modelBuilder.Entity<Staff>().HasOne(s => s.Role).WithOne().HasForeignKey<Staff>(s => s.RoleId);
 

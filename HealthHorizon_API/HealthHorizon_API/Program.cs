@@ -24,7 +24,7 @@ builder.Services.AddCors(options =>
 {
 	options.AddPolicy("AllowAllOrigins", policy =>
 	{
-		policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyHeader();
+		policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
 	});
 });
 
@@ -39,10 +39,11 @@ if (app.Environment.IsDevelopment())
 
 app.MapIdentityApi<IdentityUser>();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseCors("AllowReactApp");
 app.UseCors("AllowAllOrigins");
 
 app.MapControllers();
@@ -61,4 +62,27 @@ using (var scope = app.Services.CreateScope())
 	}
 }
 
-	app.Run();
+
+
+
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        context.Response.StatusCode = 500;
+        context.Response.ContentType = "application/json";
+
+        var exception = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>()?.Error;
+
+        if (exception != null)
+        {
+            var errorMessage = new { error = exception.Message, stackTrace = exception.StackTrace };
+            await context.Response.WriteAsJsonAsync(errorMessage);
+        }
+    });
+});
+
+
+
+
+app.Run();

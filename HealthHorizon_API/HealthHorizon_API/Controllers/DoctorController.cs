@@ -56,11 +56,15 @@ namespace HealthHorizon_API.Controllers
 			{
 				return NotFound();
 			}
-			doctor.Name = newDoctor.Name;
-			doctor.Specialization = newDoctor.Specialization;
-			doctor.Email = newDoctor.Email;
-			doctor.PhoneNumber = newDoctor.PhoneNumber;
-			await context.SaveChangesAsync();
+			doctor.FirstName = newDoctor.FirstName;
+            doctor.LastName = newDoctor.LastName;
+            doctor.Email = newDoctor.Email;
+            doctor.PhoneNumber = newDoctor.PhoneNumber;
+            doctor.Specialty = newDoctor.Specialty;
+			doctor.HospitalName = newDoctor.HospitalName;
+            doctor.ProfessionalBio = newDoctor.ProfessionalBio;
+            doctor.Password = newDoctor.Password;
+            await context.SaveChangesAsync();
 			return Ok();
 		}
 
@@ -76,5 +80,26 @@ namespace HealthHorizon_API.Controllers
 			await context.SaveChangesAsync();
 			return Ok();
 		}
-	}
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] Doctor doctor)
+        {
+            // Validate required fields
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            // Check for duplicate email (across both roles)
+            if (await context.Doctors.AnyAsync(d => d.Email == doctor.Email) ||
+                await context.Patients.AnyAsync(p => p.Email == doctor.Email))
+            {
+                return Conflict("Email already registered.");
+            }
+
+            // Save doctor
+            context.Doctors.Add(doctor);
+            await context.SaveChangesAsync();
+
+            return Ok(new { success = true });
+        }
+    }
 }

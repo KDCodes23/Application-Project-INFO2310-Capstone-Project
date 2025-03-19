@@ -8,12 +8,17 @@ namespace HealthHorizon_API.Models.PersonTypes
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
-		public string Name { get; set; } = string.Empty;
-		public DateTime DateOfBirth { get; set; }
-		public string Email { get; set; } = string.Empty;
-		public string PhoneNumber { get; set; } = string.Empty;
+        public string? FirstName { get; set; }  // Nullable
+        public string? LastName { get; set; }   // Nullable
+        public string? Email { get; set; }      // Nullable
+        public string? PhoneNumber { get; set; }      // Nullable
+        public DateTime? DateOfBirth { get; set; }
+        public string? Gender { get; set; }
+        public string? MedicalConditions { get; set; }
+        [Required]
+        public string? Password { get; set; }
 
-		public int AddressId { get; set; }
-		public Address Address {  get; set; } = null!;
-	}
+        public int AddressId { get; set; }
+        public Address? Address { get; set; } = null!;
+    }
 }
