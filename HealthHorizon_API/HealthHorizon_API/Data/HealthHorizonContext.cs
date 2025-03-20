@@ -1,6 +1,6 @@
-﻿using HealthHorizon_API.Models;
+﻿using HealthHorizon_API.Models.Entities;
+using HealthHorizon_API.Models.Identities;
 using HealthHorizon_API.Models.Medical_Record_Types;
-using HealthHorizon_API.Models.PersonTypes;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +17,7 @@ namespace HealthHorizon_API.Data
 		public DbSet<Patient> Patients { get; set; }
 		public DbSet<Address> Addresses { get; set; }
 		public DbSet<Prescription> Prescriptions { get; set; }
-		public DbSet<Staff> Staffs { get; set; }
+		public DbSet<Staff> StaffMembers { get; set; }
 		public DbSet<StaffRole> StaffRoles { get; set; }
 		public DbSet<TimeSlot> TimeSlots { get; set; }
 		public DbSet<MedicalRecord> MedicalRecords { get; set; }
@@ -37,18 +37,15 @@ namespace HealthHorizon_API.Data
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(l => new { l.LoginProvider, l.ProviderKey });
-			modelBuilder.Entity<IdentityUserRole<string>>().HasKey(r => new { r.UserId, r.RoleId });
-			modelBuilder.Entity<IdentityUserToken<string>>().HasKey(t => new { t.UserId, t.LoginProvider, t.Name });
 
 			modelBuilder.Entity<Patient>().HasOne(p => p.Address).WithOne().HasForeignKey<Patient>(p => p.AddressId);
 
-			modelBuilder.Entity<Staff>().HasOne(s => s.Role).WithOne().HasForeignKey<Staff>(s => s.RoleId);
+			modelBuilder.Entity<Staff>().HasOne(s => s.Role).WithMany().HasForeignKey(s => s.RoleId);
 
 			modelBuilder.Entity<AIChatLog>().HasOne(ai => ai.Patient).WithOne().HasForeignKey<AIChatLog>(ai => ai.PatientId);
 
-			modelBuilder.Entity<Appointment>().HasOne(a => a.Doctor).WithOne().HasForeignKey<Appointment>(a => a.DoctorId);
-			modelBuilder.Entity<Appointment>().HasOne(a => a.Patient).WithOne().HasForeignKey<Appointment>(a => a.PatientId);
+			modelBuilder.Entity<Appointment>().HasOne(a => a.Doctor).WithMany().HasForeignKey(a => a.DoctorId);
+			modelBuilder.Entity<Appointment>().HasOne(a => a.Patient).WithMany().HasForeignKey(a => a.PatientId);
 
 			modelBuilder.Entity<Bill>().HasOne(b => b.Appointment).WithOne().HasForeignKey<Bill>(b => b.AppointmentId);
 

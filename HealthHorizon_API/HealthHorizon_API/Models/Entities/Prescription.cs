@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace HealthHorizon_API.Models.PersonTypes
+namespace HealthHorizon_API.Models.Entities
 {
 	public class Prescription
 	{
@@ -10,7 +10,7 @@ namespace HealthHorizon_API.Models.PersonTypes
 		public int Id { get; set; }
 		public string MedicationName { get; set; } = string.Empty;
 		public string Dosage { get; set; } = string.Empty;
-		public string Instructions {  get; set; } = string.Empty;
+		public string Instructions { get; set; } = string.Empty;
 
 		public int AppointmentId { get; set; }
 		public Appointment Appointment { get; set; } = null!;

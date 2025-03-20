@@ -1,9 +1,9 @@
 ﻿using HealthHorizon_API.Data;
-using HealthHorizon_API.Models.PersonTypes;
 using HealthHorizon_API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using HealthHorizon_API.Models.Entities;
 
 namespace HealthHorizon_API.Controllers
 {
@@ -58,7 +58,7 @@ namespace HealthHorizon_API.Controllers
 			}
 			doctor.Name = newDoctor.Name;
 			doctor.Specialization = newDoctor.Specialization;
-			doctor.Email = newDoctor.Email;
+			doctor.User.Email = newDoctor.User.Email;
 			doctor.PhoneNumber = newDoctor.PhoneNumber;
 			await context.SaveChangesAsync();
 			return Ok();

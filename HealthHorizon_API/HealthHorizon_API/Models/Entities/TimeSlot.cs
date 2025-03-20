@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using HealthHorizon_API.Models.PersonTypes;
 
-namespace HealthHorizon_API.Models
+namespace HealthHorizon_API.Models.Entities
 {
 	public class TimeSlot
 	{

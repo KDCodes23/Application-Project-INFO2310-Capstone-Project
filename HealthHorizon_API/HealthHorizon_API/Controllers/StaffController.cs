@@ -1,5 +1,5 @@
 ﻿using HealthHorizon_API.Data;
-using HealthHorizon_API.Models.PersonTypes;
+using HealthHorizon_API.Models.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +20,7 @@ namespace HealthHorizon_API.Controllers
 		[HttpGet]
 		public async Task<ActionResult<List<Staff>>> GetAllStaff()
 		{
-			var staff = await context.Staffs.Include(s => s.Role).ToListAsync();
+			var staff = await context.StaffMembers.Include(s => s.Role).ToListAsync();
 			if (staff == null)
 			{
 				return NotFound();
@@ -32,7 +32,7 @@ namespace HealthHorizon_API.Controllers
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Staff>> GetStaff(int id)
 		{
-			var staff = await context.Staffs.Include(s => s.Role).FirstOrDefaultAsync(s => s.Id == id);
+			var staff = await context.StaffMembers.Include(s => s.Role).FirstOrDefaultAsync(s => s.Id == id);
 			if (staff == null)
 			{
 				return NotFound();
@@ -49,7 +49,7 @@ namespace HealthHorizon_API.Controllers
 				return BadRequest();
 			}
 
-			await context.Staffs.AddAsync(staff);
+			await context.StaffMembers.AddAsync(staff);
 			await context.SaveChangesAsync();
 
 			return Ok();
@@ -58,14 +58,14 @@ namespace HealthHorizon_API.Controllers
 		[HttpPut]
 		public async Task<ActionResult> UpdateStaff([FromBody] Staff staff)
 		{
-			var staffDB = await context.Staffs.FirstOrDefaultAsync(s => s.Id == staff.Id);
+			var staffDB = await context.StaffMembers.FirstOrDefaultAsync(s => s.Id == staff.Id);
 			if (staffDB == null)
 			{
 				return BadRequest();
 			}
 
 			staffDB.Name = staff.Name;
-			staffDB.Email = staff.Email;
+			staffDB.User.Email = staff.User.Email;
 			staffDB.PhoneNumber = staff.PhoneNumber;
 			staffDB.RoleId = staff.RoleId;
 			await context.SaveChangesAsync();
@@ -76,13 +76,13 @@ namespace HealthHorizon_API.Controllers
 		[HttpDelete]
 		public async Task<ActionResult> DeleteStaff(int id)
 		{
-			var staff = await context.Staffs.FirstOrDefaultAsync(s => s.Id == id);
+			var staff = await context.StaffMembers.FirstOrDefaultAsync(s => s.Id == id);
 			if (staff == null)
 			{
 				return NotFound();
 			}
 
-			context.Staffs.Remove(staff);
+			context.StaffMembers.Remove(staff);
 			await context.SaveChangesAsync();
 
 			return Ok();

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace HealthHorizon_API.Models
+namespace HealthHorizon_API.Models.Entities
 {
 	public class Feedback
 	{

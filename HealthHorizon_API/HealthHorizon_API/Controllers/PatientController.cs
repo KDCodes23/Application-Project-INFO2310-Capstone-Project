@@ -1,5 +1,5 @@
 ﻿using HealthHorizon_API.Data;
-using HealthHorizon_API.Models.PersonTypes;
+using HealthHorizon_API.Models.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -46,7 +46,7 @@ namespace HealthHorizon_API.Controllers
 			}
 			patient.Name = newPatient.Name;
 			patient.DateOfBirth = newPatient.DateOfBirth;
-			patient.Email = newPatient.Email;
+			patient.User.Email = newPatient.User.Email;
 			patient.PhoneNumber = newPatient.PhoneNumber;
 			patient.Address = newPatient.Address;
 			await context.SaveChangesAsync();

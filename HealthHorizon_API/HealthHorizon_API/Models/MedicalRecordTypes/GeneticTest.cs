@@ -1,6 +1,6 @@
-﻿using HealthHorizon_API.Models.PersonTypes;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using HealthHorizon_API.Models.Entities;
 
 namespace HealthHorizon_API.Models.Medical_Record_Types
 {

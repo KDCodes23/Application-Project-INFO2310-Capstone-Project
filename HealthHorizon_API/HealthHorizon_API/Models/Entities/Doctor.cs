@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HealthHorizon_API.Models.Identities;
+using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HealthHorizon_API.Models.PersonTypes
+namespace HealthHorizon_API.Models.Entities
 {
 	public class Doctor
 	{
@@ -10,7 +12,10 @@ namespace HealthHorizon_API.Models.PersonTypes
 		public int Id { get; set; }
 		public string Name { get; set; } = string.Empty;
 		public string Specialization { get; set; } = string.Empty;
-		public string Email { get; set; } = string.Empty;
 		public string PhoneNumber { get; set; } = string.Empty;
+
+		[ForeignKey(nameof(User))]
+		public string UserId { get; set; } = string.Empty;
+		public IdentityUser User { get; set; } = null!;
 	}
 }

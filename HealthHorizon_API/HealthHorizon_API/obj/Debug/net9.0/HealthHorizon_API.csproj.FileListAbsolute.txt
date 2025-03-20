@@ -338,3 +338,4 @@ D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Pro
 D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
 D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
+D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
