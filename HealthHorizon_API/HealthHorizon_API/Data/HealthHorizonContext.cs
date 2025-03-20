@@ -38,7 +38,7 @@ namespace HealthHorizon_API.Data
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 
-			modelBuilder.Entity<Patient>().HasOne(p => p.Address).WithOne().HasForeignKey<Patient>(p => p.AddressId);
+			modelBuilder.Entity<Patient>().HasOne(p => p.Address).WithOne(a => a.Patient).HasForeignKey<Patient>(p => p.AddressId).IsRequired(false); ;
 
 			modelBuilder.Entity<Staff>().HasOne(s => s.Role).WithMany().HasForeignKey(s => s.RoleId);
 

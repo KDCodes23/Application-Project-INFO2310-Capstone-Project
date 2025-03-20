@@ -4,6 +4,7 @@ using HealthHorizon_API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthHorizon_API.Migrations
 {
     [DbContext(typeof(HealthHorizonContext))]
-    partial class HealthHorizonContextModelSnapshot : ModelSnapshot
+    [Migration("20250319022557_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1137,7 +1140,19 @@ namespace HealthHorizon_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HospitalName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -1145,7 +1160,11 @@ namespace HealthHorizon_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Specialization")
+                    b.Property<string>("ProfessionalBio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Specialty")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -1190,19 +1209,29 @@ namespace HealthHorizon_API.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MedicalConditions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -1751,10 +1780,8 @@ namespace HealthHorizon_API.Migrations
             modelBuilder.Entity("HealthHorizon_API.Models.PersonTypes.Patient", b =>
                 {
                     b.HasOne("HealthHorizon_API.Models.Address", "Address")
-                        .WithOne()
-                        .HasForeignKey("HealthHorizon_API.Models.PersonTypes.Patient", "AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithOne("Patient")
+                        .HasForeignKey("HealthHorizon_API.Models.PersonTypes.Patient", "AddressId");
 
                     b.Navigation("Address");
                 });
@@ -1790,6 +1817,11 @@ namespace HealthHorizon_API.Migrations
                         .IsRequired();
 
                     b.Navigation("Doctor");
+                });
+
+            modelBuilder.Entity("HealthHorizon_API.Models.Address", b =>
+                {
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("HealthHorizon_API.Models.PersonTypes.MedicalRecord", b =>
