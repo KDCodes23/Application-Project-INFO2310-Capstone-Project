@@ -1,5 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
+		[Authorize(Roles = "admin")]
 		[HttpGet]
 		public async Task<ActionResult<List<Feedback>>> GetAllFeedbacks()
 		{
@@ -29,6 +31,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok(feedbacks);
 		}
 
+		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "doctor")]
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Feedback>> GetFeedback(int id)
 		{
@@ -41,6 +45,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok(feedback);
 		}
 
+		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "patient")]
 		[HttpPost]
 		public async Task<ActionResult> PostFeedback([FromBody] Feedback feedback)
 		{
@@ -55,6 +61,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
+		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "patient")]
 		[HttpPut]
 		public async Task<ActionResult> UpdateFeddback([FromBody] Feedback feedback)
 		{
@@ -70,6 +78,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
+		[Authorize(Roles = "admin")]
 		[HttpDelete]
 		public async Task<ActionResult> DeleteFeedback(int id)
 		{

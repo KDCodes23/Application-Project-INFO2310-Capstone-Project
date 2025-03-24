@@ -1,12 +1,54 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\College\\Level 4\\Appilcation Project\\New folder\\HealthHorizon_API\\",
-  "Documents": [],
+  "WorkspaceRootPath": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C75AE83E-3292-4516-9E07-998D0F517518}|HealthHorizon_API\\HealthHorizon_API.csproj|d:\\college\\level 4\\appilcation project\\application-project-info2310-capstone-project\\healthhorizon_api\\healthhorizon_api\\data\\healthhorizoncontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C75AE83E-3292-4516-9E07-998D0F517518}|HealthHorizon_API\\HealthHorizon_API.csproj|solutionrelative:healthhorizon_api\\data\\healthhorizoncontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C75AE83E-3292-4516-9E07-998D0F517518}|HealthHorizon_API\\HealthHorizon_API.csproj|d:\\college\\level 4\\appilcation project\\application-project-info2310-capstone-project\\healthhorizon_api\\healthhorizon_api\\controllers\\aichatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C75AE83E-3292-4516-9E07-998D0F517518}|HealthHorizon_API\\HealthHorizon_API.csproj|solutionrelative:healthhorizon_api\\controllers\\aichatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HealthHorizonContext.cs",
+              "DocumentMoniker": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API\\Data\\HealthHorizonContext.cs",
+              "RelativeDocumentMoniker": "HealthHorizon_API\\Data\\HealthHorizonContext.cs",
+              "ToolTip": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API\\Data\\HealthHorizonContext.cs*",
+              "RelativeToolTip": "HealthHorizon_API\\Data\\HealthHorizonContext.cs*",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAADEAAAB+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-24T18:23:14.776Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AIChatController.cs",
+              "DocumentMoniker": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API\\Controllers\\AIChatController.cs",
+              "RelativeDocumentMoniker": "HealthHorizon_API\\Controllers\\AIChatController.cs",
+              "ToolTip": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API\\Controllers\\AIChatController.cs",
+              "RelativeToolTip": "HealthHorizon_API\\Controllers\\AIChatController.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAwwEgAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-24T18:14:57.095Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

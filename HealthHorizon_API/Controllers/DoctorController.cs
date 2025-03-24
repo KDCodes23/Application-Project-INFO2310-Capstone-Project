@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HealthHorizon_API.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HealthHorizon_API.Controllers
 {
@@ -18,6 +19,9 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
+		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "doctor")]
+		[Authorize(Roles = "staff")]
 		[HttpGet]
 		public async Task<ActionResult<List<StaffRole>>> GetAllDoctors()
 		{
@@ -29,6 +33,9 @@ namespace HealthHorizon_API.Controllers
 			return Ok(doctors);
 		}
 
+		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "doctor")]
+		[Authorize(Roles = "staff")]
 		[HttpGet("{id}")]
 		public async Task<ActionResult<StaffRole>> GetDoctor(int id)
 		{
@@ -40,6 +47,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok(doctor);
 		}
 
+		[Authorize(Roles = "admin")]
 		[HttpPost]
 		public async Task<ActionResult> PostDoctor([FromBody] Doctor newDocotor)
 		{
@@ -48,6 +56,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
+		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "doctor")]
 		[HttpPut]
 		public async Task<ActionResult> UpdateDoctor([FromBody] Doctor newDoctor)
 		{
@@ -71,6 +81,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
+		[Authorize(Roles = "admin")]
 		[HttpDelete]
 		public async Task<ActionResult> DeleteDoctor(int id)
 		{

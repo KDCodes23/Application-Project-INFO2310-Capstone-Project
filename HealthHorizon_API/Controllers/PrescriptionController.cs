@@ -1,5 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
+		[Authorize(Roles = "admin")]
 		[HttpGet]
 		public async Task<ActionResult<List<Prescription>>> GetAllPrescriptions()
 		{
@@ -29,6 +31,10 @@ namespace HealthHorizon_API.Controllers
 			return Ok(prescriptions);
 		}
 
+		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "doctor")]
+		[Authorize(Roles = "staff")]
+		[Authorize(Roles = "patient")]
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Prescription>> GetPrescription(int id)
 		{
@@ -41,6 +47,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok(prescription);
 		}
 
+		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "doctor")]
 		[HttpPost]
 		public async Task<ActionResult> PostPrescription([FromBody] Prescription prescription)
 		{
@@ -55,6 +63,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
+		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "doctor")]
 		[HttpPut]
 		public async Task<ActionResult> UpdatePrescription([FromBody] Prescription prescription)
 		{
@@ -73,6 +83,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
+		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "doctor")]
 		[HttpDelete]
 		public async Task<ActionResult> DeletePrescription(int id)
 		{
