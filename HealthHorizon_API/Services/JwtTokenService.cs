@@ -1,5 +1,4 @@
 ﻿using HealthHorizon_API.Interfaces;
-using HealthHorizon_API.Models.Identities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

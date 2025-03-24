@@ -1,5 +1,4 @@
 ﻿using HealthHorizon_API.Models.Entities;
-using System.Runtime.CompilerServices;
 
 namespace HealthHorizon_API.Models.Identities
 {

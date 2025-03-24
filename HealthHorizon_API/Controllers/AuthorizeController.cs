@@ -4,7 +4,6 @@ using HealthHorizon_API.Models.Entities;
 using HealthHorizon_API.Models.Identities;
 using HealthHorizon_API.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
