@@ -1,5 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
+		[Authorize(Roles = "admin")]
 		[HttpGet]
 		public async Task<ActionResult<List<AIChatLog>>> GetAllAiChatLogs()
 		{
@@ -30,6 +32,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok(logs);
 		}
 
+		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "patient")]
 		[HttpGet("{id}")]
 		public async Task<ActionResult<AIChatLog>> GetAiChatLog(int id)
 		{
@@ -42,6 +46,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok(log);
 		}
 
+		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "patient")]
 		[HttpPost]
 		public async Task<ActionResult> PostAiChatLog([FromBody] AIChatLog log)
 		{
@@ -55,6 +61,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
+		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "patient")]
 		[HttpPut]
 		public async Task<ActionResult> UpdateAiChatLog([FromBody] AIChatLog log)
 		{
@@ -72,6 +80,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
+		[Authorize(Roles = "admin")]
 		[HttpDelete]
 		public async Task<ActionResult> DeleteAiChatLog(int id)
 		{

@@ -18,7 +18,6 @@ namespace HealthHorizon_API.Data
 		public DbSet<Prescription> Prescriptions { get; set; }
 		public DbSet<Staff> StaffMembers { get; set; }
 		public DbSet<StaffRole> StaffRoles { get; set; }
-		public DbSet<TimeSlot> TimeSlots { get; set; }
 		public DbSet<MedicalRecord> MedicalRecords { get; set; }
 		public DbSet<AllergyTest> AllergyTests { get; set; }
 		public DbSet<BodyMeasurement> BodyMeasurements { get; set; }
@@ -49,8 +48,6 @@ namespace HealthHorizon_API.Data
 			modelBuilder.Entity<Bill>().HasOne(b => b.Appointment).WithOne().HasForeignKey<Bill>(b => b.AppointmentId);
 
 			modelBuilder.Entity<Prescription>().HasOne(p => p.Appointment).WithOne().HasForeignKey<Prescription>(p => p.AppointmentId);
-
-			modelBuilder.Entity<TimeSlot>().HasOne(ts => ts.Doctor).WithOne().HasForeignKey<TimeSlot>(ts => ts.DoctorId);
 
 			modelBuilder.Entity<MedicalRecord>().HasMany(mr => mr.AllergyTests).WithOne(at => at.MedicalRecord).HasForeignKey(at => at.MedicalRecordId);
 			modelBuilder.Entity<MedicalRecord>().HasMany(mr => mr.BodyMeasurements).WithOne(bm => bm.MedicalRecord).HasForeignKey(bm => bm.MedicalRecordId);

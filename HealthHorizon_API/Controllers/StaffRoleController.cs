@@ -1,5 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,8 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
+		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "staff")]
 		[HttpGet]
 		public async Task<ActionResult<List<StaffRole>>> GetAllRoles()
 		{
@@ -28,6 +31,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok(roles);
 		}
 
+		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "staff")]
 		[HttpGet("{id}")]
 		public async Task<ActionResult<StaffRole>> GetRole(int id)
 		{
@@ -39,6 +44,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok(role);
 		}
 
+		[Authorize(Roles = "admin")]
 		[HttpPost]
 		public async Task<ActionResult> PostRole([FromBody] StaffRole newRole)
 		{
@@ -47,6 +53,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
+		[Authorize(Roles = "admin")]
 		[HttpPut]
 		public async Task<ActionResult> UpdateRole([FromBody] StaffRole newRole)
 		{
@@ -61,6 +68,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
+		[Authorize(Roles = "admin")]
 		[HttpDelete]
 		public async Task<ActionResult> DeleteRole(int id)
 		{
