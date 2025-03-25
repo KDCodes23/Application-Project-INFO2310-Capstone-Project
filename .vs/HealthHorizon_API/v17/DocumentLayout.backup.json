@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C75AE83E-3292-4516-9E07-998D0F517518}|HealthHorizon_API\\HealthHorizon_API.csproj|d:\\college\\level 4\\appilcation project\\application-project-info2310-capstone-project\\healthhorizon_api\\healthhorizon_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C75AE83E-3292-4516-9E07-998D0F517518}|HealthHorizon_API\\HealthHorizon_API.csproj|solutionrelative:healthhorizon_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C75AE83E-3292-4516-9E07-998D0F517518}|HealthHorizon_API\\HealthHorizon_API.csproj|d:\\college\\level 4\\appilcation project\\application-project-info2310-capstone-project\\healthhorizon_api\\healthhorizon_api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C75AE83E-3292-4516-9E07-998D0F517518}|HealthHorizon_API\\HealthHorizon_API.csproj|solutionrelative:healthhorizon_api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C75AE83E-3292-4516-9E07-998D0F517518}|HealthHorizon_API\\HealthHorizon_API.csproj|d:\\college\\level 4\\appilcation project\\application-project-info2310-capstone-project\\healthhorizon_api\\healthhorizon_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{C75AE83E-3292-4516-9E07-998D0F517518}|HealthHorizon_API\\HealthHorizon_API.csproj|solutionrelative:healthhorizon_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C75AE83E-3292-4516-9E07-998D0F517518}|HealthHorizon_API\\HealthHorizon_API.csproj|d:\\college\\level 4\\appilcation project\\application-project-info2310-capstone-project\\healthhorizon_api\\healthhorizon_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C75AE83E-3292-4516-9E07-998D0F517518}|HealthHorizon_API\\HealthHorizon_API.csproj|solutionrelative:healthhorizon_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,8 +22,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "HealthHorizon_API\\Properties\\launchSettings.json",
+              "ToolTip": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API\\Properties\\launchSettings.json",
+              "RelativeToolTip": "HealthHorizon_API\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-25T01:06:45.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API\\Program.cs",
+              "RelativeDocumentMoniker": "HealthHorizon_API\\Program.cs",
+              "ToolTip": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API\\Program.cs",
+              "RelativeToolTip": "HealthHorizon_API\\Program.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-24T23:14:31.578Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -28,22 +58,9 @@
               "RelativeDocumentMoniker": "HealthHorizon_API\\appsettings.json",
               "ToolTip": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API\\appsettings.json",
               "RelativeToolTip": "HealthHorizon_API\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-03-24T23:10:11.508Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API\\Program.cs",
-              "RelativeDocumentMoniker": "HealthHorizon_API\\Program.cs",
-              "ToolTip": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API\\Program.cs",
-              "RelativeToolTip": "HealthHorizon_API\\Program.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAADwAAABDAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T23:07:55.116Z",
               "EditorCaption": ""
             }
           ]

@@ -50,6 +50,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.11.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[9.0.3, )"
@@ -84,15 +88,15 @@
             },
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
-              "version": "[8.6.1, )"
+              "version": "[8.7.0, )"
             },
             "Scalar.AspNetCore": {
               "target": "Package",
-              "version": "[2.1.0, )"
+              "version": "[2.1.1, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
-              "version": "[8.6.1, )"
+              "version": "[8.7.0, )"
             }
           },
           "imports": [

@@ -345,3 +345,6 @@ D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Pro
 D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\obj\Debug\net9.0\HealthHo.A1219E94.Up2Date
 D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\obj\Debug\net9.0\HealthHorizon_API.genruntimeconfig.cache
 D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\obj\Debug\net9.0\ref\HealthHorizon_API.dll
+D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
+D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\bin\Debug\net9.0\MailKit.dll
+D:\College\Level 4\Appilcation Project\Application-Project-INFO2310-Capstone-Project\HealthHorizon_API\HealthHorizon_API\bin\Debug\net9.0\MimeKit.dll
