@@ -46,7 +46,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		//[Authorize(Roles = "admin")]
-		[HttpPost]
+		[HttpPost("add-staff")]
 		public async Task<ActionResult> PostStaff([FromBody] Staff staff)
 		{
 			if (staff == null)
@@ -61,7 +61,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		//[Authorize(Roles = "admin")]
-		[HttpPut]
+		[HttpPut("update-staff")]
 		public async Task<ActionResult> UpdateStaff([FromBody] Staff staff)
 		{
 			var staffDB = await context.StaffMembers.FirstOrDefaultAsync(s => s.Id == staff.Id);
@@ -80,7 +80,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		//[Authorize(Roles = "admin")]
-		[HttpDelete("{id:int}")]
+		[HttpDelete("remove-{id:int}")]
 		public async Task<ActionResult> DeleteStaff([FromQuery] int id)
 		{
 			var staff = await context.StaffMembers.FirstOrDefaultAsync(s => s.Id == id);

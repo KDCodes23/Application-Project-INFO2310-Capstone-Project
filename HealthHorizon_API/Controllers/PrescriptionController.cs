@@ -44,7 +44,7 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "doctor")]
-		[HttpPost]
+		[HttpPost("add-prescription")]
 		public async Task<ActionResult> PostPrescription([FromBody] Prescription prescription)
 		{
 			if (prescription == null)
@@ -60,7 +60,7 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "doctor")]
-		[HttpPut]
+		[HttpPut("update-prescription")]
 		public async Task<ActionResult> UpdatePrescription([FromBody] Prescription prescription)
 		{
 			var prescriptionDB = await context.Prescriptions.FirstOrDefaultAsync(p => p.Id == prescription.Id);
@@ -80,7 +80,7 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "doctor")]
-		[HttpDelete("{id:int}")]
+		[HttpDelete("remove-{id:int}")]
 		public async Task<ActionResult> DeletePrescription([FromQuery] int id)
 		{
 			var prescription = await context.Prescriptions.FirstOrDefaultAsync(p => p.Id == id);

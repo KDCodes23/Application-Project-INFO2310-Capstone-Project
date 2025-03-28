@@ -48,7 +48,7 @@ namespace HealthHorizon_API.Controllers
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "doctor")]
 		//[Authorize(Roles = "staff")]
-		[HttpPost]
+		[HttpPost("add-patient")]
         public async Task<ActionResult> PostPatient([FromBody] Patient newPatient)
         {
             newPatient.Address = new Address
@@ -68,7 +68,7 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "patient")]
-		[HttpPut]
+		[HttpPut("update-patient")]
         public async Task<ActionResult> UpdatePatient([FromBody] Patient newPatient)
         {
             var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == newPatient.Id);
@@ -88,7 +88,7 @@ namespace HealthHorizon_API.Controllers
         }
 
 		//[Authorize(Roles = "admin")]
-		[HttpDelete("{id:int}")]
+		[HttpDelete("remove-{id:int}")]
         public async Task<ActionResult> DeletePatient([FromQuery] int id)
         {
             var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == id);

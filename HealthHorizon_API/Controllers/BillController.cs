@@ -47,7 +47,7 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "doctor")]
-		[HttpPost]
+		[HttpPost("add-bill")]
 		public async Task<ActionResult> PostBill([FromBody] Bill bill)
 		{
 			if (bill == null)
@@ -63,7 +63,7 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "doctor")]
-		[HttpPut]
+		[HttpPut("update-bill")]
 		public async Task<ActionResult> UpdateBill([FromBody] Bill bill)
 		{
 			var billDB = await context.Bills.FirstOrDefaultAsync(b => b.Id == bill.Id);
@@ -82,7 +82,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		//[Authorize(Roles = "admin")]
-		[HttpDelete("{id:int}")]
+		[HttpDelete("remove-{id:int}")]
 		public async Task<ActionResult> DeleteBill([FromQuery] int id)
 		{
 			var bill = await context.Bills.FirstOrDefaultAsync(b => b.Id == id);

@@ -182,11 +182,41 @@ namespace HealthHorizon_API.Controllers
 			}
 			var role = (await userManager.GetRolesAsync(user)).FirstOrDefault();
 			var token = jwtTokenService.GenerateJwtTokenAsync(user);
+			int id = 0;
+
+			if (role != null)
+			{
+				switch (role)
+				{
+					case "doctor":
+						var doctor = await context.Doctors.FindAsync(user.Id);
+						if (doctor != null)
+						{
+							id = doctor.Id;
+						}
+						break;
+					case "staff":
+						var staff = await context.Doctors.FindAsync(user.Id);
+						if (staff != null)
+						{
+							id = staff.Id;
+						}
+						break;
+					case "patient":
+						var patient = await context.Doctors.FindAsync(user.Id);
+						if (patient != null)
+						{
+							id = patient.Id;
+						}
+						break;
+				}
+			}
 
 			return Ok(new
 			{
 				Token = token,
-				Role = role
+				Role = role,
+				Id = id
 			});
 		}
 	}

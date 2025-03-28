@@ -43,7 +43,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		//[Authorize(Roles = "admin")]
-		[HttpPost]
+		[HttpPost("add-role")]
 		public async Task<ActionResult> PostRole([FromBody] StaffRole newRole)
 		{
 			await context.StaffRoles.AddAsync(newRole);
@@ -52,7 +52,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		//[Authorize(Roles = "admin")]
-		[HttpPut]
+		[HttpPut("update-role")]
 		public async Task<ActionResult> UpdateRole([FromBody] StaffRole newRole)
 		{
 			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == newRole.Id);
@@ -67,7 +67,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		//[Authorize(Roles = "admin")]
-		[HttpDelete("{id:int}")]
+		[HttpDelete("remove-{id:int}")]
 		public async Task<ActionResult> DeleteRole([FromQuery] int id)
 		{
 			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == id);

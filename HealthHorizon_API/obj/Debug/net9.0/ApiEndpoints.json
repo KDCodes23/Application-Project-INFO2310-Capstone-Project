@@ -21,38 +21,6 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.AIChatController",
-    "Method": "PostAiChatLog",
-    "RelativePath": "api/AIChat",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "log",
-        "Type": "HealthHorizon_API.Models.Entities.AIChatLog",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.AIChatController",
-    "Method": "UpdateAiChatLog",
-    "RelativePath": "api/AIChat",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "log",
-        "Type": "HealthHorizon_API.Models.Entities.AIChatLog",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.AIChatController",
     "Method": "GetAiChatLog",
     "RelativePath": "api/AIChat/{id}",
     "HttpMethod": "GET",
@@ -84,8 +52,40 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.AIChatController",
+    "Method": "PostAiChatLog",
+    "RelativePath": "api/AIChat/add-ai-chat-log",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "log",
+        "Type": "HealthHorizon_API.Models.Entities.AIChatLog",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AIChatController",
+    "Method": "UpdateAiChatLog",
+    "RelativePath": "api/AIChat/ipdate-ai-chat-log",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "log",
+        "Type": "HealthHorizon_API.Models.Entities.AIChatLog",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AIChatController",
     "Method": "DeleteAiChatLog",
-    "RelativePath": "api/AIChat/{id}",
+    "RelativePath": "api/AIChat/remove-{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -125,38 +125,6 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
-    "Method": "PostAppointment",
-    "RelativePath": "api/Appointment",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "appointment",
-        "Type": "HealthHorizon_API.Models.Entities.Appointment",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
-    "Method": "UpdateAppointment",
-    "RelativePath": "api/Appointment",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "appointment",
-        "Type": "HealthHorizon_API.Models.Entities.Appointment",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
     "Method": "GetAppointment",
     "RelativePath": "api/Appointment/{id}",
     "HttpMethod": "GET",
@@ -188,8 +156,24 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
+    "Method": "PostAppointment",
+    "RelativePath": "api/Appointment/add-appointment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "appointment",
+        "Type": "HealthHorizon_API.Models.Entities.Appointment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
     "Method": "DeleteAppointment",
-    "RelativePath": "api/Appointment/{id}",
+    "RelativePath": "api/Appointment/remove-{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -202,6 +186,22 @@
       {
         "Name": "id",
         "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
+    "Method": "UpdateAppointment",
+    "RelativePath": "api/Appointment/update-appointment",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "appointment",
+        "Type": "HealthHorizon_API.Models.Entities.Appointment",
         "IsRequired": true
       }
     ],
@@ -293,38 +293,6 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.BillController",
-    "Method": "PostBill",
-    "RelativePath": "api/Bill",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "bill",
-        "Type": "HealthHorizon_API.Models.Entities.Bill",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.BillController",
-    "Method": "UpdateBill",
-    "RelativePath": "api/Bill",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "bill",
-        "Type": "HealthHorizon_API.Models.Entities.Bill",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.BillController",
     "Method": "GetBill",
     "RelativePath": "api/Bill/{id}",
     "HttpMethod": "GET",
@@ -356,8 +324,24 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.BillController",
+    "Method": "PostBill",
+    "RelativePath": "api/Bill/add-bill",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bill",
+        "Type": "HealthHorizon_API.Models.Entities.Bill",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.BillController",
     "Method": "DeleteBill",
-    "RelativePath": "api/Bill/{id}",
+    "RelativePath": "api/Bill/remove-{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -370,6 +354,22 @@
       {
         "Name": "id",
         "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.BillController",
+    "Method": "UpdateBill",
+    "RelativePath": "api/Bill/update-bill",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bill",
+        "Type": "HealthHorizon_API.Models.Entities.Bill",
         "IsRequired": true
       }
     ],
@@ -394,38 +394,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
-    "Method": "PostDoctor",
-    "RelativePath": "api/Doctor",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "newDocotor",
-        "Type": "HealthHorizon_API.Models.Entities.Doctor",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
-    "Method": "UpdateDoctor",
-    "RelativePath": "api/Doctor",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "newDoctor",
-        "Type": "HealthHorizon_API.Models.Entities.Doctor",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
@@ -460,8 +428,24 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
+    "Method": "PostDoctor",
+    "RelativePath": "api/Doctor/add-doctor",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newDocotor",
+        "Type": "HealthHorizon_API.Models.Entities.Doctor",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
     "Method": "DeleteDoctor",
-    "RelativePath": "api/Doctor/{id}",
+    "RelativePath": "api/Doctor/remove-{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -474,6 +458,22 @@
       {
         "Name": "id",
         "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
+    "Method": "UpdateDoctor",
+    "RelativePath": "api/Doctor/update-doctor",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newDoctor",
+        "Type": "HealthHorizon_API.Models.Entities.Doctor",
         "IsRequired": true
       }
     ],
@@ -498,38 +498,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.FeedbackController",
-    "Method": "PostFeedback",
-    "RelativePath": "api/Feedback",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "feedback",
-        "Type": "HealthHorizon_API.Models.Entities.Feedback",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.FeedbackController",
-    "Method": "UpdateFeddback",
-    "RelativePath": "api/Feedback",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "feedback",
-        "Type": "HealthHorizon_API.Models.Entities.Feedback",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.FeedbackController",
@@ -564,8 +532,24 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.FeedbackController",
+    "Method": "PostFeedback",
+    "RelativePath": "api/Feedback/add-feedback",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "feedback",
+        "Type": "HealthHorizon_API.Models.Entities.Feedback",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.FeedbackController",
     "Method": "DeleteFeedback",
-    "RelativePath": "api/Feedback/{id}",
+    "RelativePath": "api/Feedback/remove-{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -578,6 +562,22 @@
       {
         "Name": "id",
         "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.FeedbackController",
+    "Method": "UpdateFeddback",
+    "RelativePath": "api/Feedback/update-feedback",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "feedback",
+        "Type": "HealthHorizon_API.Models.Entities.Feedback",
         "IsRequired": true
       }
     ],
@@ -625,38 +625,6 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.PatientController",
-    "Method": "PostPatient",
-    "RelativePath": "api/Patient",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "newPatient",
-        "Type": "HealthHorizon_API.Models.Entities.Patient",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.PatientController",
-    "Method": "UpdatePatient",
-    "RelativePath": "api/Patient",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "newPatient",
-        "Type": "HealthHorizon_API.Models.Entities.Patient",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.PatientController",
     "Method": "GetPatient",
     "RelativePath": "api/Patient/{id}",
     "HttpMethod": "GET",
@@ -688,8 +656,24 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.PatientController",
+    "Method": "PostPatient",
+    "RelativePath": "api/Patient/add-patient",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newPatient",
+        "Type": "HealthHorizon_API.Models.Entities.Patient",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PatientController",
     "Method": "DeletePatient",
-    "RelativePath": "api/Patient/{id}",
+    "RelativePath": "api/Patient/remove-{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -702,6 +686,22 @@
       {
         "Name": "id",
         "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PatientController",
+    "Method": "UpdatePatient",
+    "RelativePath": "api/Patient/update-patient",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newPatient",
+        "Type": "HealthHorizon_API.Models.Entities.Patient",
         "IsRequired": true
       }
     ],
@@ -726,38 +726,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
-    "Method": "PostPrescription",
-    "RelativePath": "api/Prescription",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "prescription",
-        "Type": "HealthHorizon_API.Models.Entities.Prescription",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
-    "Method": "UpdatePrescription",
-    "RelativePath": "api/Prescription",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "prescription",
-        "Type": "HealthHorizon_API.Models.Entities.Prescription",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
@@ -792,8 +760,24 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
+    "Method": "PostPrescription",
+    "RelativePath": "api/Prescription/add-prescription",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "prescription",
+        "Type": "HealthHorizon_API.Models.Entities.Prescription",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
     "Method": "DeletePrescription",
-    "RelativePath": "api/Prescription/{id}",
+    "RelativePath": "api/Prescription/remove-{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -806,6 +790,22 @@
       {
         "Name": "id",
         "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
+    "Method": "UpdatePrescription",
+    "RelativePath": "api/Prescription/update-prescription",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "prescription",
+        "Type": "HealthHorizon_API.Models.Entities.Prescription",
         "IsRequired": true
       }
     ],
@@ -830,38 +830,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.StaffController",
-    "Method": "PostStaff",
-    "RelativePath": "api/Staff",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "staff",
-        "Type": "HealthHorizon_API.Models.Entities.Staff",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.StaffController",
-    "Method": "UpdateStaff",
-    "RelativePath": "api/Staff",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "staff",
-        "Type": "HealthHorizon_API.Models.Entities.Staff",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.StaffController",
@@ -896,8 +864,24 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.StaffController",
+    "Method": "PostStaff",
+    "RelativePath": "api/Staff/add-staff",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "staff",
+        "Type": "HealthHorizon_API.Models.Entities.Staff",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.StaffController",
     "Method": "DeleteStaff",
-    "RelativePath": "api/Staff/{id}",
+    "RelativePath": "api/Staff/remove-{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -910,6 +894,22 @@
       {
         "Name": "id",
         "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.StaffController",
+    "Method": "UpdateStaff",
+    "RelativePath": "api/Staff/update-staff",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "staff",
+        "Type": "HealthHorizon_API.Models.Entities.Staff",
         "IsRequired": true
       }
     ],
@@ -934,38 +934,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.StaffRoleController",
-    "Method": "PostRole",
-    "RelativePath": "api/StaffRole",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "newRole",
-        "Type": "HealthHorizon_API.Models.Entities.StaffRole",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.StaffRoleController",
-    "Method": "UpdateRole",
-    "RelativePath": "api/StaffRole",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "newRole",
-        "Type": "HealthHorizon_API.Models.Entities.StaffRole",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.StaffRoleController",
@@ -1000,8 +968,24 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.StaffRoleController",
+    "Method": "PostRole",
+    "RelativePath": "api/StaffRole/add-role",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newRole",
+        "Type": "HealthHorizon_API.Models.Entities.StaffRole",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.StaffRoleController",
     "Method": "DeleteRole",
-    "RelativePath": "api/StaffRole/{id}",
+    "RelativePath": "api/StaffRole/remove-{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -1014,6 +998,22 @@
       {
         "Name": "id",
         "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.StaffRoleController",
+    "Method": "UpdateRole",
+    "RelativePath": "api/StaffRole/update-role",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newRole",
+        "Type": "HealthHorizon_API.Models.Entities.StaffRole",
         "IsRequired": true
       }
     ],

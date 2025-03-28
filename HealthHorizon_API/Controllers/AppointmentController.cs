@@ -48,7 +48,7 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "doctor")]
-		[HttpPost]
+		[HttpPost("add-appointment")]
 		public async Task<ActionResult> PostAppointment([FromBody] Appointment appointment)
 		{
 			await context.Appointments.AddAsync(appointment);
@@ -58,7 +58,7 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "doctor")]
-		[HttpPut]
+		[HttpPut("update-appointment")]
 		public async Task<ActionResult> UpdateAppointment([FromBody] Appointment appointment)
 		{
 			var appointmentDB = await context.Appointments.FirstOrDefaultAsync(a => a.Id == appointment.Id);
@@ -78,7 +78,7 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "doctor")]
-		[HttpDelete("{id:int}")]
+		[HttpDelete("remove-{id:int}")]
 		public async Task<ActionResult> DeleteAppointment([FromQuery] int id)
 		{
 			var appointment = await context.Appointments.FirstOrDefaultAsync(a => a.Id == id);

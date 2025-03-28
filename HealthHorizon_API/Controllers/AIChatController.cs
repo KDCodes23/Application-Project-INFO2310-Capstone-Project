@@ -45,7 +45,7 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "patient")]
-		[HttpPost]
+		[HttpPost("add-ai-chat-log")]
 		public async Task<ActionResult> PostAiChatLog([FromBody] AIChatLog log)
 		{
 			if (log == null)
@@ -60,7 +60,7 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "patient")]
-		[HttpPut]
+		[HttpPut("ipdate-ai-chat-log")]
 		public async Task<ActionResult> UpdateAiChatLog([FromBody] AIChatLog log)
 		{
 			var logDB = await context.AIChatLogs.FirstOrDefaultAsync(l => l.Id == log.Id);
@@ -78,7 +78,7 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		//[Authorize(Roles = "admin")]
-		[HttpDelete("{id:int}")]
+		[HttpDelete("remove-{id:int}")]
 		public async Task<ActionResult> DeleteAiChatLog([FromQuery] int id)
 		{
 			var log = await context.AIChatLogs.FirstOrDefaultAsync(l => l.Id == id);
