@@ -180,11 +180,13 @@ namespace HealthHorizon_API.Controllers
 			{
 				return Unauthorized();
 			}
+			var role = (await userManager.GetRolesAsync(user)).FirstOrDefault();
 			var token = jwtTokenService.GenerateJwtTokenAsync(user);
 
 			return Ok(new
 			{
-				Token = token
+				Token = token,
+				Role = role
 			});
 		}
 	}
