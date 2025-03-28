@@ -1,0 +1,2912 @@
+[
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AIChatController",
+    "Method": "GetAllAiChatLogs",
+    "RelativePath": "api/AIChat",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.AIChatLog, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AIChatController",
+    "Method": "PostAiChatLog",
+    "RelativePath": "api/AIChat",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "log",
+        "Type": "HealthHorizon_API.Models.Entities.AIChatLog",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AIChatController",
+    "Method": "UpdateAiChatLog",
+    "RelativePath": "api/AIChat",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "log",
+        "Type": "HealthHorizon_API.Models.Entities.AIChatLog",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AIChatController",
+    "Method": "DeleteAiChatLog",
+    "RelativePath": "api/AIChat",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AIChatController",
+    "Method": "GetAiChatLog",
+    "RelativePath": "api/AIChat/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HealthHorizon_API.Models.Entities.AIChatLog",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
+    "Method": "GetAllAppointments",
+    "RelativePath": "api/Appointment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.Appointment, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
+    "Method": "PostAppointment",
+    "RelativePath": "api/Appointment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "appointment",
+        "Type": "HealthHorizon_API.Models.Entities.Appointment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
+    "Method": "UpdateAppointment",
+    "RelativePath": "api/Appointment",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "appointment",
+        "Type": "HealthHorizon_API.Models.Entities.Appointment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
+    "Method": "GetAppointment",
+    "RelativePath": "api/Appointment/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HealthHorizon_API.Models.Entities.Appointment",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
+    "Method": "DeleteAppointment",
+    "RelativePath": "api/Appointment/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AuthorizeController",
+    "Method": "Login",
+    "RelativePath": "api/Authorize/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.Identities.Login",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AuthorizeController",
+    "Method": "RegisterDoctor",
+    "RelativePath": "api/Authorize/register-doctor",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.Identities.Register",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AuthorizeController",
+    "Method": "RegisterPatient",
+    "RelativePath": "api/Authorize/register-patient",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.Identities.Register",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AuthorizeController",
+    "Method": "RegisterStaff",
+    "RelativePath": "api/Authorize/register-staff",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.Identities.Register",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.BillController",
+    "Method": "GetAllBills",
+    "RelativePath": "api/Bill",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.Bill, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.BillController",
+    "Method": "PostBill",
+    "RelativePath": "api/Bill",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bill",
+        "Type": "HealthHorizon_API.Models.Entities.Bill",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.BillController",
+    "Method": "UpdateBill",
+    "RelativePath": "api/Bill",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bill",
+        "Type": "HealthHorizon_API.Models.Entities.Bill",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.BillController",
+    "Method": "DeleteBill",
+    "RelativePath": "api/Bill",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.BillController",
+    "Method": "GetBill",
+    "RelativePath": "api/Bill/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HealthHorizon_API.Models.Entities.Bill",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
+    "Method": "GetAllDoctors",
+    "RelativePath": "api/Doctor",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.StaffRole, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
+    "Method": "PostDoctor",
+    "RelativePath": "api/Doctor",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Specialization",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "HospitalName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ProfessionalBio",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.NormalizedUserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.NormalizedEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.EmailConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PasswordHash",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.SecurityStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.ConcurrencyStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PhoneNumberConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.TwoFactorEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.LockoutEnd",
+        "Type": "System.Nullable\u00601[[System.DateTimeOffset, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.LockoutEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.AccessFailedCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
+    "Method": "UpdateDoctor",
+    "RelativePath": "api/Doctor",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Specialization",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "HospitalName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ProfessionalBio",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.NormalizedUserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.NormalizedEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.EmailConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PasswordHash",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.SecurityStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.ConcurrencyStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PhoneNumberConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.TwoFactorEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.LockoutEnd",
+        "Type": "System.Nullable\u00601[[System.DateTimeOffset, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.LockoutEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.AccessFailedCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
+    "Method": "DeleteDoctor",
+    "RelativePath": "api/Doctor",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
+    "Method": "GetDoctor",
+    "RelativePath": "api/Doctor/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HealthHorizon_API.Models.Entities.StaffRole",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.FeedbackController",
+    "Method": "GetAllFeedbacks",
+    "RelativePath": "api/Feedback",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.Feedback, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.FeedbackController",
+    "Method": "PostFeedback",
+    "RelativePath": "api/Feedback",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Details",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.FeedbackController",
+    "Method": "UpdateFeddback",
+    "RelativePath": "api/Feedback",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Details",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.FeedbackController",
+    "Method": "GetFeedback",
+    "RelativePath": "api/Feedback/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HealthHorizon_API.Models.Entities.Feedback",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.FeedbackController",
+    "Method": "DeleteFeedback",
+    "RelativePath": "api/Feedback/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.MedicalRecordController",
+    "Method": "GetAllMedicalRecords",
+    "RelativePath": "api/MedicalRecord",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.DTOs.MedicalRecordSmallDTO, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PatientController",
+    "Method": "GetAllPatients",
+    "RelativePath": "api/Patient",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "HealthHorizon_API.Models.Entities.StaffRole",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PatientController",
+    "Method": "PostPatient",
+    "RelativePath": "api/Patient",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Gender",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DateOfBirth",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AddressId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Street",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.City",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.ProvinceOrState",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Country",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.PostalCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Gender",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.DateOfBirth",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.AddressId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Address.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Address.Street",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Address.City",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Address.ProvinceOrState",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Address.Country",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Address.PostalCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Address.PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Address.Patient",
+        "Type": "HealthHorizon_API.Models.Entities.Patient",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.UserId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.NormalizedUserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.NormalizedEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.EmailConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.PasswordHash",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.SecurityStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.ConcurrencyStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.PhoneNumberConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.TwoFactorEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.LockoutEnd",
+        "Type": "System.Nullable\u00601[[System.DateTimeOffset, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.LockoutEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.AccessFailedCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.NormalizedUserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.NormalizedEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.EmailConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PasswordHash",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.SecurityStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.ConcurrencyStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PhoneNumberConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.TwoFactorEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.LockoutEnd",
+        "Type": "System.Nullable\u00601[[System.DateTimeOffset, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.LockoutEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.AccessFailedCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PatientController",
+    "Method": "UpdatePatient",
+    "RelativePath": "api/Patient",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Gender",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DateOfBirth",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AddressId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Street",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.City",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.ProvinceOrState",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Country",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.PostalCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Gender",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.DateOfBirth",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.AddressId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Address.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Address.Street",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Address.City",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Address.ProvinceOrState",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Address.Country",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Address.PostalCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Address.PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.Address.Patient",
+        "Type": "HealthHorizon_API.Models.Entities.Patient",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.UserId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.NormalizedUserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.NormalizedEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.EmailConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.PasswordHash",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.SecurityStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.ConcurrencyStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.PhoneNumberConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.TwoFactorEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.LockoutEnd",
+        "Type": "System.Nullable\u00601[[System.DateTimeOffset, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.LockoutEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address.Patient.User.AccessFailedCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.NormalizedUserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.NormalizedEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.EmailConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PasswordHash",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.SecurityStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.ConcurrencyStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PhoneNumberConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.TwoFactorEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.LockoutEnd",
+        "Type": "System.Nullable\u00601[[System.DateTimeOffset, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.LockoutEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.AccessFailedCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PatientController",
+    "Method": "GetPatient",
+    "RelativePath": "api/Patient/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HealthHorizon_API.Models.Entities.StaffRole",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PatientController",
+    "Method": "DeletePatient",
+    "RelativePath": "api/Patient/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
+    "Method": "GetAllPrescriptions",
+    "RelativePath": "api/Prescription",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.Prescription, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
+    "Method": "PostPrescription",
+    "RelativePath": "api/Prescription",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "MedicationName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Dosage",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Instructions",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AppointmentId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Date",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.DoctorId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.Specialization",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.HospitalName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.ProfessionalBio",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.UserId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.NormalizedUserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.NormalizedEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.EmailConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.PasswordHash",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.SecurityStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.ConcurrencyStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.PhoneNumberConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.TwoFactorEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.LockoutEnd",
+        "Type": "System.Nullable\u00601[[System.DateTimeOffset, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.LockoutEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.AccessFailedCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Gender",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.DateOfBirth",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.AddressId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Street",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.City",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.ProvinceOrState",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Country",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.PostalCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.Gender",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.DateOfBirth",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.AddressId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.Address",
+        "Type": "HealthHorizon_API.Models.Entities.Address",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.UserId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.NormalizedUserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.NormalizedEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.EmailConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.PasswordHash",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.SecurityStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.ConcurrencyStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.PhoneNumberConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.TwoFactorEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.LockoutEnd",
+        "Type": "System.Nullable\u00601[[System.DateTimeOffset, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.LockoutEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.AccessFailedCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.UserId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.NormalizedUserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.NormalizedEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.EmailConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.PasswordHash",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.SecurityStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.ConcurrencyStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.PhoneNumberConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.TwoFactorEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.LockoutEnd",
+        "Type": "System.Nullable\u00601[[System.DateTimeOffset, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.LockoutEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.AccessFailedCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
+    "Method": "UpdatePrescription",
+    "RelativePath": "api/Prescription",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "MedicationName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Dosage",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Instructions",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AppointmentId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Date",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.DoctorId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.Specialization",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.HospitalName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.ProfessionalBio",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.UserId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.NormalizedUserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.NormalizedEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.EmailConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.PasswordHash",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.SecurityStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.ConcurrencyStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.PhoneNumberConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.TwoFactorEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.LockoutEnd",
+        "Type": "System.Nullable\u00601[[System.DateTimeOffset, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.LockoutEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Doctor.User.AccessFailedCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Gender",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.DateOfBirth",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.AddressId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Street",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.City",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.ProvinceOrState",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Country",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.PostalCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.Gender",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.DateOfBirth",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.AddressId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.Address",
+        "Type": "HealthHorizon_API.Models.Entities.Address",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.UserId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.NormalizedUserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.NormalizedEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.EmailConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.PasswordHash",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.SecurityStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.ConcurrencyStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.PhoneNumberConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.TwoFactorEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.LockoutEnd",
+        "Type": "System.Nullable\u00601[[System.DateTimeOffset, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.LockoutEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.Address.Patient.User.AccessFailedCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.UserId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.NormalizedUserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.NormalizedEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.EmailConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.PasswordHash",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.SecurityStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.ConcurrencyStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.PhoneNumberConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.TwoFactorEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.LockoutEnd",
+        "Type": "System.Nullable\u00601[[System.DateTimeOffset, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.LockoutEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Appointment.Patient.User.AccessFailedCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
+    "Method": "GetPrescription",
+    "RelativePath": "api/Prescription/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HealthHorizon_API.Models.Entities.Prescription",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
+    "Method": "DeletePrescription",
+    "RelativePath": "api/Prescription/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.StaffController",
+    "Method": "GetAllStaff",
+    "RelativePath": "api/Staff",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.Staff, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.StaffController",
+    "Method": "PostStaff",
+    "RelativePath": "api/Staff",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RoleId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Role.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Role.Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Role.Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.NormalizedUserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.NormalizedEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.EmailConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PasswordHash",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.SecurityStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.ConcurrencyStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PhoneNumberConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.TwoFactorEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.LockoutEnd",
+        "Type": "System.Nullable\u00601[[System.DateTimeOffset, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.LockoutEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.AccessFailedCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.StaffController",
+    "Method": "UpdateStaff",
+    "RelativePath": "api/Staff",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RoleId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Role.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Role.Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Role.Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.NormalizedUserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.NormalizedEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.EmailConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PasswordHash",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.SecurityStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.ConcurrencyStamp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.PhoneNumberConfirmed",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.TwoFactorEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.LockoutEnd",
+        "Type": "System.Nullable\u00601[[System.DateTimeOffset, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.LockoutEnabled",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "User.AccessFailedCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.StaffController",
+    "Method": "GetStaff",
+    "RelativePath": "api/Staff/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HealthHorizon_API.Models.Entities.Staff",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.StaffController",
+    "Method": "DeleteStaff",
+    "RelativePath": "api/Staff/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.StaffRoleController",
+    "Method": "GetAllRoles",
+    "RelativePath": "api/StaffRole",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.StaffRole, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.StaffRoleController",
+    "Method": "GetRole",
+    "RelativePath": "api/StaffRole",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HealthHorizon_API.Models.Entities.StaffRole",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.StaffRoleController",
+    "Method": "PostRole",
+    "RelativePath": "api/StaffRole",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.StaffRoleController",
+    "Method": "UpdateRole",
+    "RelativePath": "api/StaffRole",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.StaffRoleController",
+    "Method": "DeleteRole",
+    "RelativePath": "api/StaffRole/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

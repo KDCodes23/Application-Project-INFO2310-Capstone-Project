@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\HealthHorizon_API.props" />
+</Project>
