@@ -10,10 +10,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
@@ -24,6 +21,8 @@ builder.Services.AddDbContext<HealthHorizonContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 	.AddEntityFrameworkStores<HealthHorizonContext>()
 	.AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IEmailSender<IdentityUser>, EmailService>();
 
 builder.Services.AddAuthorization();
 
@@ -61,7 +60,6 @@ using (var scope = app.Services.CreateScope())
 	await SeedAdminUserAsync(userManager, roleManager, configuration);
 }
 
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -69,14 +67,12 @@ if (app.Environment.IsDevelopment())
 	app.MapOpenApi();
 }
 
-app.MapIdentityApi<IdentityUser>();
+app.UseRouting();
 
-//app.UseHttpsRedirection();
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseCors("AllowAllOrigins");
 
 app.MapControllers();
 
@@ -84,7 +80,7 @@ app.Run();
 
 async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
 {
-	string[] roles = { "admin", "doctor", "staff", "patient"};
+	string[] roles = { "admin", "doctor", "staff", "patient" };
 	foreach (string role in roles)
 	{
 		if (!await roleManager.RoleExistsAsync(role))
@@ -121,4 +117,3 @@ async Task SeedAdminUserAsync(UserManager<IdentityUser> userManager, RoleManager
 		}
 	}
 }
-
