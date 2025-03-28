@@ -17,7 +17,7 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		[HttpGet]
 		public async Task<ActionResult<List<AIChatLog>>> GetAllAiChatLogs()
 		{
@@ -30,8 +30,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok(logs);
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "patient")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "patient")]
 		[HttpGet("{id}")]
 		public async Task<ActionResult<AIChatLog>> GetAiChatLog(int id)
 		{
@@ -44,8 +44,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok(log);
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "patient")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "patient")]
 		[HttpPost]
 		public async Task<ActionResult> PostAiChatLog([FromBody] AIChatLog log)
 		{
@@ -59,8 +59,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "patient")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "patient")]
 		[HttpPut]
 		public async Task<ActionResult> UpdateAiChatLog([FromBody] AIChatLog log)
 		{
@@ -78,7 +78,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		[HttpDelete]
 		public async Task<ActionResult> DeleteAiChatLog(int id)
 		{

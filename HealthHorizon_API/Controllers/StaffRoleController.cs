@@ -17,8 +17,8 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "staff")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "staff")]
 		[HttpGet]
 		public async Task<ActionResult<List<StaffRole>>> GetAllRoles()
 		{
@@ -30,10 +30,10 @@ namespace HealthHorizon_API.Controllers
 			return Ok(roles);
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "staff")]
-		[HttpGet("{id}")]
-		public async Task<ActionResult<StaffRole>> GetRole(int id)
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "staff")]
+		//[HttpGet("{id:int}")]
+		public async Task<ActionResult<StaffRole>> GetRole([FromQuery] int id)
 		{
 			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == id);
 			if (role == null)
@@ -43,18 +43,18 @@ namespace HealthHorizon_API.Controllers
 			return Ok(role);
 		}
 
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		[HttpPost]
-		public async Task<ActionResult> PostRole([FromBody] StaffRole newRole)
+		public async Task<ActionResult> PostRole([FromForm] StaffRole newRole)
 		{
 			await context.StaffRoles.AddAsync(newRole);
 			await context.SaveChangesAsync();
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		[HttpPut]
-		public async Task<ActionResult> UpdateRole([FromBody] StaffRole newRole)
+		public async Task<ActionResult> UpdateRole([FromForm] StaffRole newRole)
 		{
 			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == newRole.Id);
 			if (role == null)
@@ -67,9 +67,9 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
-		[HttpDelete]
-		public async Task<ActionResult> DeleteRole(int id)
+		//[Authorize(Roles = "admin")]
+		[HttpDelete("{id:int}")]
+		public async Task<ActionResult> DeleteRole([FromQuery] int id)
 		{
 			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == id);
 			if (role == null)

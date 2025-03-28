@@ -17,7 +17,7 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		[HttpGet]
 		public async Task<ActionResult<List<Appointment>>> GetAllAppointments()
 		{
@@ -31,10 +31,10 @@ namespace HealthHorizon_API.Controllers
 			return Ok(appointments);
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
-		[Authorize(Roles = "staff")]
-		[Authorize(Roles = "patient")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "staff")]
+		//[Authorize(Roles = "patient")]
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Appointment>> GetAppointment(int id)
 		{
@@ -47,8 +47,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok(appointment);
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
 		[HttpPost]
 		public async Task<ActionResult> PostAppointment([FromBody] Appointment appointment)
 		{
@@ -57,8 +57,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
 		[HttpPut]
 		public async Task<ActionResult> UpdateAppointment([FromBody] Appointment appointment)
 		{
@@ -77,8 +77,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
 		[HttpDelete("{id}")]
 		public async Task<ActionResult> DeleteAppointment(int id)
 		{

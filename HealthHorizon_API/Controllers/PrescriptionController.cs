@@ -17,7 +17,7 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		[HttpGet]
 		public async Task<ActionResult<List<Prescription>>> GetAllPrescriptions()
 		{
@@ -30,12 +30,9 @@ namespace HealthHorizon_API.Controllers
 			return Ok(prescriptions);
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
-		[Authorize(Roles = "staff")]
-		[Authorize(Roles = "patient")]
-		[HttpGet("{id}")]
-		public async Task<ActionResult<Prescription>> GetPrescription(int id)
+		//[Authorize]
+		[HttpGet("{id:int}")]
+		public async Task<ActionResult<Prescription>> GetPrescription([FromQuery] int id)
 		{
 			var prescription = await context.Prescriptions.Include(p => p.Appointment).FirstOrDefaultAsync(p => p.Id == id);
 			if (prescription == null)
@@ -46,10 +43,10 @@ namespace HealthHorizon_API.Controllers
 			return Ok(prescription);
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
 		[HttpPost]
-		public async Task<ActionResult> PostPrescription([FromBody] Prescription prescription)
+		public async Task<ActionResult> PostPrescription([FromForm] Prescription prescription)
 		{
 			if (prescription == null)
 			{
@@ -62,10 +59,10 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
 		[HttpPut]
-		public async Task<ActionResult> UpdatePrescription([FromBody] Prescription prescription)
+		public async Task<ActionResult> UpdatePrescription([FromForm] Prescription prescription)
 		{
 			var prescriptionDB = await context.Prescriptions.FirstOrDefaultAsync(p => p.Id == prescription.Id);
 			if (prescriptionDB == null)
@@ -82,10 +79,10 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
-		[HttpDelete]
-		public async Task<ActionResult> DeletePrescription(int id)
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
+		[HttpDelete("{id:int}")]
+		public async Task<ActionResult> DeletePrescription([FromQuery] int id)
 		{
 			var prescription = await context.Prescriptions.FirstOrDefaultAsync(p => p.Id == id);
 			if (prescription == null)

@@ -26,7 +26,7 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		[HttpPost("register-doctor")]
 		public async Task<ActionResult> RegisterDoctor([FromBody] Register request)
 		{
@@ -73,9 +73,9 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
-		[Authorize(Roles = "staff")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "staff")]
 		[HttpPost("register-patient")]
 		public async Task<ActionResult> RegisterPatient([FromBody] Register request)
 		{
@@ -122,7 +122,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		[HttpPost("register-staff")]
 		public async Task<ActionResult> RegisterStaff([FromBody] Register request)
 		{

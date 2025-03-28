@@ -17,9 +17,9 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
-		[Authorize(Roles = "staff")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "staff")]
 		[HttpGet]
 		public async Task<ActionResult<List<StaffRole>>> GetAllDoctors()
 		{
@@ -31,11 +31,11 @@ namespace HealthHorizon_API.Controllers
 			return Ok(doctors);
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
-		[Authorize(Roles = "staff")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "staff")]
 		[HttpGet("{id}")]
-		public async Task<ActionResult<StaffRole>> GetDoctor(int id)
+		public async Task<ActionResult<StaffRole>> GetDoctor([FromQuery] int id)
 		{
 			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == id);
 			if (doctor == null)
@@ -45,19 +45,19 @@ namespace HealthHorizon_API.Controllers
 			return Ok(doctor);
 		}
 
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		[HttpPost]
-		public async Task<ActionResult> PostDoctor([FromBody] Doctor newDocotor)
+		public async Task<ActionResult> PostDoctor([FromForm] Doctor newDocotor)
 		{
 			await context.Doctors.AddAsync(newDocotor);
 			await context.SaveChangesAsync();
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
 		[HttpPut]
-		public async Task<ActionResult> UpdateDoctor([FromBody] Doctor newDoctor)
+		public async Task<ActionResult> UpdateDoctor([FromForm] Doctor newDoctor)
 		{
 			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == newDoctor.Id);
 			if (doctor == null)
@@ -79,7 +79,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		[HttpDelete]
 		public async Task<ActionResult> DeleteDoctor(int id)
 		{

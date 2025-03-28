@@ -17,7 +17,7 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		[HttpGet]
 		public async Task<ActionResult<List<Bill>>> GetAllBills()
 		{
@@ -30,10 +30,10 @@ namespace HealthHorizon_API.Controllers
 			return Ok(bills);
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
-		[Authorize(Roles = "staff")]
-		[Authorize(Roles = "patient")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "staff")]
+		//[Authorize(Roles = "patient")]
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Bill>> GetBill(int id)
 		{
@@ -46,8 +46,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok(bill);
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
 		[HttpPost]
 		public async Task<ActionResult> PostBill([FromBody] Bill bill)
 		{
@@ -62,8 +62,8 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
 		[HttpPut]
 		public async Task<ActionResult> UpdateBill([FromBody] Bill bill)
 		{
@@ -82,7 +82,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		[HttpDelete]
 		public async Task<ActionResult> DeleteBill(int id)
 		{

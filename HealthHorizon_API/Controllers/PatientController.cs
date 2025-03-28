@@ -17,9 +17,9 @@ namespace HealthHorizon_API.Controllers
             this.context = context;
         }
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
-		[Authorize(Roles = "staff")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "staff")]
 		[HttpGet]
 		public async Task<ActionResult<StaffRole>> GetAllPatients()
 		{
@@ -31,12 +31,12 @@ namespace HealthHorizon_API.Controllers
 			return Ok(patients);
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
-		[Authorize(Roles = "staff")]
-		[Authorize(Roles = "patient")]
-		[HttpGet]
-        public async Task<ActionResult<StaffRole>> GetPatient(int id)
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "staff")]
+		//[Authorize(Roles = "patient")]
+		[HttpGet("{id:int}")]
+        public async Task<ActionResult<StaffRole>> GetPatient([FromQuery] int id)
         {
             var patient = await context.Patients.Include(p => p.Address).FirstOrDefaultAsync(x => x.Id == id);
             if (patient == null)
@@ -46,11 +46,11 @@ namespace HealthHorizon_API.Controllers
             return Ok(patient);
         }
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
-		[Authorize(Roles = "staff")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "staff")]
 		[HttpPost]
-        public async Task<ActionResult> PostPatient([FromBody] Patient newPatient)
+        public async Task<ActionResult> PostPatient([FromForm] Patient newPatient)
         {
             newPatient.Address = new Address
             {
@@ -67,10 +67,10 @@ namespace HealthHorizon_API.Controllers
             return Ok();
         }
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "patient")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "patient")]
 		[HttpPut]
-        public async Task<ActionResult> UpdatePatient([FromBody] Patient newPatient)
+        public async Task<ActionResult> UpdatePatient([FromForm] Patient newPatient)
         {
             var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == newPatient.Id);
             if (patient == null)
@@ -88,9 +88,9 @@ namespace HealthHorizon_API.Controllers
             return Ok();
         }
 
-		[Authorize(Roles = "admin")]
-		[HttpDelete]
-        public async Task<ActionResult> DeletePatient(int id)
+		//[Authorize(Roles = "admin")]
+		[HttpDelete("{id:int}")]
+        public async Task<ActionResult> DeletePatient([FromQuery] int id)
         {
             var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == id);
             if (patient == null)

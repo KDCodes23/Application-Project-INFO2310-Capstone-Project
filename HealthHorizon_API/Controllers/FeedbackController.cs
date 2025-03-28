@@ -17,7 +17,7 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		[HttpGet]
 		public async Task<ActionResult<List<Feedback>>> GetAllFeedbacks()
 		{
@@ -30,10 +30,10 @@ namespace HealthHorizon_API.Controllers
 			return Ok(feedbacks);
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
 		[HttpGet("{id}")]
-		public async Task<ActionResult<Feedback>> GetFeedback(int id)
+		public async Task<ActionResult<Feedback>> GetFeedback([FromQuery] int id)
 		{
 			var feedback = await context.Feedbacks.FirstOrDefaultAsync(f => f.Id == id);
 			if (feedback == null)
@@ -44,10 +44,10 @@ namespace HealthHorizon_API.Controllers
 			return Ok(feedback);
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "patient")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "patient")]
 		[HttpPost]
-		public async Task<ActionResult> PostFeedback([FromBody] Feedback feedback)
+		public async Task<ActionResult> PostFeedback([FromForm] Feedback feedback)
 		{
 			if (feedback == null)
 			{
@@ -60,10 +60,10 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "patient")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "patient")]
 		[HttpPut]
-		public async Task<ActionResult> UpdateFeddback([FromBody] Feedback feedback)
+		public async Task<ActionResult> UpdateFeddback([FromForm] Feedback feedback)
 		{
 			var feedbackDB = await context.Feedbacks.FirstOrDefaultAsync(f => f.Id == feedback.Id);
 			if (feedbackDB == null)
@@ -77,9 +77,9 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
-		[HttpDelete]
-		public async Task<ActionResult> DeleteFeedback(int id)
+		//[Authorize(Roles = "admin")]
+		[HttpDelete("{id:int}")]
+		public async Task<ActionResult> DeleteFeedback([FromQuery] int id)
 		{
 			var feedback = await context.Feedbacks.FirstOrDefaultAsync(fb => fb.Id == id);
 			if (feedback == null)

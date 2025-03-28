@@ -17,8 +17,8 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
 		[HttpGet]
 		public async Task<ActionResult<List<Staff>>> GetAllStaff()
 		{
@@ -31,11 +31,11 @@ namespace HealthHorizon_API.Controllers
 			return Ok(staff);
 		}
 
-		[Authorize(Roles = "admin")]
-		[Authorize(Roles = "doctor")]
-		[Authorize(Roles = "staff")]
-		[HttpGet("{id}")]
-		public async Task<ActionResult<Staff>> GetStaff(int id)
+		//[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "staff")]
+		[HttpGet("{id:int}")]
+		public async Task<ActionResult<Staff>> GetStaff([FromQuery] int id)
 		{
 			var staff = await context.StaffMembers.Include(s => s.Role).FirstOrDefaultAsync(s => s.Id == id);
 			if (staff == null)
@@ -46,9 +46,9 @@ namespace HealthHorizon_API.Controllers
 			return Ok(staff);
 		}
 
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		[HttpPost]
-		public async Task<ActionResult> PostStaff([FromBody] Staff staff)
+		public async Task<ActionResult> PostStaff([FromForm] Staff staff)
 		{
 			if (staff == null)
 			{
@@ -61,9 +61,9 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
+		//[Authorize(Roles = "admin")]
 		[HttpPut]
-		public async Task<ActionResult> UpdateStaff([FromBody] Staff staff)
+		public async Task<ActionResult> UpdateStaff([FromForm] Staff staff)
 		{
 			var staffDB = await context.StaffMembers.FirstOrDefaultAsync(s => s.Id == staff.Id);
 			if (staffDB == null)
@@ -80,9 +80,9 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
-		[HttpDelete]
-		public async Task<ActionResult> DeleteStaff(int id)
+		//[Authorize(Roles = "admin")]
+		[HttpDelete("{id:int}")]
+		public async Task<ActionResult> DeleteStaff([FromQuery] int id)
 		{
 			var staff = await context.StaffMembers.FirstOrDefaultAsync(s => s.Id == id);
 			if (staff == null)
