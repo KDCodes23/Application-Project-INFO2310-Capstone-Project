@@ -10,10 +10,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
@@ -24,6 +21,8 @@ builder.Services.AddDbContext<HealthHorizonContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 	.AddEntityFrameworkStores<HealthHorizonContext>()
 	.AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IEmailSender<IdentityUser>, EmailService>();
 
 builder.Services.AddAuthorization();
 
@@ -55,9 +54,10 @@ using (var scope = app.Services.CreateScope())
 	var services = scope.ServiceProvider;
 	var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 	var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+	var configuration = services.GetRequiredService<IConfiguration>();
 
-	await SeedRolesAsync(roleManager); // Ensure roles exist
-	await SeedAdminUserAsync(userManager, roleManager); // Add default admin
+	await SeedRolesAsync(roleManager);
+	await SeedAdminUserAsync(userManager, roleManager, configuration);
 }
 
 // Configure the HTTP request pipeline.
@@ -67,15 +67,12 @@ if (app.Environment.IsDevelopment())
 	app.MapOpenApi();
 }
 
-app.MapIdentityApi<IdentityUser>();
+app.UseRouting();
 
-//app.UseHttpsRedirection();
-
-app.UseAuthorization();
-app.UseAuthentication();
-
-app.UseCors("AllowReactApp");
 app.UseCors("AllowAllOrigins");
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 
@@ -83,7 +80,7 @@ app.Run();
 
 async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
 {
-	string[] roles = { "admin", "doctor", "staff", "patient"};
+	string[] roles = { "admin", "doctor", "staff", "patient" };
 	foreach (string role in roles)
 	{
 		if (!await roleManager.RoleExistsAsync(role))
@@ -93,11 +90,11 @@ async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
 	}
 }
 
-async Task SeedAdminUserAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+async Task SeedAdminUserAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
 {
-	string adminUserName = "lord commander";
-	string adminEmail = "healthhorizon790@gmail.com";
-	string adminPassword = "healthhorizonproject";
+	var adminUserName = configuration["AdminUser:UserName"];
+	var adminEmail = configuration["AdminUser:Email"];
+	var adminPassword = configuration["AdminUser:Password"];
 
 	var adminUser = await userManager.FindByEmailAsync(adminEmail);
 	if (adminUser == null)
@@ -114,7 +111,9 @@ async Task SeedAdminUserAsync(UserManager<IdentityUser> userManager, RoleManager
 		{
 			await userManager.AddToRoleAsync(adminUser, "admin");
 		}
+		else
+		{
+			throw new Exception($"Admin user creation failed: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+		}
 	}
 }
-
-app.Run();
