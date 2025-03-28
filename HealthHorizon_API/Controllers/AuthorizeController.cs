@@ -190,26 +190,21 @@ namespace HealthHorizon_API.Controllers
 				{
 					case "doctor":
 						var doctor = await context.Doctors.FindAsync(user.Id);
-						if (doctor != null)
-						{
-							id = doctor.Id;
-						}
+						id = (doctor != null) ? doctor.Id : 0;
 						break;
 					case "staff":
 						var staff = await context.Doctors.FindAsync(user.Id);
-						if (staff != null)
-						{
-							id = staff.Id;
-						}
+						id = (staff != null) ? staff.Id : 0;
 						break;
 					case "patient":
 						var patient = await context.Doctors.FindAsync(user.Id);
-						if (patient != null)
-						{
-							id = patient.Id;
-						}
+						id = (patient != null) ? patient.Id : 0;
 						break;
 				}
+			}
+			else
+			{
+				role = string.Empty;
 			}
 
 			return Ok(new
