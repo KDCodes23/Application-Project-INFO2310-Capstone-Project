@@ -5,6 +5,7 @@ using HealthHorizon_API.Models.Identities;
 using HealthHorizon_API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HealthHorizon_API.Controllers
 {
@@ -181,7 +182,7 @@ namespace HealthHorizon_API.Controllers
 				return Unauthorized();
 			}
 			var role = (await userManager.GetRolesAsync(user)).FirstOrDefault();
-			var token = jwtTokenService.GenerateJwtTokenAsync(user);
+			var token = await jwtTokenService.GenerateJwtTokenAsync(user);
 			int id = 0;
 
 			if (role != null)
@@ -189,15 +190,15 @@ namespace HealthHorizon_API.Controllers
 				switch (role)
 				{
 					case "doctor":
-						var doctor = await context.Doctors.FindAsync(user.Id);
+						var doctor = await context.Doctors.FirstOrDefaultAsync(d => d.UserId == user.Id);
 						id = (doctor != null) ? doctor.Id : 0;
 						break;
 					case "staff":
-						var staff = await context.Doctors.FindAsync(user.Id);
+						var staff = await context.StaffMembers.FirstOrDefaultAsync(s => s.UserId == user.Id);
 						id = (staff != null) ? staff.Id : 0;
 						break;
 					case "patient":
-						var patient = await context.Doctors.FindAsync(user.Id);
+						var patient = await context.Patients.FirstOrDefaultAsync(p => p.UserId == user.Id);
 						id = (patient != null) ? patient.Id : 0;
 						break;
 				}
