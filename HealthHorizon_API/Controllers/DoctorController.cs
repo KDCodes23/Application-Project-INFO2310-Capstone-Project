@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HealthHorizon_API.Models.Entities;
-using Microsoft.AspNetCore.Authorization;
 
 namespace HealthHorizon_API.Controllers
 {

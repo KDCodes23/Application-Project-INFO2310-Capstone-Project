@@ -3,7 +3,6 @@ using HealthHorizon_API.Interfaces;
 using HealthHorizon_API.Models.Entities;
 using HealthHorizon_API.Models.Identities;
 using HealthHorizon_API.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -183,7 +182,10 @@ namespace HealthHorizon_API.Controllers
 			}
 			var token = jwtTokenService.GenerateJwtTokenAsync(user);
 
-			return Ok(new { Token = token });
+			return Ok(new
+			{
+				Token = token
+			});
 		}
 	}
 }
