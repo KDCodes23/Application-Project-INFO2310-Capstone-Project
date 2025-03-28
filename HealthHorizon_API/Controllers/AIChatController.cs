@@ -32,8 +32,8 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "patient")]
-		[HttpGet("{id}")]
-		public async Task<ActionResult<AIChatLog>> GetAiChatLog(int id)
+		[HttpGet("{id:int}")]
+		public async Task<ActionResult<AIChatLog>> GetAiChatLog([FromQuery] int id)
 		{
 			var log = await context.AIChatLogs.Include(l => l.Patient).FirstOrDefaultAsync(l => l.Id == id);
 			if (log == null)
@@ -79,8 +79,8 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		//[Authorize(Roles = "admin")]
-		[HttpDelete]
-		public async Task<ActionResult> DeleteAiChatLog(int id)
+		[HttpDelete("{id:int}")]
+		public async Task<ActionResult> DeleteAiChatLog([FromQuery] int id)
 		{
 			var log = await context.AIChatLogs.FirstOrDefaultAsync(l => l.Id == id);
 			if (log == null)

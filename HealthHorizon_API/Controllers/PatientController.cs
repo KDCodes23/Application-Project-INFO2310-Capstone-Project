@@ -50,7 +50,7 @@ namespace HealthHorizon_API.Controllers
 		//[Authorize(Roles = "doctor")]
 		//[Authorize(Roles = "staff")]
 		[HttpPost]
-        public async Task<ActionResult> PostPatient([FromForm] Patient newPatient)
+        public async Task<ActionResult> PostPatient([FromBody] Patient newPatient)
         {
             newPatient.Address = new Address
             {
@@ -70,7 +70,7 @@ namespace HealthHorizon_API.Controllers
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "patient")]
 		[HttpPut]
-        public async Task<ActionResult> UpdatePatient([FromForm] Patient newPatient)
+        public async Task<ActionResult> UpdatePatient([FromBody] Patient newPatient)
         {
             var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == newPatient.Id);
             if (patient == null)

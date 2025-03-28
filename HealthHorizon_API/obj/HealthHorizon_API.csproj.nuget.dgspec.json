@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API\\HealthHorizon_API.csproj": {}
+    "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API.csproj": {}
   },
   "projects": {
-    "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API\\HealthHorizon_API.csproj": {
+    "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API\\HealthHorizon_API.csproj",
+        "projectUniqueName": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API.csproj",
         "projectName": "HealthHorizon_API",
-        "projectPath": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API\\HealthHorizon_API.csproj",
+        "projectPath": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API.csproj",
         "packagesPath": "C:\\Users\\cools\\.nuget\\packages\\",
-        "outputPath": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\HealthHorizon_API\\obj\\",
+        "outputPath": "D:\\College\\Level 4\\Appilcation Project\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\Application-Project-INFO2310-Capstone-Project\\HealthHorizon_API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

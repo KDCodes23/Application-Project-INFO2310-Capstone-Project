@@ -32,7 +32,7 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "doctor")]
-		[HttpGet("{id}")]
+		[HttpGet("{id:int}")]
 		public async Task<ActionResult<Feedback>> GetFeedback([FromQuery] int id)
 		{
 			var feedback = await context.Feedbacks.FirstOrDefaultAsync(f => f.Id == id);
@@ -47,7 +47,7 @@ namespace HealthHorizon_API.Controllers
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "patient")]
 		[HttpPost]
-		public async Task<ActionResult> PostFeedback([FromForm] Feedback feedback)
+		public async Task<ActionResult> PostFeedback([FromBody] Feedback feedback)
 		{
 			if (feedback == null)
 			{
@@ -63,7 +63,7 @@ namespace HealthHorizon_API.Controllers
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "patient")]
 		[HttpPut]
-		public async Task<ActionResult> UpdateFeddback([FromForm] Feedback feedback)
+		public async Task<ActionResult> UpdateFeddback([FromBody] Feedback feedback)
 		{
 			var feedbackDB = await context.Feedbacks.FirstOrDefaultAsync(f => f.Id == feedback.Id);
 			if (feedbackDB == null)

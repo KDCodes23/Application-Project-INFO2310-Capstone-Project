@@ -32,7 +32,7 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "staff")]
-		//[HttpGet("{id:int}")]
+		[HttpGet("{id:int}")]
 		public async Task<ActionResult<StaffRole>> GetRole([FromQuery] int id)
 		{
 			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == id);
@@ -45,7 +45,7 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		[HttpPost]
-		public async Task<ActionResult> PostRole([FromForm] StaffRole newRole)
+		public async Task<ActionResult> PostRole([FromBody] StaffRole newRole)
 		{
 			await context.StaffRoles.AddAsync(newRole);
 			await context.SaveChangesAsync();
@@ -54,7 +54,7 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		[HttpPut]
-		public async Task<ActionResult> UpdateRole([FromForm] StaffRole newRole)
+		public async Task<ActionResult> UpdateRole([FromBody] StaffRole newRole)
 		{
 			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == newRole.Id);
 			if (role == null)

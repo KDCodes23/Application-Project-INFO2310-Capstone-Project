@@ -35,8 +35,8 @@ namespace HealthHorizon_API.Controllers
 		//[Authorize(Roles = "doctor")]
 		//[Authorize(Roles = "staff")]
 		//[Authorize(Roles = "patient")]
-		[HttpGet("{id}")]
-		public async Task<ActionResult<Appointment>> GetAppointment(int id)
+		[HttpGet("{id:int}")]
+		public async Task<ActionResult<Appointment>> GetAppointment([FromQuery] int id)
 		{
 			var appointment = await context.Appointments.Include(a => a.Doctor).Include(a => a.Patient).FirstOrDefaultAsync(a => a.Id == id);
 			if (appointment == null)
@@ -79,8 +79,8 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "doctor")]
-		[HttpDelete("{id}")]
-		public async Task<ActionResult> DeleteAppointment(int id)
+		[HttpDelete("{id:int}")]
+		public async Task<ActionResult> DeleteAppointment([FromQuery] int id)
 		{
 			var appointment = await context.Appointments.FirstOrDefaultAsync(a => a.Id == id);
 			if (appointment == null)
