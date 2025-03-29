@@ -6,6 +6,7 @@ using HealthHorizon_API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HealthHorizon_API.Controllers
 {
@@ -35,43 +36,55 @@ namespace HealthHorizon_API.Controllers
 				return BadRequest();
 			}
 
-			var existingUser = await userManager.FindByEmailAsync(request.Email);
-			if (existingUser != null)
+			try
 			{
-				return BadRequest();
-			}
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
 
-			var user = new IdentityUser
-			{
-				UserName = request.UserName,
-				Email = request.Email,
-				EmailConfirmed = true
-				
-			};
+                var existingUser = await userManager.FindByEmailAsync(request.Email);
+                if (existingUser != null)
+                {
+                    return BadRequest("Email already registered!");
+                }
 
-			var result = await userManager.CreateAsync(user, request.Password);
-			if (!result.Succeeded)
-			{
-				return BadRequest();
-			}
+                var user = new IdentityUser
+                {
+                    UserName = request.UserName,
+                    Email = request.Email,
+                    EmailConfirmed = true
 
-			await userManager.AddToRoleAsync(user, "doctor");
+                };
 
-			var doctor = new Doctor
-			{
-				FirstName = request.Doctor.FirstName,
-				LastName = request.Doctor.LastName,
-				Specialization = request.Doctor.Specialization,
-				PhoneNumber = request.Doctor.PhoneNumber,
-				UserId = user.Id,
-				User = user
-			};
+                var result = await userManager.CreateAsync(user, request.Password);
+                if (!result.Succeeded)
+                {
+                    return BadRequest();
+                }
 
-			await context.Doctors.AddAsync(doctor);
-			await context.SaveChangesAsync();
+                await userManager.AddToRoleAsync(user, "doctor");
 
-			return Ok();
-		}
+                var doctor = new Doctor
+                {
+                    FirstName = request.Doctor.FirstName,
+                    LastName = request.Doctor.LastName,
+                    Specialization = request.Doctor.Specialization,
+                    PhoneNumber = request.Doctor.PhoneNumber,
+                    HospitalName = request.Doctor.HospitalName,
+                    ProfessionalBio = request.Doctor.ProfessionalBio,
+                    UserId = user.Id,
+                    User = user
+                };
+
+                await context.Doctors.AddAsync(doctor);
+                await context.SaveChangesAsync();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while saving patient data");
+            }
+        }
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "doctor")]
@@ -84,43 +97,73 @@ namespace HealthHorizon_API.Controllers
 				return BadRequest();
 			}
 
-			var existingUser = await userManager.FindByEmailAsync(request.Email);
-			if (existingUser != null)
+			try
 			{
-				return BadRequest();
-			}
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
 
-			var user = new IdentityUser
-			{
-				UserName = request.UserName,
-				Email = request.Email,
-				EmailConfirmed = true
+                var existingUser = await userManager.FindByEmailAsync(request.Email);
+				if (existingUser != null)
+				{
+					return BadRequest("Email already registered!");
+				}
 
-			};
+				var user = new IdentityUser
+				{
+					UserName = request.UserName,
+					Email = request.Email,
+					EmailConfirmed = true
+				};
 
-			var result = await userManager.CreateAsync(user, request.Password);
-			if (!result.Succeeded)
-			{
-				return BadRequest();
-			}
+				var result = await userManager.CreateAsync(user, request.Password);
+                if (!result.Succeeded)
+                {
+                    return BadRequest(new { message = "User creation failed", errors = result.Errors });
+                }
 
-			await userManager.AddToRoleAsync(user, "patient");
+                await userManager.AddToRoleAsync(user, "patient");
 
-			var patient = new Patient
-			{
-				FirstName = request.Patient.FirstName,
-				DateOfBirth = request.Patient.DateOfBirth,
-				PhoneNumber = request.Patient.PhoneNumber,
-				AddressId = request.Patient.AddressId,
-				UserId = user.Id,
-				User = user
-			};
+				var patient = new Patient
+				{
+					FirstName = request.Patient.FirstName,
+                    LastName = request.Patient.LastName,
+                    DateOfBirth = request.Patient.DateOfBirth,
+					PhoneNumber = request.Patient.PhoneNumber,
+                    Gender = request.Patient.Gender,
+                    AddressId = request.Patient.AddressId,
+					UserId = user.Id,
+					User = user
+				};
 
-			await context.Patients.AddAsync(patient);
-			await context.SaveChangesAsync();
+                if (request.Patient.Address != null)
+                {
+                    var address = new Address
+                    {
+                        Street = request.Patient.Address.Street,
+                        City = request.Patient.Address.City,
+                        ProvinceOrState = request.Patient.Address.ProvinceOrState,
+                        Country = request.Patient.Address.Country,
+                        PostalCode = request.Patient.Address.PostalCode
+                    };
 
-			return Ok();
-		}
+                    context.Addresses.Add(address);
+                    await context.SaveChangesAsync();
+                    patient.AddressId = address.Id;
+                }
+
+                await context.Patients.AddAsync(patient);
+				await context.SaveChangesAsync();
+
+                return Ok(new { message = "Patient registered successfully" });
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return StatusCode(500, new { message = "Internal server error", error = ex.Message });
+            }
+        }
+
 
 		//[Authorize(Roles = "admin")]
 		[HttpPost("register-staff")]
@@ -171,19 +214,26 @@ namespace HealthHorizon_API.Controllers
 		[HttpPost("login")]
 		public async Task<ActionResult> Login([FromBody] Login request)
 		{
-			var user = await userManager.FindByEmailAsync(request.Email);
-			if (user == null)
+			try
 			{
-				return NotFound();
-			}
-			var result = await signInManager.PasswordSignInAsync(user, request.Password, false, false);
-			if (!result.Succeeded)
-			{
-				return Unauthorized();
-			}
-			var token = jwtTokenService.GenerateJwtTokenAsync(user);
+                var user = await userManager.FindByEmailAsync(request.Email);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                var result = await signInManager.PasswordSignInAsync(user, request.Password, false, false);
+                if (!result.Succeeded)
+                {
+                    return Unauthorized();
+                }
+                var token = jwtTokenService.GenerateJwtTokenAsync(user);
 
-			return Ok(new { Token = token });
-		}
+                return Ok(new { Token = token });
+            }
+            catch (Exception ex)
+			{
+                return StatusCode(500, new { message = "Login failed", errors = ex.Message });
+            }
+        }
 	}
 }
