@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthHorizon_API.Migrations
 {
     [DbContext(typeof(HealthHorizonContext))]
-    [Migration("20250328002159_Initial")]
+    [Migration("20250329224057_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -187,6 +187,34 @@ namespace HealthHorizon_API.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Doctors");
+                });
+
+            modelBuilder.Entity("HealthHorizon_API.Models.Entities.DoctorAvailability", b =>
+                {
+                    b.Property<int>("DoctorAvailabilityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DoctorAvailabilityId"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<TimeSpan>("ShiftEnd")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("ShiftStart")
+                        .HasColumnType("time");
+
+                    b.HasKey("DoctorAvailabilityId");
+
+                    b.ToTable("DoctorAvailabilities");
                 });
 
             modelBuilder.Entity("HealthHorizon_API.Models.Entities.Feedback", b =>

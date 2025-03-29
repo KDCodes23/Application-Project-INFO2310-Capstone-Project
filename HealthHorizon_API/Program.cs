@@ -7,64 +7,67 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
 using System.Text;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 
 builder.Services.AddDbContext<HealthHorizonContext>(options =>
-	options.UseSqlServer(builder.Configuration.GetConnectionString("HealthHorizonContext")));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("HealthHorizonContext")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-	.AddEntityFrameworkStores<HealthHorizonContext>()
-	.AddDefaultTokenProviders();
+                .AddEntityFrameworkStores<HealthHorizonContext>()
+                .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IEmailSender<IdentityUser>, EmailService>();
 
 builder.Services.AddAuthorization();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-	options.TokenValidationParameters = new TokenValidationParameters
-	{
-		ValidateIssuer = true,
-		ValidateAudience = true,
-		ValidateLifetime = true,
-		ValidateIssuerSigningKey = true,
-		ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
-		ValidAudience = builder.Configuration["JwtSettings:Audience"],
-		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]))
-	}
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+                    ValidAudience = builder.Configuration["JwtSettings:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]))
+                }
 );
+
 
 builder.Services.AddCors(options =>
 {
-	options.AddPolicy("AllowAllOrigins", policy =>
-	{
-		policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-	});
+    options.AddPolicy("AllowAllOrigins", policy =>
+        {
+                    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
 });
 
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-	var services = scope.ServiceProvider;
-	var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-	var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
-	var configuration = services.GetRequiredService<IConfiguration>();
+    var services = scope.ServiceProvider;
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+    var configuration = services.GetRequiredService<IConfiguration>();
 
-	await SeedRolesAsync(roleManager);
-	await SeedAdminUserAsync(userManager, roleManager, configuration);
+    await SeedRolesAsync(roleManager);
+    await SeedAdminUserAsync(userManager, roleManager, configuration);
 }
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-	app.MapScalarApiReference();
-	app.MapOpenApi();
+    app.MapScalarApiReference();
+    app.MapOpenApi();
 }
 
 app.UseRouting();
@@ -80,40 +83,40 @@ app.Run();
 
 async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
 {
-	string[] roles = { "admin", "doctor", "staff", "patient" };
-	foreach (string role in roles)
-	{
-		if (!await roleManager.RoleExistsAsync(role))
-		{
-			await roleManager.CreateAsync(new IdentityRole(role));
-		}
-	}
+    string[] roles = { "admin", "doctor", "staff", "patient" };
+    foreach (string role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
 }
 
 async Task SeedAdminUserAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
 {
-	var adminUserName = configuration["AdminUser:UserName"];
-	var adminEmail = configuration["AdminUser:Email"];
-	var adminPassword = configuration["AdminUser:Password"];
+    var adminUserName = configuration["AdminUser:UserName"];
+    var adminEmail = configuration["AdminUser:Email"];
+    var adminPassword = configuration["AdminUser:Password"];
 
-	var adminUser = await userManager.FindByEmailAsync(adminEmail);
-	if (adminUser == null)
-	{
-		adminUser = new IdentityUser
-		{
-			UserName = adminUserName,
-			Email = adminEmail,
-			EmailConfirmed = true
-		};
+    var adminUser = await userManager.FindByEmailAsync(adminEmail);
+    if (adminUser == null)
+    {
+        adminUser = new IdentityUser
+        {
+            UserName = adminUserName,
+            Email = adminEmail,
+            EmailConfirmed = true
+        };
 
-		var result = await userManager.CreateAsync(adminUser, adminPassword);
-		if (result.Succeeded)
-		{
-			await userManager.AddToRoleAsync(adminUser, "admin");
-		}
-		else
-		{
-			throw new Exception($"Admin user creation failed: {string.Join(", ", result.Errors.Select(e => e.Description))}");
-		}
-	}
+        var result = await userManager.CreateAsync(adminUser, adminPassword);
+        if (result.Succeeded)
+        {
+            await userManager.AddToRoleAsync(adminUser, "admin");
+        }
+        else
+        {
+            throw new Exception($"Admin user creation failed: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+        }
+    }
 }

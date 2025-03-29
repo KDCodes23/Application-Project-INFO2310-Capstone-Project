@@ -480,6 +480,38 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "HealthHorizon_API.Controllers.DoctorAvailabilityController",
+    "Method": "AddOrUpdateAvailability",
+    "RelativePath": "api/DoctorAvailability",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "availability",
+        "Type": "HealthHorizon_API.Models.Entities.DoctorAvailability",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.DoctorAvailabilityController",
+    "Method": "GetDoctorAvailability",
+    "RelativePath": "api/DoctorAvailability/{doctorId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "doctorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HealthHorizon_API.Controllers.FeedbackController",
     "Method": "GetAllFeedbacks",
     "RelativePath": "api/Feedback",

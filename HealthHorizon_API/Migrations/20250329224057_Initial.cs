@@ -69,6 +69,23 @@ namespace HealthHorizon_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DoctorAvailabilities",
+                columns: table => new
+                {
+                    DoctorAvailabilityId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DoctorId = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ShiftStart = table.Column<TimeSpan>(type: "time", nullable: false),
+                    ShiftEnd = table.Column<TimeSpan>(type: "time", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DoctorAvailabilities", x => x.DoctorAvailabilityId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Feedbacks",
                 columns: table => new
                 {
@@ -1151,6 +1168,9 @@ namespace HealthHorizon_API.Migrations
 
             migrationBuilder.DropTable(
                 name: "CardiacTests");
+
+            migrationBuilder.DropTable(
+                name: "DoctorAvailabilities");
 
             migrationBuilder.DropTable(
                 name: "EndocrineTests");

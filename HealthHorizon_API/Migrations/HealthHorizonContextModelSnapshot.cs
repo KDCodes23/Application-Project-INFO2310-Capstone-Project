@@ -186,6 +186,34 @@ namespace HealthHorizon_API.Migrations
                     b.ToTable("Doctors");
                 });
 
+            modelBuilder.Entity("HealthHorizon_API.Models.Entities.DoctorAvailability", b =>
+                {
+                    b.Property<int>("DoctorAvailabilityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DoctorAvailabilityId"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<TimeSpan>("ShiftEnd")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("ShiftStart")
+                        .HasColumnType("time");
+
+                    b.HasKey("DoctorAvailabilityId");
+
+                    b.ToTable("DoctorAvailabilities");
+                });
+
             modelBuilder.Entity("HealthHorizon_API.Models.Entities.Feedback", b =>
                 {
                     b.Property<int>("Id")

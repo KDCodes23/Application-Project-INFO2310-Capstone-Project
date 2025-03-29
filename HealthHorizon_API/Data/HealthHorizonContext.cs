@@ -12,13 +12,15 @@ namespace HealthHorizon_API.Data
 		public DbSet<Appointment> Appointments { get; set; }
 		public DbSet<Bill> Bills { get; set; }
 		public DbSet<Doctor> Doctors { get; set; }
-		public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<DoctorAvailability> DoctorAvailabilities { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
 		public DbSet<Patient> Patients { get; set; }
 		public DbSet<Address> Addresses { get; set; }
 		public DbSet<Prescription> Prescriptions { get; set; }
 		public DbSet<Staff> StaffMembers { get; set; }
 		public DbSet<StaffRole> StaffRoles { get; set; }
 		public DbSet<MedicalRecord> MedicalRecords { get; set; }
+
 		public DbSet<AllergyTest> AllergyTests { get; set; }
 		public DbSet<BodyMeasurement> BodyMeasurements { get; set; }
 		public DbSet<CardiacTest> CardiacTests { get; set; }
@@ -31,7 +33,7 @@ namespace HealthHorizon_API.Data
 		public DbSet<RespiratoryTest> RespiratoryTests { get; set; }
 		public DbSet<VitalSign> VitalSigns { get; set; }
 
-		public HealthHorizonContext(DbContextOptions<HealthHorizonContext> options) : base(options) { }
+        public HealthHorizonContext(DbContextOptions<HealthHorizonContext> options) : base(options) { }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -43,7 +45,11 @@ namespace HealthHorizon_API.Data
 				.HasForeignKey<Patient>(p => p.AddressId)
 				.IsRequired(false);
 
-			modelBuilder.Entity<Staff>()
+            // Define any relationships, keys, or constraints
+            modelBuilder.Entity<DoctorAvailability>()
+				.HasKey(d => d.DoctorAvailabilityId);
+
+            modelBuilder.Entity<Staff>()
 				.HasOne(s => s.Role)
 				.WithMany()
 				.HasForeignKey(s => s.RoleId);
