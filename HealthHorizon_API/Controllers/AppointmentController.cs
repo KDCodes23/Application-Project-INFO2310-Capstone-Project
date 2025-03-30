@@ -36,7 +36,7 @@ namespace HealthHorizon_API.Controllers
 		//[Authorize(Roles = "staff")]
 		//[Authorize(Roles = "patient")]
 		[HttpGet("{id:int}")]
-		public async Task<ActionResult<Appointment>> GetAppointment([FromQuery] int id)
+		public async Task<ActionResult<Appointment>> GetAppointment([FromRoute] int id)
 		{
 			var appointment = await context.Appointments.Include(a => a.Doctor).Include(a => a.Patient).FirstOrDefaultAsync(a => a.Id == id);
 			if (appointment == null)
@@ -54,8 +54,10 @@ namespace HealthHorizon_API.Controllers
 		{
 			await context.Appointments.AddAsync(appointment);
 			await context.SaveChangesAsync();
-			return Ok();
-		}
+
+			//return Ok();
+            return CreatedAtAction(nameof(GetAppointment), new { id = appointment.Id }, appointment);
+        }
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "doctor")]
@@ -74,8 +76,8 @@ namespace HealthHorizon_API.Controllers
 			appointmentDB.PatientId = appointment.PatientId;
 
 			await context.SaveChangesAsync();
-			return Ok();
-		}
+            return NoContent();
+        }
 
 		//[Authorize(Roles = "admin")]
 		//[Authorize(Roles = "doctor")]
@@ -91,7 +93,7 @@ namespace HealthHorizon_API.Controllers
 			context.Appointments.Remove(appointment);
 			await context.SaveChangesAsync();
 
-			return Ok();
-		}
+            return NoContent();
+        }
 	}
 }

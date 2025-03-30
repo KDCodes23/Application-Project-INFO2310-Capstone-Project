@@ -36,10 +36,12 @@ namespace HealthHorizon_API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddOrUpdateAvailability([FromBody] DoctorAvailability availability)
         {
-            if (availability == null)
+            if (availability.ShiftStart >= availability.ShiftEnd)
             {
-                return BadRequest("Invalid data.");
+                return BadRequest("Shift start must be earlier than shift end!");
             }
+
+            var timeSlots = GenerateTimeSlots(availability.DoctorId, availability.Date, availability.ShiftStart, availability.ShiftEnd);
 
             if (availability.DoctorId == 0)
             {
@@ -84,6 +86,32 @@ namespace HealthHorizon_API.Controllers
 
             await context.SaveChangesAsync();
             return Ok(availability);
+        }
+
+
+        private List<DoctorAvailability> GenerateTimeSlots(int doctorId, DateTime date, TimeSpan shiftStart, TimeSpan shiftEnd)
+        {
+            var timeSlots = new List<DoctorAvailability>();
+            var currentTime = shiftStart;
+
+            // Generate slots for every hour between ShiftStart and ShiftEnd
+            while (currentTime < shiftEnd)
+            {
+                var nextTime = currentTime.Add(new TimeSpan(1, 0, 0)); // Add one hour
+
+                timeSlots.Add(new DoctorAvailability
+                {
+                    DoctorId = doctorId,
+                    Date = date,
+                    ShiftStart = currentTime,
+                    ShiftEnd = nextTime,
+                    IsAvailable = true // Initially mark the slot as available
+                });
+
+                currentTime = nextTime; // Move to the next time slot
+            }
+
+            return timeSlots;
         }
     }
 }

@@ -11,8 +11,11 @@ namespace HealthHorizon_API.Models.Entities
 		public DateTime Date { get; set; }
 		public string Status { get; set; } = string.Empty;
 
-		public int DoctorId { get; set; }
-		public Doctor Doctor { get; set; } = null!;
+        public int DoctorSlotId { get; set; }  // Foreign Key to DoctorSlots
+        public DoctorSlot? DoctorSlot { get; set; } = null!;  // Navigation property
+
+        public int DoctorId { get; set; }
+		public Doctor? Doctor { get; set; } = null!;
 
 		public int PatientId { get; set; }
 		public Patient? Patient { get; set; } = null;

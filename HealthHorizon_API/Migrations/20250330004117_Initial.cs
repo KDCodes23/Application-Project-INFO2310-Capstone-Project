@@ -86,6 +86,23 @@ namespace HealthHorizon_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DoctorSlots",
+                columns: table => new
+                {
+                    DoctorSlotId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DoctorId = table.Column<int>(type: "int", nullable: false),
+                    SlotDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SlotStart = table.Column<TimeSpan>(type: "time", nullable: false),
+                    SlotEnd = table.Column<TimeSpan>(type: "time", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DoctorSlots", x => x.DoctorSlotId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Feedbacks",
                 columns: table => new
                 {
@@ -330,12 +347,19 @@ namespace HealthHorizon_API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DoctorSlotId = table.Column<int>(type: "int", nullable: false),
                     DoctorId = table.Column<int>(type: "int", nullable: false),
                     PatientId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Appointments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Appointments_DoctorSlots_DoctorSlotId",
+                        column: x => x.DoctorSlotId,
+                        principalTable: "DoctorSlots",
+                        principalColumn: "DoctorSlotId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Appointments_Doctors_DoctorId",
                         column: x => x.DoctorId,
@@ -949,6 +973,11 @@ namespace HealthHorizon_API.Migrations
                 column: "DoctorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Appointments_DoctorSlotId",
+                table: "Appointments",
+                column: "DoctorSlotId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Appointments_PatientId",
                 table: "Appointments",
                 column: "PatientId");
@@ -1216,6 +1245,9 @@ namespace HealthHorizon_API.Migrations
 
             migrationBuilder.DropTable(
                 name: "MedicalRecords");
+
+            migrationBuilder.DropTable(
+                name: "DoctorSlots");
 
             migrationBuilder.DropTable(
                 name: "Doctors");

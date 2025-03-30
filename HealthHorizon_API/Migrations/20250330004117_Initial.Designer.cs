@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthHorizon_API.Migrations
 {
     [DbContext(typeof(HealthHorizonContext))]
-    [Migration("20250329224057_Initial")]
+    [Migration("20250330004117_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -101,6 +101,9 @@ namespace HealthHorizon_API.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
+                    b.Property<int>("DoctorSlotId")
+                        .HasColumnType("int");
+
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
@@ -111,6 +114,8 @@ namespace HealthHorizon_API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DoctorId");
+
+                    b.HasIndex("DoctorSlotId");
 
                     b.HasIndex("PatientId");
 
@@ -215,6 +220,34 @@ namespace HealthHorizon_API.Migrations
                     b.HasKey("DoctorAvailabilityId");
 
                     b.ToTable("DoctorAvailabilities");
+                });
+
+            modelBuilder.Entity("HealthHorizon_API.Models.Entities.DoctorSlot", b =>
+                {
+                    b.Property<int>("DoctorSlotId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DoctorSlotId"));
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("SlotDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("SlotEnd")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("SlotStart")
+                        .HasColumnType("time");
+
+                    b.HasKey("DoctorSlotId");
+
+                    b.ToTable("DoctorSlots");
                 });
 
             modelBuilder.Entity("HealthHorizon_API.Models.Entities.Feedback", b =>
@@ -1570,6 +1603,12 @@ namespace HealthHorizon_API.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("HealthHorizon_API.Models.Entities.DoctorSlot", "DoctorSlot")
+                        .WithMany()
+                        .HasForeignKey("DoctorSlotId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("HealthHorizon_API.Models.Entities.Patient", "Patient")
                         .WithMany()
                         .HasForeignKey("PatientId")
@@ -1577,6 +1616,8 @@ namespace HealthHorizon_API.Migrations
                         .IsRequired();
 
                     b.Navigation("Doctor");
+
+                    b.Navigation("DoctorSlot");
 
                     b.Navigation("Patient");
                 });

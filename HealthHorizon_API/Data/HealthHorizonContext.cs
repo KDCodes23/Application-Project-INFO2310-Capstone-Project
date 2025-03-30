@@ -9,10 +9,11 @@ namespace HealthHorizon_API.Data
 	public class HealthHorizonContext : IdentityDbContext<IdentityUser>
 	{
 		public DbSet<AIChatLog> AIChatLogs { get; set; }
-		public DbSet<Appointment> Appointments { get; set; }
 		public DbSet<Bill> Bills { get; set; }
 		public DbSet<Doctor> Doctors { get; set; }
         public DbSet<DoctorAvailability> DoctorAvailabilities { get; set; }
+        public DbSet<DoctorSlot> DoctorSlots { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
 		public DbSet<Patient> Patients { get; set; }
 		public DbSet<Address> Addresses { get; set; }
@@ -71,7 +72,14 @@ namespace HealthHorizon_API.Data
 				.HasForeignKey(a => a.PatientId)
 				.OnDelete(DeleteBehavior.Restrict);
 
-			modelBuilder.Entity<Bill>()
+            // Define Appointment to DoctorSlot relationship (newly added)
+            modelBuilder.Entity<Appointment>()
+                .HasOne(a => a.DoctorSlot)  // Appointment references DoctorSlot
+                .WithMany()                 // One DoctorSlot can have many Appointments
+                .HasForeignKey(a => a.DoctorSlotId) // Foreign key in Appointment
+                .OnDelete(DeleteBehavior.Restrict);  // Decide on delete behavior, can also be Cascade or SetNull if needed
+
+            modelBuilder.Entity<Bill>()
 				.HasOne(b => b.Appointment)
 				.WithOne()
 				.HasForeignKey<Bill>(b => b.AppointmentId)
