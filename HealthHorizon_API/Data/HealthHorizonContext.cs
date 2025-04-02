@@ -11,8 +11,6 @@ namespace HealthHorizon_API.Data
 		public DbSet<AIChatLog> AIChatLogs { get; set; }
 		public DbSet<Bill> Bills { get; set; }
 		public DbSet<Doctor> Doctors { get; set; }
-        public DbSet<DoctorAvailability> DoctorAvailabilities { get; set; }
-        public DbSet<DoctorSlot> DoctorSlots { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
 		public DbSet<Patient> Patients { get; set; }
@@ -20,6 +18,8 @@ namespace HealthHorizon_API.Data
 		public DbSet<Prescription> Prescriptions { get; set; }
 		public DbSet<Staff> StaffMembers { get; set; }
 		public DbSet<StaffRole> StaffRoles { get; set; }
+		public DbSet<Schedule> Schedules { get; set; }
+		public DbSet<TimeSlot> TimeSlots { get; set; }
 		public DbSet<MedicalRecord> MedicalRecords { get; set; }
 
 		public DbSet<AllergyTest> AllergyTests { get; set; }
@@ -40,15 +40,21 @@ namespace HealthHorizon_API.Data
 		{
 			base.OnModelCreating(modelBuilder);
 
+			modelBuilder.Entity<Doctor>()
+				.HasMany(d => d.Schedules)
+				.WithOne(s => s.Doctor)
+				.HasForeignKey(s => s.DoctorId);
+
+			modelBuilder.Entity<Schedule>()
+				.HasMany(s => s.TimeSlots)
+				.WithOne(ts => ts.Schedule)
+				.HasForeignKey(ts => ts.ScheduleId);
+
 			modelBuilder.Entity<Patient>()
 				.HasOne(p => p.Address)
 				.WithOne(a => a.Patient)
 				.HasForeignKey<Patient>(p => p.AddressId)
 				.IsRequired(false);
-
-            // Define any relationships, keys, or constraints
-            modelBuilder.Entity<DoctorAvailability>()
-				.HasKey(d => d.DoctorAvailabilityId);
 
             modelBuilder.Entity<Staff>()
 				.HasOne(s => s.Role)
@@ -72,12 +78,11 @@ namespace HealthHorizon_API.Data
 				.HasForeignKey(a => a.PatientId)
 				.OnDelete(DeleteBehavior.Restrict);
 
-            // Define Appointment to DoctorSlot relationship (newly added)
             modelBuilder.Entity<Appointment>()
-                .HasOne(a => a.DoctorSlot)  // Appointment references DoctorSlot
-                .WithMany()                 // One DoctorSlot can have many Appointments
-                .HasForeignKey(a => a.DoctorSlotId) // Foreign key in Appointment
-                .OnDelete(DeleteBehavior.Restrict);  // Decide on delete behavior, can also be Cascade or SetNull if needed
+                .HasOne(a => a.DoctorSlot)
+                .WithMany()
+                .HasForeignKey(a => a.DoctorSlotId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Bill>()
 				.HasOne(b => b.Appointment)
@@ -156,6 +161,11 @@ namespace HealthHorizon_API.Data
 				.WithOne(vs => vs.MedicalRecord)
 				.HasForeignKey(vs => vs.MedicalRecordId)
 				.OnDelete(DeleteBehavior.Restrict);
+
+			modelBuilder.Entity<DoctorSlot>()
+				.HasOne(ds => ds.Doctor)
+				.WithOne()
+				.HasForeignKey<DoctorSlot>(ds => ds.DoctorId);
 		}
 	}
 }

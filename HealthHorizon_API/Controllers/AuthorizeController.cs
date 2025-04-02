@@ -39,8 +39,10 @@ namespace HealthHorizon_API.Controllers
 			try
 			{
                 if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
-
+				{
+					return BadRequest(ModelState);
+				}
+                    
                 var existingUser = await userManager.FindByEmailAsync(request.Email);
                 if (existingUser != null)
                 {
@@ -86,9 +88,7 @@ namespace HealthHorizon_API.Controllers
             }
         }
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
-		//[Authorize(Roles = "staff")]
+		//[Authorize(Roles = "admin, doctor, staff")]
 		[HttpPost("register-patient")]
 		public async Task<ActionResult> RegisterPatient([FromBody] Register request)
 		{
@@ -100,7 +100,9 @@ namespace HealthHorizon_API.Controllers
 			try
 			{
                 if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
+				{
+					return BadRequest(ModelState);
+				}
 
                 var existingUser = await userManager.FindByEmailAsync(request.Email);
 				if (existingUser != null)
@@ -216,6 +218,7 @@ namespace HealthHorizon_API.Controllers
 		{
 			try
 			{
+				Guid id = Guid.Empty;
                 var user = await userManager.FindByEmailAsync(request.Email);
                 if (user == null)
                 {
@@ -227,8 +230,42 @@ namespace HealthHorizon_API.Controllers
                     return Unauthorized();
                 }
                 var token = jwtTokenService.GenerateJwtTokenAsync(user);
+				var role = (await userManager.GetRolesAsync(user)).FirstOrDefault();
 
-                return Ok(new { Token = token });
+				if (role == "doctor")
+				{
+					var doctor = await context.Doctors.FirstOrDefaultAsync(d => d.UserId == user.Id);
+					if (doctor == null)
+					{
+						return NotFound("Doctor does not exist");
+					}
+					id = doctor.Id;
+				}
+				else if (role == "staff")
+				{
+					var staff = await context.StaffMembers.FirstOrDefaultAsync(d => d.UserId == user.Id);
+					if (staff == null)
+					{
+						return NotFound("Staff member does not exist.");
+					}
+					id = staff.Id;
+				}
+				else if (role == "patient")
+				{
+					var patient = await context.Patients.FirstOrDefaultAsync(d => d.UserId == user.Id);
+					if (patient == null)
+					{
+						return NotFound("Patient does not exist.");
+					}
+					id = patient.Id;
+				}
+
+				return Ok(new
+				{
+					Token = token,
+					Role = role,
+					Id = id
+				});
             }
             catch (Exception ex)
 			{

@@ -1,6 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
-using Microsoft.AspNetCore.Authorization;
+using HealthHorizon_API.Models.UtilityModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,14 +30,11 @@ namespace HealthHorizon_API.Controllers
 			return Ok(bills);
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
-		//[Authorize(Roles = "staff")]
-		//[Authorize(Roles = "patient")]
-		[HttpGet("{id:int}")]
-		public async Task<ActionResult<Bill>> GetBill([FromQuery] int id)
+		//[Authorize]
+		[HttpGet("get-bill")]
+		public async Task<ActionResult<Bill>> GetBill([FromBody] IdRequest request)
 		{
-			var bill = await context.Bills.Include(b => b.Appointment).FirstOrDefaultAsync(b => b.Id == id);
+			var bill = await context.Bills.Include(b => b.Appointment).FirstOrDefaultAsync(b => b.Id == request.Id);
 			if (bill == null)
 			{
 				return NotFound();
@@ -46,8 +43,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok(bill);
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin, doctor")]
 		[HttpPost]
 		public async Task<ActionResult> PostBill([FromBody] Bill bill)
 		{
@@ -62,8 +58,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin, doctor")]
 		[HttpPut]
 		public async Task<ActionResult> UpdateBill([FromBody] Bill bill)
 		{
@@ -83,10 +78,10 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		//[Authorize(Roles = "admin")]
-		[HttpDelete("{id:int}")]
-		public async Task<ActionResult> DeleteBill([FromQuery] int id)
+		[HttpDelete("delete-bill")]
+		public async Task<ActionResult> DeleteBill([FromBody] IdRequest request)
 		{
-			var bill = await context.Bills.FirstOrDefaultAsync(b => b.Id == id);
+			var bill = await context.Bills.FirstOrDefaultAsync(b => b.Id == request.Id);
 			if (bill == null)
 			{
 				return NotFound();

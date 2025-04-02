@@ -7,14 +7,13 @@ namespace HealthHorizon_API.Models.Medical_Record_Types
 	public class LaboratoryTest
 	{
 		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
+		public Guid Id { get; set; } = Guid.NewGuid();
 		public DateTime Date { get; set; }
 
-		public int DoctorId { get; set; }
+		public Guid DoctorId { get; set; }
 		public Doctor Doctor { get; set; } = null!;
 
-		public int MedicalRecordId { get; set; }
+		public Guid MedicalRecordId { get; set; }
 		public MedicalRecord MedicalRecord { get; set; } = null!;
 
 		public double Hemoglobin { get; set; } = 0;

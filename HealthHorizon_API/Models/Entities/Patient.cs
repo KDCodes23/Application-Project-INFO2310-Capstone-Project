@@ -7,18 +7,24 @@ namespace HealthHorizon_API.Models.Entities
 	public class Patient
 	{
 		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
-        public string FirstName { get; set; } = string.Empty;
+		public Guid Id { get; set; } = Guid.NewGuid();
+		[Required]
+		public string FirstName { get; set; } = string.Empty;
+		[Required]
 		public string LastName { get; set; } = string.Empty;
+		[Required]
 		public string Gender { get; set; } = string.Empty;
-		public DateTime DateOfBirth { get; set; }
+		[Required]
+		public DateOnly DateOfBirth { get; set; }
+		[Required]
 		public string PhoneNumber { get; set; } = string.Empty;
 
-		public int AddressId { get; set; }
+		[Required]
+		public Guid AddressId { get; set; }
 		public Address? Address { get; set; }
 
 		[ForeignKey("ApplicationUser")]
+		[Required]
 		public string UserId { get; set; } = string.Empty;
 		public IdentityUser? User { get; set; } = null;
 

@@ -1,6 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
-using Microsoft.AspNetCore.Authorization;
+using HealthHorizon_API.Models.UtilityModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,11 +30,13 @@ namespace HealthHorizon_API.Controllers
 			return Ok(prescriptions);
 		}
 
+		[HttpGet]
+
 		//[Authorize]
-		[HttpGet("{id:int}")]
-		public async Task<ActionResult<Prescription>> GetPrescription([FromQuery] int id)
+		[HttpGet("get-prescription")]
+		public async Task<ActionResult<Prescription>> GetPrescription([FromBody] IdRequest request)
 		{
-			var prescription = await context.Prescriptions.Include(p => p.Appointment).FirstOrDefaultAsync(p => p.Id == id);
+			var prescription = await context.Prescriptions.Include(p => p.Appointment).FirstOrDefaultAsync(p => p.Id == request.Id);
 			if (prescription == null)
 			{
 				return NotFound();
@@ -43,8 +45,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok(prescription);
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin, doctor")]
 		[HttpPost]
 		public async Task<ActionResult> PostPrescription([FromBody] Prescription prescription)
 		{
@@ -59,8 +60,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin, doctor")]
 		[HttpPut]
 		public async Task<ActionResult> UpdatePrescription([FromBody] Prescription prescription)
 		{
@@ -79,12 +79,11 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin, doctor")]
 		[HttpDelete("{id:int}")]
-		public async Task<ActionResult> DeletePrescription([FromQuery] int id)
+		public async Task<ActionResult> DeletePrescription([FromBody] IdRequest request)
 		{
-			var prescription = await context.Prescriptions.FirstOrDefaultAsync(p => p.Id == id);
+			var prescription = await context.Prescriptions.FirstOrDefaultAsync(p => p.Id == request.Id);
 			if (prescription == null)
 			{
 				return NotFound();

@@ -53,20 +53,36 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.AIChatController",
-    "Method": "GetAiChatLog",
+    "Method": "DeleteAiChatLog",
     "RelativePath": "api/AIChat/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AIChatController",
+    "Method": "GetAiChatLog",
+    "RelativePath": "api/AIChat/get-chat-log",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
         "IsRequired": true
       }
     ],
@@ -81,27 +97,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.AIChatController",
-    "Method": "DeleteAiChatLog",
-    "RelativePath": "api/AIChat/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
@@ -157,20 +152,31 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
+    "Method": "DeleteAppointment",
+    "RelativePath": "api/Appointment/delete-appointment",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
     "Method": "GetAppointment",
-    "RelativePath": "api/Appointment/{id}",
+    "RelativePath": "api/Appointment/get-appointment",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
         "IsRequired": true
       }
     ],
@@ -185,27 +191,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
-    "Method": "DeleteAppointment",
-    "RelativePath": "api/Appointment/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.AuthorizeController",
@@ -325,20 +310,31 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.BillController",
+    "Method": "DeleteBill",
+    "RelativePath": "api/Bill/delete-bill",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.BillController",
     "Method": "GetBill",
-    "RelativePath": "api/Bill/{id}",
+    "RelativePath": "api/Bill/get-bill",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
         "IsRequired": true
       }
     ],
@@ -353,27 +349,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.BillController",
-    "Method": "DeleteBill",
-    "RelativePath": "api/Bill/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
@@ -429,20 +404,31 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
+    "Method": "DeleteDoctor",
+    "RelativePath": "api/Doctor/delete-doctor",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
     "Method": "GetDoctor",
-    "RelativePath": "api/Doctor/{id}",
+    "RelativePath": "api/Doctor/get-doctor",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
         "IsRequired": true
       }
     ],
@@ -457,59 +443,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
-    "Method": "DeleteDoctor",
-    "RelativePath": "api/Doctor/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.DoctorAvailabilityController",
-    "Method": "AddOrUpdateAvailability",
-    "RelativePath": "api/DoctorAvailability",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "availability",
-        "Type": "HealthHorizon_API.Models.Entities.DoctorAvailability",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.DoctorAvailabilityController",
-    "Method": "GetDoctorAvailability",
-    "RelativePath": "api/DoctorAvailability/{doctorId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "doctorId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.FeedbackController",
@@ -565,20 +498,31 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.FeedbackController",
+    "Method": "DeleteFeedback",
+    "RelativePath": "api/Feedback/delete-feedback",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.FeedbackController",
     "Method": "GetFeedback",
-    "RelativePath": "api/Feedback/{id}",
+    "RelativePath": "api/Feedback/get-feedback",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
         "IsRequired": true
       }
     ],
@@ -593,27 +537,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.FeedbackController",
-    "Method": "DeleteFeedback",
-    "RelativePath": "api/Feedback/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.MedicalRecordController",
@@ -689,20 +612,31 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.PatientController",
+    "Method": "DeletePatient",
+    "RelativePath": "api/Patient/delete-patient",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PatientController",
     "Method": "GetPatient",
-    "RelativePath": "api/Patient/{id}",
+    "RelativePath": "api/Patient/get-patient",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
         "IsRequired": true
       }
     ],
@@ -719,27 +653,6 @@
     ]
   },
   {
-    "ContainingType": "HealthHorizon_API.Controllers.PatientController",
-    "Method": "DeletePatient",
-    "RelativePath": "api/Patient/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
     "Method": "GetAllPrescriptions",
     "RelativePath": "api/Prescription",
@@ -750,6 +663,32 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.Prescription, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
+    "Method": "GetPrescription",
+    "RelativePath": "api/Prescription",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HealthHorizon_API.Models.Entities.Prescription",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -793,20 +732,36 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
-    "Method": "GetPrescription",
+    "Method": "DeletePrescription",
     "RelativePath": "api/Prescription/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
+    "Method": "GetPrescription",
+    "RelativePath": "api/Prescription/get-prescription",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
         "IsRequired": true
       }
     ],
@@ -823,25 +778,114 @@
     ]
   },
   {
-    "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
-    "Method": "DeletePrescription",
-    "RelativePath": "api/Prescription/{id}",
+    "ContainingType": "HealthHorizon_API.Controllers.ScheduleController",
+    "Method": "GetAllSchedules",
+    "RelativePath": "api/Schedule",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.Schedule, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.ScheduleController",
+    "Method": "PostSchedule",
+    "RelativePath": "api/Schedule",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "scheduleDTO",
+        "Type": "HealthHorizon_API.Models.DTOs.ScheduleDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.ScheduleController",
+    "Method": "DeleteSchedule",
+    "RelativePath": "api/Schedule",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.ScheduleController",
+    "Method": "UpdateScheduleDate",
+    "RelativePath": "api/Schedule/change-date",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "scheduleDTO",
+        "Type": "HealthHorizon_API.Models.DTOs.ScheduleDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.ScheduleController",
+    "Method": "UpdateScheduleDoctor",
+    "RelativePath": "api/Schedule/change-doctor",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "scheduleDTO",
+        "Type": "HealthHorizon_API.Models.DTOs.ScheduleDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.ScheduleController",
+    "Method": "GetDoctorSchedules",
+    "RelativePath": "api/Schedule/Doctor",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.Schedule, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.StaffController",
@@ -897,20 +941,31 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.StaffController",
+    "Method": "DeleteStaff",
+    "RelativePath": "api/Staff/delete-staff-member",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.StaffController",
     "Method": "GetStaff",
-    "RelativePath": "api/Staff/{id}",
+    "RelativePath": "api/Staff/get-staff-member",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
         "IsRequired": true
       }
     ],
@@ -925,27 +980,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.StaffController",
-    "Method": "DeleteStaff",
-    "RelativePath": "api/Staff/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.StaffRoleController",
@@ -1001,20 +1035,31 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.StaffRoleController",
+    "Method": "DeleteRole",
+    "RelativePath": "api/StaffRole/delete-role",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.StaffRoleController",
     "Method": "GetRole",
-    "RelativePath": "api/StaffRole/{id}",
+    "RelativePath": "api/StaffRole/get-role",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
         "IsRequired": true
       }
     ],
@@ -1029,26 +1074,5 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.StaffRoleController",
-    "Method": "DeleteRole",
-    "RelativePath": "api/StaffRole/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   }
 ]

@@ -6,18 +6,22 @@ namespace HealthHorizon_API.Models.Entities
 	public class Appointment
 	{
 		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
+		public Guid Id { get; set; } = Guid.NewGuid();
+		[Required]
 		public DateTime Date { get; set; }
+		[Required]
 		public string Status { get; set; } = string.Empty;
 
-        public int DoctorSlotId { get; set; }  // Foreign Key to DoctorSlots
-        public DoctorSlot? DoctorSlot { get; set; } = null!;  // Navigation property
+		[Required]
+		public Guid DoctorSlotId { get; set; }
+        public DoctorSlot? DoctorSlot { get; set; } = null!;
 
-        public int DoctorId { get; set; }
+		[Required]
+		public Guid DoctorId { get; set; }
 		public Doctor? Doctor { get; set; } = null!;
 
-		public int PatientId { get; set; }
+		[Required]
+		public Guid PatientId { get; set; }
 		public Patient? Patient { get; set; } = null;
 	}
 }

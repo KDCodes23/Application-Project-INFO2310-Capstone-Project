@@ -1,13 +1,21 @@
-﻿namespace HealthHorizon_API.Models.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace HealthHorizon_API.Models.Entities
 {
     public class Availability
     {
-        public int AvailabilityId { get; set; }
-        public DateTime Date { get; set; }  // Specific date for the availability
-        public DateTime AvailableFrom { get; set; }  // Start time
-        public DateTime AvailableTo { get; set; }    // End time
-        public bool IsAvailable { get; set; }  // Whether the time slot is available
+		[Key]
+		public Guid Id { get; set; } = Guid.NewGuid();
+		[Required]
+		public DateOnly Date { get; set; }
+		[Required]
+		public TimeSpan Start { get; set; }
+		[Required]
+		public TimeSpan End { get; set; }
+		[Required]
+		public bool IsAvailable { get; set; } = false;
 
-        public List<DoctorAvailability> DoctorAvailabilities { get; set; }  // Navigation property
+		public List<DoctorAvailability> DoctorAvailabilities { get; set; } = new List<DoctorAvailability>();
     }
 }

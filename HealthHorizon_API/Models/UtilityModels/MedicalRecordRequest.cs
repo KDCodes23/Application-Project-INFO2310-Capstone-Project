@@ -2,7 +2,6 @@
 {
 	public class MedicalRecordRequest
 	{
-		public int Id { get; set; }
 		public string Categories { get; set; } = string.Empty;
 	}
 }

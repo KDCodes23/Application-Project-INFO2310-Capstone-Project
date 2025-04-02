@@ -1,5 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
+using HealthHorizon_API.Models.UtilityModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,9 +18,7 @@ namespace HealthHorizon_API.Controllers
             this.context = context;
         }
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
-		//[Authorize(Roles = "staff")]
+		//[Authorize(Roles = "admin, doctor, staff")]
 		[HttpGet]
 		public async Task<ActionResult<StaffRole>> GetAllPatients()
 		{
@@ -31,14 +30,11 @@ namespace HealthHorizon_API.Controllers
 			return Ok(patients);
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
-		//[Authorize(Roles = "staff")]
-		//[Authorize(Roles = "patient")]
-		[HttpGet("{id:int}")]
-        public async Task<ActionResult<StaffRole>> GetPatient([FromQuery] int id)
+		//[Authorize]
+		[HttpGet("get-patient")]
+        public async Task<ActionResult<StaffRole>> GetPatient([FromBody] IdRequest request)
         {
-            var patient = await context.Patients.Include(p => p.Address).FirstOrDefaultAsync(x => x.Id == id);
+            var patient = await context.Patients.Include(p => p.Address).FirstOrDefaultAsync(x => x.Id == request.Id);
             if (patient == null)
             {
                 return NotFound();
@@ -46,9 +42,7 @@ namespace HealthHorizon_API.Controllers
             return Ok(patient);
         }
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
-		//[Authorize(Roles = "staff")]
+		//[Authorize(Roles = "admin, doctor, staff")]
 		[HttpPost]
         public async Task<ActionResult> PostPatient([FromBody] Patient newPatient)
         {
@@ -60,15 +54,13 @@ namespace HealthHorizon_API.Controllers
                 Country = newPatient.Address.Country,
                 PostalCode = newPatient.Address.PostalCode
             };
-
 		
             await context.Patients.AddAsync(newPatient);
             await context.SaveChangesAsync();
             return Ok();
         }
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "patient")]
+		//[Authorize(Roles = "admin, patient")]
 		[HttpPut]
         public async Task<ActionResult> UpdatePatient([FromBody] Patient newPatient)
         {
@@ -89,10 +81,10 @@ namespace HealthHorizon_API.Controllers
         }
 
 		//[Authorize(Roles = "admin")]
-		[HttpDelete("{id:int}")]
-        public async Task<ActionResult> DeletePatient([FromQuery] int id)
+		[HttpDelete("delete-patient")]
+        public async Task<ActionResult> DeletePatient([FromBody] IdRequest request)
         {
-            var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == id);
+            var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == request.Id);
             if (patient == null)
             {
                 return NotFound();

@@ -4,7 +4,7 @@ namespace HealthHorizon_API.Models.DTOs
 {
 	public class MedicalRecordSmallDTO
 	{
-		public int Id { get; set; }
+		public Guid Id { get; set; } = Guid.NewGuid();
 		public int PatientId { get; set; }
 		public Patient Patient { get; set; } = null!;
 		public DateTime Date { get; set; }

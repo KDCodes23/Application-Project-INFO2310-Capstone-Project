@@ -1,5 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
+using HealthHorizon_API.Models.UtilityModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -30,12 +31,11 @@ namespace HealthHorizon_API.Controllers
 			return Ok(logs);
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "patient")]
-		[HttpGet("{id:int}")]
-		public async Task<ActionResult<AIChatLog>> GetAiChatLog([FromQuery] int id)
+		//[Authorize(Roles = "admin, patient")]
+		[HttpGet("get-chat-log")]
+		public async Task<ActionResult<AIChatLog>> GetAiChatLog([FromBody] IdRequest request)
 		{
-			var log = await context.AIChatLogs.Include(l => l.Patient).FirstOrDefaultAsync(l => l.Id == id);
+			var log = await context.AIChatLogs.Include(l => l.Patient).FirstOrDefaultAsync(l => l.Id == request.Id);
 			if (log == null)
 			{
 				return NotFound();
@@ -44,8 +44,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok(log);
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "patient")]
+		//[Authorize(Roles = "admin, patient")]
 		[HttpPost]
 		public async Task<ActionResult> PostAiChatLog([FromBody] AIChatLog log)
 		{
@@ -59,8 +58,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "patient")]
+		//[Authorize(Roles = "admin, patient")]
 		[HttpPut]
 		public async Task<ActionResult> UpdateAiChatLog([FromBody] AIChatLog log)
 		{
@@ -80,9 +78,9 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		[HttpDelete("{id:int}")]
-		public async Task<ActionResult> DeleteAiChatLog([FromQuery] int id)
+		public async Task<ActionResult> DeleteAiChatLog([FromBody] IdRequest request)
 		{
-			var log = await context.AIChatLogs.FirstOrDefaultAsync(l => l.Id == id);
+			var log = await context.AIChatLogs.FirstOrDefaultAsync(l => l.Id == request.Id);
 			if (log == null)
 			{
 				return NotFound();

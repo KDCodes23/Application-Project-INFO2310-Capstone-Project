@@ -6,13 +6,16 @@ namespace HealthHorizon_API.Models.Entities
 	public class Bill
 	{
 		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
+		public Guid Id { get; set; } = Guid.NewGuid();
+		[Required]
 		public float Amount { get; set; } = 0f;
+		[Required]
 		public string PaymentMethod { get; set; } = string.Empty;
-		public DateTime Date { get; set; }
+		[Required]
+		public DateOnly Date { get; set; }
 
-		public int AppointmentId { get; set; }
+		[Required]
+		public Guid AppointmentId { get; set; }
 		public Appointment? Appointment { get; set; } = null;
 	}
 }

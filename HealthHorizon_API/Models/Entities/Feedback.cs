@@ -6,8 +6,10 @@ namespace HealthHorizon_API.Models.Entities
 	public class Feedback
 	{
 		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
+		public Guid Id { get; set; } = Guid.NewGuid();
+		[Required]
+		public DateTime Date { get; set; }
+		[Required]
 		public string Details { get; set; } = string.Empty;
 	}
 }

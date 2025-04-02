@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HealthHorizon_API.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
+using HealthHorizon_API.Models.UtilityModels;
 
 namespace HealthHorizon_API.Controllers
 {
@@ -17,9 +18,7 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
-		//[Authorize(Roles = "staff")]
+		//[Authorize(Roles = "admin, doctor, staff")]
 		[HttpGet]
 		public async Task<ActionResult<List<StaffRole>>> GetAllDoctors()
 		{
@@ -31,13 +30,11 @@ namespace HealthHorizon_API.Controllers
 			return Ok(doctors);
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
-		//[Authorize(Roles = "staff")]
-		[HttpGet("{id:int}")]
-		public async Task<ActionResult<StaffRole>> GetDoctor([FromQuery] int id)
+		//[Authorize(Roles = "admin, doctor, staff")]
+		[HttpGet("get-doctor")]
+		public async Task<ActionResult<StaffRole>> GetDoctor([FromBody] IdRequest request)
 		{
-			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == id);
+			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == request.Id);
 			if (doctor == null)
 			{
 				return NotFound();
@@ -54,8 +51,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin, doctor")]
 		[HttpPut]
 		public async Task<ActionResult> UpdateDoctor([FromBody] Doctor newDoctor)
 		{
@@ -80,10 +76,10 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		//[Authorize(Roles = "admin")]
-		[HttpDelete("{id:int}")]
-		public async Task<ActionResult> DeleteDoctor([FromQuery] int id)
+		[HttpDelete("delete-doctor")]
+		public async Task<ActionResult> DeleteDoctor([FromBody] IdRequest request)
 		{
-			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == id);
+			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == request.Id);
 			if (doctor == null)
 			{
 				return NotFound();

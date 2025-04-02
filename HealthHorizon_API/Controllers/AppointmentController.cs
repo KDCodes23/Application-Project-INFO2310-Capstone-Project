@@ -1,6 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
-using Microsoft.AspNetCore.Authorization;
+using HealthHorizon_API.Models.UtilityModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,14 +31,11 @@ namespace HealthHorizon_API.Controllers
 			return Ok(appointments);
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
-		//[Authorize(Roles = "staff")]
-		//[Authorize(Roles = "patient")]
-		[HttpGet("{id:int}")]
-		public async Task<ActionResult<Appointment>> GetAppointment([FromRoute] int id)
+		//[Authorize]
+		[HttpGet("get-appointment")]
+		public async Task<ActionResult<Appointment>> GetAppointment([FromBody] IdRequest request)
 		{
-			var appointment = await context.Appointments.Include(a => a.Doctor).Include(a => a.Patient).FirstOrDefaultAsync(a => a.Id == id);
+			var appointment = await context.Appointments.Include(a => a.Doctor).Include(a => a.Patient).FirstOrDefaultAsync(a => a.Id == request.Id);
 			if (appointment == null)
 			{
 				return NotFound();
@@ -47,8 +44,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok(appointment);
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin, doctor")]
 		[HttpPost]
 		public async Task<ActionResult> PostAppointment([FromBody] Appointment appointment)
 		{
@@ -59,8 +55,7 @@ namespace HealthHorizon_API.Controllers
             return CreatedAtAction(nameof(GetAppointment), new { id = appointment.Id }, appointment);
         }
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
+		//[Authorize(Roles = "admin, doctor")]
 		[HttpPut]
 		public async Task<ActionResult> UpdateAppointment([FromBody] Appointment appointment)
 		{
@@ -79,12 +74,11 @@ namespace HealthHorizon_API.Controllers
             return NoContent();
         }
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
-		[HttpDelete("{id:int}")]
-		public async Task<ActionResult> DeleteAppointment([FromQuery] int id)
+		//[Authorize(Roles = "admin, doctor")]
+		[HttpDelete("delete-appointment")]
+		public async Task<ActionResult> DeleteAppointment([FromBody] IdRequest request)
 		{
-			var appointment = await context.Appointments.FirstOrDefaultAsync(a => a.Id == id);
+			var appointment = await context.Appointments.FirstOrDefaultAsync(a => a.Id == request.Id);
 			if (appointment == null)
 			{
 				return NotFound();

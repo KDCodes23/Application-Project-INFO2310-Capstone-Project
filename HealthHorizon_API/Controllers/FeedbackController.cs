@@ -1,6 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
-using Microsoft.AspNetCore.Authorization;
+using HealthHorizon_API.Models.UtilityModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,12 +30,11 @@ namespace HealthHorizon_API.Controllers
 			return Ok(feedbacks);
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "doctor")]
-		[HttpGet("{id:int}")]
-		public async Task<ActionResult<Feedback>> GetFeedback([FromQuery] int id)
+		//[Authorize(Roles = "admin, doctor")]
+		[HttpGet("get-feedback")]
+		public async Task<ActionResult<Feedback>> GetFeedback([FromBody] IdRequest request)
 		{
-			var feedback = await context.Feedbacks.FirstOrDefaultAsync(f => f.Id == id);
+			var feedback = await context.Feedbacks.FirstOrDefaultAsync(f => f.Id == request.Id);
 			if (feedback == null)
 			{
 				return NotFound();
@@ -44,8 +43,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok(feedback);
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "patient")]
+		//[Authorize(Roles = "admin, patient")]
 		[HttpPost]
 		public async Task<ActionResult> PostFeedback([FromBody] Feedback feedback)
 		{
@@ -60,8 +58,7 @@ namespace HealthHorizon_API.Controllers
 			return Ok();
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "patient")]
+		//[Authorize(Roles = "admin, patient")]
 		[HttpPut]
 		public async Task<ActionResult> UpdateFeddback([FromBody] Feedback feedback)
 		{
@@ -78,10 +75,10 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		//[Authorize(Roles = "admin")]
-		[HttpDelete("{id:int}")]
-		public async Task<ActionResult> DeleteFeedback([FromQuery] int id)
+		[HttpDelete("delete-feedback")]
+		public async Task<ActionResult> DeleteFeedback([FromBody] IdRequest request)
 		{
-			var feedback = await context.Feedbacks.FirstOrDefaultAsync(fb => fb.Id == id);
+			var feedback = await context.Feedbacks.FirstOrDefaultAsync(fb => fb.Id == request.Id);
 			if (feedback == null)
 			{
 				return NotFound();

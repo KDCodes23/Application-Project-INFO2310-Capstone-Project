@@ -1,6 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
-using Microsoft.AspNetCore.Authorization;
+using HealthHorizon_API.Models.UtilityModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,8 +17,7 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "staff")]
+		//[Authorize(Roles = "admin, doctor, staff")]
 		[HttpGet]
 		public async Task<ActionResult<List<StaffRole>>> GetAllRoles()
 		{
@@ -30,12 +29,11 @@ namespace HealthHorizon_API.Controllers
 			return Ok(roles);
 		}
 
-		//[Authorize(Roles = "admin")]
-		//[Authorize(Roles = "staff")]
-		[HttpGet("{id:int}")]
-		public async Task<ActionResult<StaffRole>> GetRole([FromQuery] int id)
+		//[Authorize(Roles = "admin, doctor, staff")]
+		[HttpGet("get-role")]
+		public async Task<ActionResult<StaffRole>> GetRole([FromBody] IdRequest request)
 		{
-			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == id);
+			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == request.Id);
 			if (role == null)
 			{
 				return NotFound();
@@ -68,10 +66,10 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		//[Authorize(Roles = "admin")]
-		[HttpDelete("{id:int}")]
-		public async Task<ActionResult> DeleteRole([FromQuery] int id)
+		[HttpDelete("delete-role")]
+		public async Task<ActionResult> DeleteRole([FromBody] IdRequest request)
 		{
-			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == id);
+			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == request.Id);
 			if (role == null)
 			{
 				return NotFound();
