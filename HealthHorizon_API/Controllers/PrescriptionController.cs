@@ -24,7 +24,7 @@ namespace HealthHorizon_API.Controllers
 			var prescriptions = await context.Prescriptions.Include(p => p.Appointment).ToListAsync();
 			if (prescriptions == null)
 			{
-				return NotFound();
+				return NotFound("Prescriptions Not Found");
 			}
 
 			return Ok(prescriptions);
@@ -39,7 +39,7 @@ namespace HealthHorizon_API.Controllers
 			var prescription = await context.Prescriptions.Include(p => p.Appointment).FirstOrDefaultAsync(p => p.Id == request.Id);
 			if (prescription == null)
 			{
-				return NotFound();
+				return NotFound("Prescription Not Found");
 			}
 
 			return Ok(prescription);
@@ -51,13 +51,13 @@ namespace HealthHorizon_API.Controllers
 		{
 			if (prescription == null)
 			{
-				return BadRequest();
+				return BadRequest("Prescription Data Required");
 			}
 
 			await context.Prescriptions.AddAsync(prescription);
 			await context.SaveChangesAsync();
 
-			return Ok();
+			return Created();
 		}
 
 		//[Authorize(Roles = "admin, doctor")]
@@ -67,7 +67,7 @@ namespace HealthHorizon_API.Controllers
 			var prescriptionDB = await context.Prescriptions.FirstOrDefaultAsync(p => p.Id == prescription.Id);
 			if (prescriptionDB == null)
 			{
-				return NotFound();
+				return NotFound("Prescription Not Found");
 			}
 
 			prescriptionDB.MedicationName = prescription.MedicationName;
@@ -76,23 +76,23 @@ namespace HealthHorizon_API.Controllers
 			prescriptionDB.AppointmentId = prescription.AppointmentId;
 			await context.SaveChangesAsync();
 
-			return Ok();
+			return Ok("Prescription Updated");
 		}
 
 		//[Authorize(Roles = "admin, doctor")]
-		[HttpDelete("{id:int}")]
+		[HttpDelete]
 		public async Task<ActionResult> DeletePrescription([FromBody] IdRequest request)
 		{
 			var prescription = await context.Prescriptions.FirstOrDefaultAsync(p => p.Id == request.Id);
 			if (prescription == null)
 			{
-				return NotFound();
+				return NotFound("Prescription Not Found");
 			}
 
 			context.Prescriptions.Remove(prescription);
 			await context.SaveChangesAsync();
 
-			return Ok();
+			return Ok("Prescription Deleted");
 		}
 	}
 }

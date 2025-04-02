@@ -24,7 +24,7 @@ namespace HealthHorizon_API.Controllers
 			var feedbacks = await context.Feedbacks.ToListAsync();
 			if (feedbacks == null)
 			{
-				return NotFound();
+				return NotFound("Feedbacks Not Found");
 			}
 
 			return Ok(feedbacks);
@@ -37,7 +37,7 @@ namespace HealthHorizon_API.Controllers
 			var feedback = await context.Feedbacks.FirstOrDefaultAsync(f => f.Id == request.Id);
 			if (feedback == null)
 			{
-				return NotFound();
+				return NotFound("Feedback Not Found");
 			}
 
 			return Ok(feedback);
@@ -45,33 +45,38 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin, patient")]
 		[HttpPost]
-		public async Task<ActionResult> PostFeedback([FromBody] Feedback feedback)
+		public async Task<ActionResult> PostFeedback([FromBody] Feedback newFeedback)
 		{
-			if (feedback == null)
+			if (newFeedback == null)
 			{
-				return BadRequest();
+				return BadRequest("Feedback Data Required");
 			}
 
-			await context.Feedbacks.AddAsync(feedback);
+			await context.Feedbacks.AddAsync(newFeedback);
 			await context.SaveChangesAsync();
 
-			return Ok();
+			return Created();
 		}
 
 		//[Authorize(Roles = "admin, patient")]
 		[HttpPut]
-		public async Task<ActionResult> UpdateFeddback([FromBody] Feedback feedback)
+		public async Task<ActionResult> UpdateFeddback([FromBody] Feedback newFeedback)
 		{
-			var feedbackDB = await context.Feedbacks.FirstOrDefaultAsync(f => f.Id == feedback.Id);
-			if (feedbackDB == null)
+			if (newFeedback == null)
 			{
-				return NotFound();
+				return BadRequest("Feedback Data Required");
 			}
 
-			feedbackDB.Details = feedback.Details;
+			var feedbackDB = await context.Feedbacks.FirstOrDefaultAsync(f => f.Id == newFeedback.Id);
+			if (feedbackDB == null)
+			{
+				return NotFound("Feedback Not Found");
+			}
+
+			feedbackDB.Details = newFeedback.Details;
 			await context.SaveChangesAsync();
 
-			return Ok();
+			return Ok("Feedback Updated");
 		}
 
 		//[Authorize(Roles = "admin")]
@@ -81,13 +86,13 @@ namespace HealthHorizon_API.Controllers
 			var feedback = await context.Feedbacks.FirstOrDefaultAsync(fb => fb.Id == request.Id);
 			if (feedback == null)
 			{
-				return NotFound();
+				return NotFound("Feedback Not Found");
 			}
 
 			context.Feedbacks.Remove(feedback);
 			await context.SaveChangesAsync();
 
-			return Ok();
+			return Ok("Feedback Deleted");
 		}
 	}
 }

@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HealthHorizon_API.Models.Entities;
-using Microsoft.AspNetCore.Authorization;
 using HealthHorizon_API.Models.UtilityModels;
 
 namespace HealthHorizon_API.Controllers
@@ -25,7 +24,7 @@ namespace HealthHorizon_API.Controllers
 			var doctors = await context.Doctors.ToListAsync();
 			if (doctors == null)
 			{
-				return NotFound();
+				return NotFound("Doctors Not Found");
 			}
 			return Ok(doctors);
 		}
@@ -46,19 +45,29 @@ namespace HealthHorizon_API.Controllers
 		[HttpPost]
 		public async Task<ActionResult> PostDoctor([FromBody] Doctor newDocotor)
 		{
+			if (newDocotor == null)
+			{
+				return BadRequest("Doctor Data Required");
+			}
+
 			await context.Doctors.AddAsync(newDocotor);
 			await context.SaveChangesAsync();
-			return Ok();
+			return Created();
 		}
 
 		//[Authorize(Roles = "admin, doctor")]
 		[HttpPut]
 		public async Task<ActionResult> UpdateDoctor([FromBody] Doctor newDoctor)
 		{
+			if (newDoctor == null)
+			{
+				return BadRequest("Doctor Data Required");	
+			}
+
 			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == newDoctor.Id);
 			if (doctor == null)
 			{
-				return NotFound();
+				return NotFound("Doctor Not Found");
 			}
 
 			doctor.FirstName = newDoctor.FirstName;
@@ -72,7 +81,7 @@ namespace HealthHorizon_API.Controllers
 
             await context.SaveChangesAsync();
 
-			return Ok();
+			return Ok("Doctor Updated");
 		}
 
 		//[Authorize(Roles = "admin")]
@@ -82,11 +91,11 @@ namespace HealthHorizon_API.Controllers
 			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == request.Id);
 			if (doctor == null)
 			{
-				return NotFound();
+				return NotFound("Doctor Not Found");
 			}
 			context.Doctors.Remove(doctor);
 			await context.SaveChangesAsync();
-			return Ok();
+			return Ok("Doctor Deleted");
 		}
     }
 }

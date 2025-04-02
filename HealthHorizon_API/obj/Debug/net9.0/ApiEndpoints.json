@@ -473,7 +473,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "feedback",
+        "Name": "newFeedback",
         "Type": "HealthHorizon_API.Models.Entities.Feedback",
         "IsRequired": true
       }
@@ -489,7 +489,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "feedback",
+        "Name": "newFeedback",
         "Type": "HealthHorizon_API.Models.Entities.Feedback",
         "IsRequired": true
       }
@@ -733,7 +733,7 @@
   {
     "ContainingType": "HealthHorizon_API.Controllers.PrescriptionController",
     "Method": "DeletePrescription",
-    "RelativePath": "api/Prescription/{id}",
+    "RelativePath": "api/Prescription",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -741,11 +741,6 @@
       {
         "Name": "request",
         "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
-      },
-      {
-        "Name": "id",
-        "Type": "",
         "IsRequired": true
       }
     ],

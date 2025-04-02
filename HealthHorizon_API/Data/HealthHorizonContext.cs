@@ -43,28 +43,32 @@ namespace HealthHorizon_API.Data
 			modelBuilder.Entity<Doctor>()
 				.HasMany(d => d.Schedules)
 				.WithOne(s => s.Doctor)
-				.HasForeignKey(s => s.DoctorId);
+				.HasForeignKey(s => s.DoctorId)
+				.OnDelete(DeleteBehavior.Restrict);
 
 			modelBuilder.Entity<Schedule>()
 				.HasMany(s => s.TimeSlots)
 				.WithOne(ts => ts.Schedule)
-				.HasForeignKey(ts => ts.ScheduleId);
+				.HasForeignKey(ts => ts.ScheduleId)
+				.OnDelete(DeleteBehavior.Restrict);
 
 			modelBuilder.Entity<Patient>()
 				.HasOne(p => p.Address)
 				.WithOne(a => a.Patient)
 				.HasForeignKey<Patient>(p => p.AddressId)
-				.IsRequired(false);
+				.OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Staff>()
+			modelBuilder.Entity<Staff>()
 				.HasOne(s => s.Role)
 				.WithMany()
-				.HasForeignKey(s => s.RoleId);
+				.HasForeignKey(s => s.RoleId)
+				.OnDelete(DeleteBehavior.Restrict);
 
 			modelBuilder.Entity<AIChatLog>()
 				.HasOne(ai => ai.Patient)
 				.WithOne()
-				.HasForeignKey<AIChatLog>(ai => ai.PatientId);
+				.HasForeignKey<AIChatLog>(ai => ai.PatientId)
+				.OnDelete(DeleteBehavior.Restrict);
 
 			modelBuilder.Entity<Appointment>()
 				.HasOne(a => a.Doctor)
@@ -79,9 +83,9 @@ namespace HealthHorizon_API.Data
 				.OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Appointment>()
-                .HasOne(a => a.DoctorSlot)
+                .HasOne(a => a.TimeSlot)
                 .WithMany()
-                .HasForeignKey(a => a.DoctorSlotId)
+                .HasForeignKey(a => a.TimeSlotId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Bill>()
@@ -161,11 +165,6 @@ namespace HealthHorizon_API.Data
 				.WithOne(vs => vs.MedicalRecord)
 				.HasForeignKey(vs => vs.MedicalRecordId)
 				.OnDelete(DeleteBehavior.Restrict);
-
-			modelBuilder.Entity<DoctorSlot>()
-				.HasOne(ds => ds.Doctor)
-				.WithOne()
-				.HasForeignKey<DoctorSlot>(ds => ds.DoctorId);
 		}
 	}
 }

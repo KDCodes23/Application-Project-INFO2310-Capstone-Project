@@ -1,7 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
 using HealthHorizon_API.Models.UtilityModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,7 +24,7 @@ namespace HealthHorizon_API.Controllers
 			var logs = await context.AIChatLogs.Include(l => l.Patient).ToListAsync();
 			if (logs == null)
 			{
-				return NotFound();
+				return NotFound("Chat Logs Not Found");
 			}
 
 			return Ok(logs);
@@ -38,7 +37,7 @@ namespace HealthHorizon_API.Controllers
 			var log = await context.AIChatLogs.Include(l => l.Patient).FirstOrDefaultAsync(l => l.Id == request.Id);
 			if (log == null)
 			{
-				return NotFound();
+				return NotFound("Chat Log Not Found");
 			}
 
 			return Ok(log);
@@ -50,12 +49,12 @@ namespace HealthHorizon_API.Controllers
 		{
 			if (log == null)
 			{
-				return BadRequest();
+				return BadRequest("Chat Log Data Required");
 			}
 
 			await context.AddAsync(log);
 			await context.SaveChangesAsync();
-			return Ok();
+			return Created();
 		}
 
 		//[Authorize(Roles = "admin, patient")]
@@ -65,7 +64,7 @@ namespace HealthHorizon_API.Controllers
 			var logDB = await context.AIChatLogs.FirstOrDefaultAsync(l => l.Id == log.Id);
 			if (logDB == null)
 			{
-				return NotFound();
+				return NotFound("Chat Log Not Found");
 			}
 
 			logDB.Date = log.Date;
@@ -73,7 +72,7 @@ namespace HealthHorizon_API.Controllers
 			logDB.PatientId = log.PatientId;
 
 			await context.SaveChangesAsync();
-			return Ok();
+			return Ok("Chat Log Updated");
 		}
 
 		//[Authorize(Roles = "admin")]
@@ -83,12 +82,13 @@ namespace HealthHorizon_API.Controllers
 			var log = await context.AIChatLogs.FirstOrDefaultAsync(l => l.Id == request.Id);
 			if (log == null)
 			{
-				return NotFound();
+				return NotFound("Chat Log Data Required");
 			}
 
 			context.AIChatLogs.Remove(log);
 			await context.SaveChangesAsync();
-			return Ok();
+
+			return Ok("Chat Log Deleted");
 		}
 	}
 }

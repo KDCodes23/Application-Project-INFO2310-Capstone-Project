@@ -1,7 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
 using HealthHorizon_API.Models.UtilityModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,7 +24,7 @@ namespace HealthHorizon_API.Controllers
 			var staff = await context.StaffMembers.Include(s => s.Role).ToListAsync();
 			if (staff == null)
 			{
-				return NotFound();
+				return NotFound("Staff Not Found");
 			}
 
 			return Ok(staff);
@@ -38,7 +37,7 @@ namespace HealthHorizon_API.Controllers
 			var staff = await context.StaffMembers.Include(s => s.Role).FirstOrDefaultAsync(s => s.Id == request.Id);
 			if (staff == null)
 			{
-				return NotFound();
+				return NotFound("Staff Not Found");
 			}
 
 			return Ok(staff);
@@ -50,13 +49,13 @@ namespace HealthHorizon_API.Controllers
 		{
 			if (staff == null)
 			{
-				return BadRequest();
+				return BadRequest("Data Required");
 			}
 
 			await context.StaffMembers.AddAsync(staff);
 			await context.SaveChangesAsync();
 
-			return Ok();
+			return Created();
 		}
 
 		//[Authorize(Roles = "admin")]
@@ -66,7 +65,7 @@ namespace HealthHorizon_API.Controllers
 			var staffDB = await context.StaffMembers.FirstOrDefaultAsync(s => s.Id == staff.Id);
 			if (staffDB == null)
 			{
-				return BadRequest();
+				return BadRequest("Data Required");
 			}
 
 			staffDB.Name = staff.Name;
@@ -85,7 +84,7 @@ namespace HealthHorizon_API.Controllers
 			var staff = await context.StaffMembers.FirstOrDefaultAsync(s => s.Id == request.Id);
 			if (staff == null)
 			{
-				return NotFound();
+				return NotFound("Staff Not Found");
 			}
 
 			context.StaffMembers.Remove(staff);

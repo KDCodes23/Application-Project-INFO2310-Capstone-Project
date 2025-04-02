@@ -24,7 +24,7 @@ namespace HealthHorizon_API.Controllers
 			var schedules = await context.Schedules.Include(s => s.TimeSlots).ToListAsync();
 			if (schedules == null)
 			{
-				return BadRequest("No Schedules Found");
+				return NotFound("No Schedules Found");
 			}
 			return Ok(schedules);
 		}
@@ -35,7 +35,7 @@ namespace HealthHorizon_API.Controllers
 			var schedules = await context.Schedules.Include(s => s.TimeSlots).Where(s => s.DoctorId == request.Id).ToListAsync();
 			if (schedules == null)
 			{
-				return BadRequest("No Schedules Found For That Doctor.");
+				return NotFound("No Schedules Found For That Doctor.");
 			}
 			return Ok(schedules);
 		}
@@ -45,14 +45,14 @@ namespace HealthHorizon_API.Controllers
 		{
 			if (scheduleDTO == null)
 			{
-				return BadRequest("Request Is Null");
+				return BadRequest("Data Required");
 			}
 
 			var doctor = await context.Doctors.FirstOrDefaultAsync(d => d.Id == scheduleDTO.DoctorId);
 
 			if (scheduleDTO.Id == Guid.Empty || scheduleDTO.Date == DateOnly.MinValue || scheduleDTO.Start >= scheduleDTO.End || doctor == null)
 			{
-				return BadRequest("Invalid Schedule Data");
+				return BadRequest("Schedule Data Required");
 			}
 
 			Schedule newSchedule = new Schedule
@@ -81,7 +81,7 @@ namespace HealthHorizon_API.Controllers
 			var schedule = await context.Schedules.FirstOrDefaultAsync(s => s.Id == scheduleDTO.Id);
 			if (schedule == null)
 			{
-				return BadRequest("Schedule Does Not Exist");
+				return NotFound("Schedule Does Not Exist");
 			}
 
 			var doctor = await context.Doctors.FirstOrDefaultAsync(d => d.Id == scheduleDTO.DoctorId);
@@ -103,14 +103,14 @@ namespace HealthHorizon_API.Controllers
 			var schedule = await context.Schedules.Include(s => s.TimeSlots).FirstOrDefaultAsync(s => s.Id == scheduleDTO.Id);
 			if (schedule == null)
 			{
-				return BadRequest("Schedule Does Not Exist");
+				return NotFound("Schedule Does Not Exist");
 			}
 
 			var doctor = await context.Doctors.FirstOrDefaultAsync(d => d.Id == scheduleDTO.DoctorId);
 
 			if (scheduleDTO.Id == Guid.Empty || scheduleDTO.Date == DateOnly.MinValue || scheduleDTO.Start >= scheduleDTO.End || doctor == null)
 			{
-				return BadRequest("Invalid Schedule Data");
+				return BadRequest("Schedule Data Required");
 			}
 
 			schedule.Date = scheduleDTO.Date;
@@ -131,7 +131,7 @@ namespace HealthHorizon_API.Controllers
 			var schedule = await context.Schedules.Include(s => s.TimeSlots).FirstOrDefaultAsync(s => s.Id == request.Id);
 			if (schedule == null)
 			{
-				return BadRequest("Schedule Not Found");
+				return NotFound("Schedule Not Found");
 			}
 
 			context.TimeSlots.RemoveRange(schedule.TimeSlots);

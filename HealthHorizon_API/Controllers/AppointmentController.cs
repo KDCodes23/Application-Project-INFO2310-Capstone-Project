@@ -25,7 +25,7 @@ namespace HealthHorizon_API.Controllers
 
 			if (appointments == null)
 			{
-				return NotFound();
+				return NotFound("Appointments Not Found");
 			}
 
 			return Ok(appointments);
@@ -38,7 +38,7 @@ namespace HealthHorizon_API.Controllers
 			var appointment = await context.Appointments.Include(a => a.Doctor).Include(a => a.Patient).FirstOrDefaultAsync(a => a.Id == request.Id);
 			if (appointment == null)
 			{
-				return NotFound();
+				return NotFound("Appointment Not Found");
 			}
 
 			return Ok(appointment);
@@ -48,21 +48,30 @@ namespace HealthHorizon_API.Controllers
 		[HttpPost]
 		public async Task<ActionResult> PostAppointment([FromBody] Appointment appointment)
 		{
+			if (appointment == null)
+			{
+				return BadRequest("Appointment Data Required");
+			}
+
 			await context.Appointments.AddAsync(appointment);
 			await context.SaveChangesAsync();
 
-			//return Ok();
-            return CreatedAtAction(nameof(GetAppointment), new { id = appointment.Id }, appointment);
+            return Created();
         }
 
 		//[Authorize(Roles = "admin, doctor")]
 		[HttpPut]
 		public async Task<ActionResult> UpdateAppointment([FromBody] Appointment appointment)
 		{
+			if (appointment == null)
+			{
+				return BadRequest("Appointment Data Required");
+			}
+
 			var appointmentDB = await context.Appointments.FirstOrDefaultAsync(a => a.Id == appointment.Id);
 			if (appointmentDB == null)
 			{
-				return NotFound();
+				return NotFound("Appointment Not Found");
 			}
 
 			appointmentDB.Date = appointment.Date;
@@ -71,7 +80,7 @@ namespace HealthHorizon_API.Controllers
 			appointmentDB.PatientId = appointment.PatientId;
 
 			await context.SaveChangesAsync();
-            return NoContent();
+            return Ok("Appointment Updated");
         }
 
 		//[Authorize(Roles = "admin, doctor")]
@@ -81,13 +90,13 @@ namespace HealthHorizon_API.Controllers
 			var appointment = await context.Appointments.FirstOrDefaultAsync(a => a.Id == request.Id);
 			if (appointment == null)
 			{
-				return NotFound();
+				return NotFound("Appointment Not Found");
 			}
 
 			context.Appointments.Remove(appointment);
 			await context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Appointment Deleted");
         }
 	}
 }

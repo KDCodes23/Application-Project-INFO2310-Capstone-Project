@@ -21,7 +21,7 @@ namespace HealthHorizon_API.Models.Entities
 
 		[Required]
 		public Guid AddressId { get; set; }
-		public Address? Address { get; set; }
+		public Address Address { get; set; } = null!;
 
 		[ForeignKey("ApplicationUser")]
 		[Required]

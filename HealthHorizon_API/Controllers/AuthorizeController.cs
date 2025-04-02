@@ -3,7 +3,6 @@ using HealthHorizon_API.Interfaces;
 using HealthHorizon_API.Models.Entities;
 using HealthHorizon_API.Models.Identities;
 using HealthHorizon_API.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -80,7 +79,7 @@ namespace HealthHorizon_API.Controllers
                 await context.Doctors.AddAsync(doctor);
                 await context.SaveChangesAsync();
 
-                return Ok();
+                return Created();
             }
             catch (Exception ex)
             {
@@ -156,7 +155,7 @@ namespace HealthHorizon_API.Controllers
                 await context.Patients.AddAsync(patient);
 				await context.SaveChangesAsync();
 
-                return Ok(new { message = "Patient registered successfully" });
+                return Created();
 
             }
             catch (Exception ex)
@@ -210,7 +209,7 @@ namespace HealthHorizon_API.Controllers
 			await context.StaffMembers.AddAsync(staff);
 			await context.SaveChangesAsync();
 
-			return Ok();
+			return Created();
 		}
 
 		[HttpPost("login")]

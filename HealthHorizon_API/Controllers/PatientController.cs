@@ -1,7 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
 using HealthHorizon_API.Models.UtilityModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,8 +24,9 @@ namespace HealthHorizon_API.Controllers
 			var patients = await context.Patients.Include(p => p.Address).ToListAsync();
 			if (patients == null)
 			{
-				return NotFound();
+				return NotFound("Patients Not Found");
 			}
+
 			return Ok(patients);
 		}
 
@@ -37,8 +37,9 @@ namespace HealthHorizon_API.Controllers
             var patient = await context.Patients.Include(p => p.Address).FirstOrDefaultAsync(x => x.Id == request.Id);
             if (patient == null)
             {
-                return NotFound();
+                return NotFound("Patient Not Found");
             }
+
             return Ok(patient);
         }
 
@@ -46,7 +47,12 @@ namespace HealthHorizon_API.Controllers
 		[HttpPost]
         public async Task<ActionResult> PostPatient([FromBody] Patient newPatient)
         {
-            newPatient.Address = new Address
+            if (newPatient == null)
+            {
+                return BadRequest("Patient Data Required");
+            }
+
+			newPatient.Address = new Address
             {
                 Street = newPatient.Address.Street,
                 City = newPatient.Address.City,
@@ -57,17 +63,22 @@ namespace HealthHorizon_API.Controllers
 		
             await context.Patients.AddAsync(newPatient);
             await context.SaveChangesAsync();
-            return Ok();
+            return Created();
         }
 
 		//[Authorize(Roles = "admin, patient")]
 		[HttpPut]
         public async Task<ActionResult> UpdatePatient([FromBody] Patient newPatient)
         {
-            var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == newPatient.Id);
+			if (newPatient == null)
+			{
+				return BadRequest("Patient Data Required");
+			}
+
+			var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == newPatient.Id);
             if (patient == null)
             {
-                return NotFound();
+                return NotFound("Patient Not Found");
             }
             patient.FirstName = newPatient.FirstName;
             patient.LastName = newPatient.LastName;
@@ -77,7 +88,7 @@ namespace HealthHorizon_API.Controllers
             patient.Gender = newPatient.Gender;
 
             await context.SaveChangesAsync();
-            return Ok();
+            return Ok("Patient Updated");
         }
 
 		//[Authorize(Roles = "admin")]
@@ -87,11 +98,11 @@ namespace HealthHorizon_API.Controllers
             var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == request.Id);
             if (patient == null)
             {
-                return NotFound();
+                return NotFound("Patient Not Found");
             }
             context.Patients.Remove(patient);
             await context.SaveChangesAsync();
-            return Ok();
+            return Ok("Patient Deleted");
         }
     }
 }

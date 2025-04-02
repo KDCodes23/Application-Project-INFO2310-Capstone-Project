@@ -24,7 +24,7 @@ namespace HealthHorizon_API.Controllers
 			var bills = await context.Bills.Include(b => b.Appointment).ToListAsync();
 			if (bills == null)
 			{
-				return NotFound();
+				return NotFound("Bills Not Found");
 			}
 
 			return Ok(bills);
@@ -37,7 +37,7 @@ namespace HealthHorizon_API.Controllers
 			var bill = await context.Bills.Include(b => b.Appointment).FirstOrDefaultAsync(b => b.Id == request.Id);
 			if (bill == null)
 			{
-				return NotFound();
+				return NotFound("Bill Not Found");
 			}
 
 			return Ok(bill);
@@ -49,13 +49,13 @@ namespace HealthHorizon_API.Controllers
 		{
 			if (bill == null)
 			{
-				return BadRequest();
+				return BadRequest("Bill Data Required");
 			}
 
 			await context.Bills.AddAsync(bill);
 			await context.SaveChangesAsync();
 
-			return Ok();
+			return Created();
 		}
 
 		//[Authorize(Roles = "admin, doctor")]
@@ -65,7 +65,7 @@ namespace HealthHorizon_API.Controllers
 			var billDB = await context.Bills.FirstOrDefaultAsync(b => b.Id == bill.Id);
 			if (billDB == null)
 			{
-				return BadRequest();
+				return BadRequest("Bill Data Required");
 			}
 			
 			billDB.Amount = bill.Amount;
@@ -74,7 +74,7 @@ namespace HealthHorizon_API.Controllers
 			billDB.AppointmentId = bill.AppointmentId;
 			await context.SaveChangesAsync();
 
-			return Ok();
+			return Ok("Bill Updated");
 		}
 
 		//[Authorize(Roles = "admin")]
@@ -84,13 +84,13 @@ namespace HealthHorizon_API.Controllers
 			var bill = await context.Bills.FirstOrDefaultAsync(b => b.Id == request.Id);
 			if (bill == null)
 			{
-				return NotFound();
+				return NotFound("Bill Not Found");
 			}
 
 			context.Bills.Remove(bill);
 			await context.SaveChangesAsync();
 
-			return Ok();
+			return Ok("Bill Deleted");
 		}
 	}
 }

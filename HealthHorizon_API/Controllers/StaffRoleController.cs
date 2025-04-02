@@ -24,8 +24,9 @@ namespace HealthHorizon_API.Controllers
 			var roles = await context.Roles.ToListAsync();
 			if (roles == null)
 			{
-				return NotFound();
+				return NotFound("Role Not Found");
 			}
+
 			return Ok(roles);
 		}
 
@@ -36,8 +37,9 @@ namespace HealthHorizon_API.Controllers
 			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == request.Id);
 			if (role == null)
 			{
-				return NotFound();
+				return NotFound("Role Not Found");
 			}
+
 			return Ok(role);
 		}
 
@@ -47,7 +49,8 @@ namespace HealthHorizon_API.Controllers
 		{
 			await context.StaffRoles.AddAsync(newRole);
 			await context.SaveChangesAsync();
-			return Ok();
+
+			return Created();
 		}
 
 		//[Authorize(Roles = "admin")]
@@ -57,12 +60,13 @@ namespace HealthHorizon_API.Controllers
 			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == newRole.Id);
 			if (role == null)
 			{
-				return NotFound();
+				return NotFound("Role Not Found");
 			}
 			role.Title = newRole.Title;
 			role.Description = newRole.Description;
 			await context.SaveChangesAsync();
-			return Ok();
+
+			return Ok("Staff Role Updated");
 		}
 
 		//[Authorize(Roles = "admin")]
@@ -72,11 +76,12 @@ namespace HealthHorizon_API.Controllers
 			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == request.Id);
 			if (role == null)
 			{
-				return NotFound();
+				return NotFound("Role Not Found");
 			}
 			context.StaffRoles.Remove(role);
 			await context.SaveChangesAsync();
-			return Ok();
+
+			return Ok("Staff Role Deleted");
 		}
 	}
 }

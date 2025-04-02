@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace HealthHorizon_API.Models.Entities
 {
@@ -13,8 +12,8 @@ namespace HealthHorizon_API.Models.Entities
 		public string Status { get; set; } = string.Empty;
 
 		[Required]
-		public Guid DoctorSlotId { get; set; }
-        public DoctorSlot? DoctorSlot { get; set; } = null!;
+		public Guid TimeSlotId { get; set; }
+        public TimeSlot? TimeSlot { get; set; } = null!;
 
 		[Required]
 		public Guid DoctorId { get; set; }
