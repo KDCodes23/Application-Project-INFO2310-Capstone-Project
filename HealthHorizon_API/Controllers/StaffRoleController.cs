@@ -12,20 +12,14 @@ namespace HealthHorizon_API.Controllers
 	{
 		private readonly HealthHorizonContext context;
 
-		public StaffRoleController(HealthHorizonContext context)
-		{
-			this.context = context;
-		}
+		public StaffRoleController(HealthHorizonContext context) => this.context = context;
 
 		//[Authorize(Roles = "admin, doctor, staff")]
 		[HttpGet]
 		public async Task<ActionResult<List<StaffRole>>> GetAllRoles()
 		{
 			var roles = await context.Roles.ToListAsync();
-			if (roles == null)
-			{
-				return NotFound("Role Not Found");
-			}
+			if (roles is null) return NotFound("Role Not Found");
 
 			return Ok(roles);
 		}
@@ -34,11 +28,10 @@ namespace HealthHorizon_API.Controllers
 		[HttpGet("get-role")]
 		public async Task<ActionResult<StaffRole>> GetRole([FromBody] IdRequest request)
 		{
-			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == request.Id);
-			if (role == null)
-			{
-				return NotFound("Role Not Found");
-			}
+			if (request is null || request.Id == Guid.Empty) return BadRequest("Id Required");
+
+			var role = await context.StaffRoles.FindAsync(request.Id);
+			if (role is null) return NotFound("Role Not Found");
 
 			return Ok(role);
 		}
@@ -47,6 +40,8 @@ namespace HealthHorizon_API.Controllers
 		[HttpPost]
 		public async Task<ActionResult> PostRole([FromBody] StaffRole newRole)
 		{
+			if (newRole is null) return BadRequest("Role Data Required");
+
 			await context.StaffRoles.AddAsync(newRole);
 			await context.SaveChangesAsync();
 
@@ -57,11 +52,11 @@ namespace HealthHorizon_API.Controllers
 		[HttpPut]
 		public async Task<ActionResult> UpdateRole([FromBody] StaffRole newRole)
 		{
-			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == newRole.Id);
-			if (role == null)
-			{
-				return NotFound("Role Not Found");
-			}
+			if (newRole is null) return BadRequest("Role Data Required");
+
+			var role = await context.StaffRoles.FindAsync(newRole.Id);
+			if (role is null) return NotFound("Role Not Found");
+
 			role.Title = newRole.Title;
 			role.Description = newRole.Description;
 			await context.SaveChangesAsync();
@@ -73,11 +68,11 @@ namespace HealthHorizon_API.Controllers
 		[HttpDelete("delete-role")]
 		public async Task<ActionResult> DeleteRole([FromBody] IdRequest request)
 		{
+			if (request is null || request.Id == Guid.Empty) return BadRequest("Id Required");
+
 			var role = await context.StaffRoles.FirstOrDefaultAsync(x => x.Id == request.Id);
-			if (role == null)
-			{
-				return NotFound("Role Not Found");
-			}
+			if (role is null) return NotFound("Role Not Found");
+
 			context.StaffRoles.Remove(role);
 			await context.SaveChangesAsync();
 

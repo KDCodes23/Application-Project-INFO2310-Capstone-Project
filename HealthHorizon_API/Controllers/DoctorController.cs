@@ -22,7 +22,7 @@ namespace HealthHorizon_API.Controllers
 		public async Task<ActionResult<List<StaffRole>>> GetAllDoctors()
 		{
 			var doctors = await context.Doctors.ToListAsync();
-			if (doctors == null)
+			if (doctors is null)
 			{
 				return NotFound("Doctors Not Found");
 			}
@@ -33,10 +33,15 @@ namespace HealthHorizon_API.Controllers
 		[HttpGet("get-doctor")]
 		public async Task<ActionResult<StaffRole>> GetDoctor([FromBody] IdRequest request)
 		{
-			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == request.Id);
-			if (doctor == null)
+			if (request is null || request.Id == Guid.Empty)
 			{
-				return NotFound();
+				return BadRequest("Id Required");
+			}
+
+			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == request.Id);
+			if (doctor is null)
+			{
+				return NotFound("Doctor Not Found");
 			}
 			return Ok(doctor);
 		}
@@ -45,7 +50,7 @@ namespace HealthHorizon_API.Controllers
 		[HttpPost]
 		public async Task<ActionResult> PostDoctor([FromBody] Doctor newDocotor)
 		{
-			if (newDocotor == null)
+			if (newDocotor is null)
 			{
 				return BadRequest("Doctor Data Required");
 			}
@@ -59,13 +64,13 @@ namespace HealthHorizon_API.Controllers
 		[HttpPut]
 		public async Task<ActionResult> UpdateDoctor([FromBody] Doctor newDoctor)
 		{
-			if (newDoctor == null)
+			if (newDoctor is null)
 			{
 				return BadRequest("Doctor Data Required");	
 			}
 
 			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == newDoctor.Id);
-			if (doctor == null)
+			if (doctor is null)
 			{
 				return NotFound("Doctor Not Found");
 			}
@@ -88,8 +93,13 @@ namespace HealthHorizon_API.Controllers
 		[HttpDelete("delete-doctor")]
 		public async Task<ActionResult> DeleteDoctor([FromBody] IdRequest request)
 		{
+			if (request is null || request.Id == Guid.Empty)
+			{
+				return BadRequest("Id Required");
+			}
+
 			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == request.Id);
-			if (doctor == null)
+			if (doctor is null)
 			{
 				return NotFound("Doctor Not Found");
 			}

@@ -22,7 +22,7 @@ namespace HealthHorizon_API.Controllers
 		public async Task<ActionResult<List<AIChatLog>>> GetAllAiChatLogs()
 		{
 			var logs = await context.AIChatLogs.Include(l => l.Patient).ToListAsync();
-			if (logs == null)
+			if (logs is null)
 			{
 				return NotFound("Chat Logs Not Found");
 			}
@@ -30,12 +30,34 @@ namespace HealthHorizon_API.Controllers
 			return Ok(logs);
 		}
 
+		[HttpGet("patient-chat-logs")]
+		public async Task<ActionResult<List<AIChatLog>>> GetPatientChatLogs([FromBody] IdRequest request)
+		{
+			if (request is null || request.Id == Guid.Empty)
+			{
+				return BadRequest("Id Requred");
+			}
+
+			var logs = await context.AIChatLogs.Include(l => l.Patient).Where(l => l.PatientId == request.Id).ToListAsync();
+			if (logs is null)
+			{
+				return NotFound("Chat Logs Not Found");
+			}
+
+			return Ok(logs);	
+		}
+
 		//[Authorize(Roles = "admin, patient")]
 		[HttpGet("get-chat-log")]
 		public async Task<ActionResult<AIChatLog>> GetAiChatLog([FromBody] IdRequest request)
 		{
+			if (request is null || request.Id == Guid.Empty)
+			{
+				return BadRequest("Id Requred");
+			}
+
 			var log = await context.AIChatLogs.Include(l => l.Patient).FirstOrDefaultAsync(l => l.Id == request.Id);
-			if (log == null)
+			if (log is null)
 			{
 				return NotFound("Chat Log Not Found");
 			}
@@ -47,7 +69,7 @@ namespace HealthHorizon_API.Controllers
 		[HttpPost]
 		public async Task<ActionResult> PostAiChatLog([FromBody] AIChatLog log)
 		{
-			if (log == null)
+			if (log is null)
 			{
 				return BadRequest("Chat Log Data Required");
 			}
@@ -61,8 +83,13 @@ namespace HealthHorizon_API.Controllers
 		[HttpPut]
 		public async Task<ActionResult> UpdateAiChatLog([FromBody] AIChatLog log)
 		{
+			if (log is null)
+			{
+				return BadRequest("Chat Log Data Required");
+			}
+
 			var logDB = await context.AIChatLogs.FirstOrDefaultAsync(l => l.Id == log.Id);
-			if (logDB == null)
+			if (logDB is null)
 			{
 				return NotFound("Chat Log Not Found");
 			}
@@ -79,8 +106,13 @@ namespace HealthHorizon_API.Controllers
 		[HttpDelete("{id:int}")]
 		public async Task<ActionResult> DeleteAiChatLog([FromBody] IdRequest request)
 		{
+			if (request is null || request.Id == Guid.Empty)
+			{
+				return BadRequest("Id Requred");
+			}
+
 			var log = await context.AIChatLogs.FirstOrDefaultAsync(l => l.Id == request.Id);
-			if (log == null)
+			if (log is null)
 			{
 				return NotFound("Chat Log Data Required");
 			}

@@ -1,4 +1,5 @@
-﻿using HealthHorizon_API.Models.Entities;
+﻿using HealthHorizon_API.Models.DTOs;
+using HealthHorizon_API.Models.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace HealthHorizon_API.Models.Identities
@@ -12,8 +13,8 @@ namespace HealthHorizon_API.Models.Identities
 		[Required]
 		public string Password { get; set; } = string.Empty;
 
-		public Doctor? Doctor { get; set; }
-		public Staff? Staff { get; set; }
-		public Patient? Patient { get; set; }
+		public DoctorDTO? Doctor { get; set; }
+		public StaffDTO? Staff { get; set; }
+		public PatientDTO? Patient { get; set; }
 	}
 }

@@ -22,7 +22,7 @@ namespace HealthHorizon_API.Controllers
 		public async Task<ActionResult<List<Feedback>>> GetAllFeedbacks()
 		{
 			var feedbacks = await context.Feedbacks.ToListAsync();
-			if (feedbacks == null)
+			if (feedbacks is null)
 			{
 				return NotFound("Feedbacks Not Found");
 			}
@@ -34,8 +34,13 @@ namespace HealthHorizon_API.Controllers
 		[HttpGet("get-feedback")]
 		public async Task<ActionResult<Feedback>> GetFeedback([FromBody] IdRequest request)
 		{
+			if (request is null || request.Id == Guid.Empty)
+			{
+				return BadRequest("Id Required");
+			}
+
 			var feedback = await context.Feedbacks.FirstOrDefaultAsync(f => f.Id == request.Id);
-			if (feedback == null)
+			if (feedback is null)
 			{
 				return NotFound("Feedback Not Found");
 			}
@@ -47,7 +52,7 @@ namespace HealthHorizon_API.Controllers
 		[HttpPost]
 		public async Task<ActionResult> PostFeedback([FromBody] Feedback newFeedback)
 		{
-			if (newFeedback == null)
+			if (newFeedback is null)
 			{
 				return BadRequest("Feedback Data Required");
 			}
@@ -62,13 +67,13 @@ namespace HealthHorizon_API.Controllers
 		[HttpPut]
 		public async Task<ActionResult> UpdateFeddback([FromBody] Feedback newFeedback)
 		{
-			if (newFeedback == null)
+			if (newFeedback is null)
 			{
 				return BadRequest("Feedback Data Required");
 			}
 
 			var feedbackDB = await context.Feedbacks.FirstOrDefaultAsync(f => f.Id == newFeedback.Id);
-			if (feedbackDB == null)
+			if (feedbackDB is null)
 			{
 				return NotFound("Feedback Not Found");
 			}
@@ -83,8 +88,13 @@ namespace HealthHorizon_API.Controllers
 		[HttpDelete("delete-feedback")]
 		public async Task<ActionResult> DeleteFeedback([FromBody] IdRequest request)
 		{
+			if (request is null || request.Id == Guid.Empty)
+			{
+				return BadRequest("Id Required");
+			}
+
 			var feedback = await context.Feedbacks.FirstOrDefaultAsync(fb => fb.Id == request.Id);
-			if (feedback == null)
+			if (feedback is null)
 			{
 				return NotFound("Feedback Not Found");
 			}

@@ -22,7 +22,7 @@ namespace HealthHorizon_API.Controllers
 		public async Task<ActionResult<List<Prescription>>> GetAllPrescriptions()
 		{
 			var prescriptions = await context.Prescriptions.Include(p => p.Appointment).ToListAsync();
-			if (prescriptions == null)
+			if (prescriptions is null)
 			{
 				return NotFound("Prescriptions Not Found");
 			}
@@ -36,8 +36,13 @@ namespace HealthHorizon_API.Controllers
 		[HttpGet("get-prescription")]
 		public async Task<ActionResult<Prescription>> GetPrescription([FromBody] IdRequest request)
 		{
+			if (request is null || request.Id == Guid.Empty)
+			{
+				return BadRequest("Id Required");
+			}
+
 			var prescription = await context.Prescriptions.Include(p => p.Appointment).FirstOrDefaultAsync(p => p.Id == request.Id);
-			if (prescription == null)
+			if (prescription is null)
 			{
 				return NotFound("Prescription Not Found");
 			}
@@ -47,14 +52,14 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin, doctor")]
 		[HttpPost]
-		public async Task<ActionResult> PostPrescription([FromBody] Prescription prescription)
+		public async Task<ActionResult> PostPrescription([FromBody] Prescription newPrescription)
 		{
-			if (prescription == null)
+			if (newPrescription is null)
 			{
 				return BadRequest("Prescription Data Required");
 			}
 
-			await context.Prescriptions.AddAsync(prescription);
+			await context.Prescriptions.AddAsync(newPrescription);
 			await context.SaveChangesAsync();
 
 			return Created();
@@ -62,18 +67,23 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin, doctor")]
 		[HttpPut]
-		public async Task<ActionResult> UpdatePrescription([FromBody] Prescription prescription)
+		public async Task<ActionResult> UpdatePrescription([FromBody] Prescription newPrescription)
 		{
-			var prescriptionDB = await context.Prescriptions.FirstOrDefaultAsync(p => p.Id == prescription.Id);
-			if (prescriptionDB == null)
+			if (newPrescription is null)
+			{
+				return BadRequest("Prescription Data Required");
+			}
+
+			var prescriptionDB = await context.Prescriptions.FirstOrDefaultAsync(p => p.Id == newPrescription.Id);
+			if (prescriptionDB is null)
 			{
 				return NotFound("Prescription Not Found");
 			}
 
-			prescriptionDB.MedicationName = prescription.MedicationName;
-			prescriptionDB.Dosage = prescription.Dosage;
-			prescriptionDB.Instructions = prescription.Instructions;
-			prescriptionDB.AppointmentId = prescription.AppointmentId;
+			prescriptionDB.MedicationName = newPrescription.MedicationName;
+			prescriptionDB.Dosage = newPrescription.Dosage;
+			prescriptionDB.Instructions = newPrescription.Instructions;
+			prescriptionDB.AppointmentId = newPrescription.AppointmentId;
 			await context.SaveChangesAsync();
 
 			return Ok("Prescription Updated");
@@ -83,8 +93,13 @@ namespace HealthHorizon_API.Controllers
 		[HttpDelete]
 		public async Task<ActionResult> DeletePrescription([FromBody] IdRequest request)
 		{
+			if (request is null || request.Id == Guid.Empty)
+			{
+				return BadRequest("Id Required");
+			}
+
 			var prescription = await context.Prescriptions.FirstOrDefaultAsync(p => p.Id == request.Id);
-			if (prescription == null)
+			if (prescription is null)
 			{
 				return NotFound("Prescription Not Found");
 			}

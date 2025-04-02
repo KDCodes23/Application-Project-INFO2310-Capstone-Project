@@ -30,23 +30,14 @@ namespace HealthHorizon_API.Controllers
 		[HttpPost("register-doctor")]
 		public async Task<ActionResult> RegisterDoctor([FromBody] Register request)
 		{
-			if (request.Doctor == null)
-			{
-				return BadRequest();
-			}
+			if (request.Doctor is null) return BadRequest();
 
 			try
 			{
-                if (!ModelState.IsValid)
-				{
-					return BadRequest(ModelState);
-				}
+                if (!ModelState.IsValid) return BadRequest(ModelState);
                     
                 var existingUser = await userManager.FindByEmailAsync(request.Email);
-                if (existingUser != null)
-                {
-                    return BadRequest("Email already registered!");
-                }
+                if (existingUser != null) return BadRequest("Email already registered!");
 
                 var user = new IdentityUser
                 {
@@ -57,10 +48,7 @@ namespace HealthHorizon_API.Controllers
                 };
 
                 var result = await userManager.CreateAsync(user, request.Password);
-                if (!result.Succeeded)
-                {
-                    return BadRequest();
-                }
+                if (!result.Succeeded) return BadRequest();
 
                 await userManager.AddToRoleAsync(user, "doctor");
 
@@ -72,8 +60,7 @@ namespace HealthHorizon_API.Controllers
                     PhoneNumber = request.Doctor.PhoneNumber,
                     HospitalName = request.Doctor.HospitalName,
                     ProfessionalBio = request.Doctor.ProfessionalBio,
-                    UserId = user.Id,
-                    User = user
+					UserId = user.Id
                 };
 
                 await context.Doctors.AddAsync(doctor);
@@ -91,23 +78,14 @@ namespace HealthHorizon_API.Controllers
 		[HttpPost("register-patient")]
 		public async Task<ActionResult> RegisterPatient([FromBody] Register request)
 		{
-			if (request.Patient == null)
-			{
-				return BadRequest();
-			}
+			if (request.Patient is null) return BadRequest();
 
 			try
 			{
-                if (!ModelState.IsValid)
-				{
-					return BadRequest(ModelState);
-				}
+                if (!ModelState.IsValid) return BadRequest(ModelState);
 
                 var existingUser = await userManager.FindByEmailAsync(request.Email);
-				if (existingUser != null)
-				{
-					return BadRequest("Email already registered!");
-				}
+				if (existingUser != null) return BadRequest("Email already registered!");
 
 				var user = new IdentityUser
 				{
@@ -124,35 +102,31 @@ namespace HealthHorizon_API.Controllers
 
                 await userManager.AddToRoleAsync(user, "patient");
 
-				var patient = new Patient
+				Patient patient = new Patient
 				{
 					FirstName = request.Patient.FirstName,
                     LastName = request.Patient.LastName,
                     DateOfBirth = request.Patient.DateOfBirth,
 					PhoneNumber = request.Patient.PhoneNumber,
                     Gender = request.Patient.Gender,
-                    AddressId = request.Patient.AddressId,
-					UserId = user.Id,
-					User = user
+					UserId = user.Id
 				};
 
-                if (request.Patient.Address != null)
-                {
-                    var address = new Address
-                    {
-                        Street = request.Patient.Address.Street,
-                        City = request.Patient.Address.City,
-                        ProvinceOrState = request.Patient.Address.ProvinceOrState,
-                        Country = request.Patient.Address.Country,
-                        PostalCode = request.Patient.Address.PostalCode
-                    };
+				Address address = new Address
+				{
+					Street = request.Patient.Address.Street,
+					City = request.Patient.Address.City,
+					ProvinceOrState = request.Patient.Address.ProvinceOrState,
+					Country = request.Patient.Address.Country,
+					PostalCode = request.Patient.Address.PostalCode,
+					PatientId = patient.Id
+				};
 
-                    context.Addresses.Add(address);
-                    await context.SaveChangesAsync();
-                    patient.AddressId = address.Id;
-                }
+				await context.Addresses.AddAsync(address);
 
-                await context.Patients.AddAsync(patient);
+				patient.AddressId = address.Id;
+
+				await context.Patients.AddAsync(patient);
 				await context.SaveChangesAsync();
 
                 return Created();
@@ -170,7 +144,7 @@ namespace HealthHorizon_API.Controllers
 		[HttpPost("register-staff")]
 		public async Task<ActionResult> RegisterStaff([FromBody] Register request)
 		{
-			if (request.Staff == null)
+			if (request.Staff is null)
 			{
 				return BadRequest();
 			}
@@ -219,7 +193,7 @@ namespace HealthHorizon_API.Controllers
 			{
 				Guid id = Guid.Empty;
                 var user = await userManager.FindByEmailAsync(request.Email);
-                if (user == null)
+                if (user is null)
                 {
                     return NotFound();
                 }
@@ -234,7 +208,7 @@ namespace HealthHorizon_API.Controllers
 				if (role == "doctor")
 				{
 					var doctor = await context.Doctors.FirstOrDefaultAsync(d => d.UserId == user.Id);
-					if (doctor == null)
+					if (doctor is null)
 					{
 						return NotFound("Doctor does not exist");
 					}
@@ -243,7 +217,7 @@ namespace HealthHorizon_API.Controllers
 				else if (role == "staff")
 				{
 					var staff = await context.StaffMembers.FirstOrDefaultAsync(d => d.UserId == user.Id);
-					if (staff == null)
+					if (staff is null)
 					{
 						return NotFound("Staff member does not exist.");
 					}
@@ -252,7 +226,7 @@ namespace HealthHorizon_API.Controllers
 				else if (role == "patient")
 				{
 					var patient = await context.Patients.FirstOrDefaultAsync(d => d.UserId == user.Id);
-					if (patient == null)
+					if (patient is null)
 					{
 						return NotFound("Patient does not exist.");
 					}

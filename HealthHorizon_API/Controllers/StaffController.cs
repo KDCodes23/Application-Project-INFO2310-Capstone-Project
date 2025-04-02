@@ -12,20 +12,14 @@ namespace HealthHorizon_API.Controllers
 	{
 		private readonly HealthHorizonContext context;
 
-		public StaffController(HealthHorizonContext context)
-		{
-			this.context = context;
-		}
+		public StaffController(HealthHorizonContext context) => this.context = context;
 
 		//[Authorize(Roles = "admin, doctor")]
 		[HttpGet]
 		public async Task<ActionResult<List<Staff>>> GetAllStaff()
 		{
 			var staff = await context.StaffMembers.Include(s => s.Role).ToListAsync();
-			if (staff == null)
-			{
-				return NotFound("Staff Not Found");
-			}
+			if (staff is null) return NotFound("Staff Not Found");
 
 			return Ok(staff);
 		}
@@ -34,11 +28,10 @@ namespace HealthHorizon_API.Controllers
 		[HttpGet("get-staff-member")]
 		public async Task<ActionResult<Staff>> GetStaff([FromBody] IdRequest request)
 		{
+			if (request is null || request.Id == Guid.Empty) return BadRequest("Id Required");
+
 			var staff = await context.StaffMembers.Include(s => s.Role).FirstOrDefaultAsync(s => s.Id == request.Id);
-			if (staff == null)
-			{
-				return NotFound("Staff Not Found");
-			}
+			if (staff is null) return NotFound("Staff Not Found");
 
 			return Ok(staff);
 		}
@@ -47,10 +40,7 @@ namespace HealthHorizon_API.Controllers
 		[HttpPost]
 		public async Task<ActionResult> PostStaff([FromBody] Staff staff)
 		{
-			if (staff == null)
-			{
-				return BadRequest("Data Required");
-			}
+			if (staff is null) return BadRequest("Staff Data Required");
 
 			await context.StaffMembers.AddAsync(staff);
 			await context.SaveChangesAsync();
@@ -60,18 +50,17 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		[HttpPut]
-		public async Task<ActionResult> UpdateStaff([FromBody] Staff staff)
+		public async Task<ActionResult> UpdateStaff([FromBody] Staff newStaff)
 		{
-			var staffDB = await context.StaffMembers.FirstOrDefaultAsync(s => s.Id == staff.Id);
-			if (staffDB == null)
-			{
-				return BadRequest("Data Required");
-			}
+			if (newStaff is null) return BadRequest("Staff Data Required");
 
-			staffDB.Name = staff.Name;
-			staffDB.User.Email = staff.User.Email;
-			staffDB.PhoneNumber = staff.PhoneNumber;
-			staffDB.RoleId = staff.RoleId;
+			var staffDB = await context.StaffMembers.FirstOrDefaultAsync(s => s.Id == newStaff.Id);
+			if (staffDB is null) return BadRequest("Data Required");
+
+			staffDB.Name = newStaff.Name;
+			staffDB.User.Email = newStaff.User.Email;
+			staffDB.PhoneNumber = newStaff.PhoneNumber;
+			staffDB.RoleId = newStaff.RoleId;
 			await context.SaveChangesAsync();
 
 			return Ok();
@@ -82,10 +71,7 @@ namespace HealthHorizon_API.Controllers
 		public async Task<ActionResult> DeleteStaff([FromBody] IdRequest request)
 		{
 			var staff = await context.StaffMembers.FirstOrDefaultAsync(s => s.Id == request.Id);
-			if (staff == null)
-			{
-				return NotFound("Staff Not Found");
-			}
+			if (staff is null) return NotFound("Staff Not Found");
 
 			context.StaffMembers.Remove(staff);
 			await context.SaveChangesAsync();

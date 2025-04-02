@@ -22,7 +22,7 @@ namespace HealthHorizon_API.Controllers
 		public async Task<ActionResult<List<Bill>>> GetAllBills()
 		{
 			var bills = await context.Bills.Include(b => b.Appointment).ToListAsync();
-			if (bills == null)
+			if (bills is null)
 			{
 				return NotFound("Bills Not Found");
 			}
@@ -34,8 +34,13 @@ namespace HealthHorizon_API.Controllers
 		[HttpGet("get-bill")]
 		public async Task<ActionResult<Bill>> GetBill([FromBody] IdRequest request)
 		{
+			if (request is null || request.Id == Guid.Empty)
+			{
+				return BadRequest("Id Required");
+			}
+
 			var bill = await context.Bills.Include(b => b.Appointment).FirstOrDefaultAsync(b => b.Id == request.Id);
-			if (bill == null)
+			if (bill is null)
 			{
 				return NotFound("Bill Not Found");
 			}
@@ -45,14 +50,14 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin, doctor")]
 		[HttpPost]
-		public async Task<ActionResult> PostBill([FromBody] Bill bill)
+		public async Task<ActionResult> PostBill([FromBody] Bill newBill)
 		{
-			if (bill == null)
+			if (newBill is null)
 			{
 				return BadRequest("Bill Data Required");
 			}
 
-			await context.Bills.AddAsync(bill);
+			await context.Bills.AddAsync(newBill);
 			await context.SaveChangesAsync();
 
 			return Created();
@@ -60,18 +65,23 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin, doctor")]
 		[HttpPut]
-		public async Task<ActionResult> UpdateBill([FromBody] Bill bill)
+		public async Task<ActionResult> UpdateBill([FromBody] Bill newBill)
 		{
-			var billDB = await context.Bills.FirstOrDefaultAsync(b => b.Id == bill.Id);
-			if (billDB == null)
+			if (newBill is null)
 			{
 				return BadRequest("Bill Data Required");
 			}
+
+			var billDB = await context.Bills.FirstOrDefaultAsync(b => b.Id == newBill.Id);
+			if (billDB is null)
+			{
+				return NotFound("Bill NotFound");
+			}
 			
-			billDB.Amount = bill.Amount;
-			billDB.PaymentMethod = bill.PaymentMethod;
-			billDB.Date = bill.Date;
-			billDB.AppointmentId = bill.AppointmentId;
+			billDB.Amount = newBill.Amount;
+			billDB.PaymentMethod = newBill.PaymentMethod;
+			billDB.Date = newBill.Date;
+			billDB.AppointmentId = newBill.AppointmentId;
 			await context.SaveChangesAsync();
 
 			return Ok("Bill Updated");
@@ -81,8 +91,13 @@ namespace HealthHorizon_API.Controllers
 		[HttpDelete("delete-bill")]
 		public async Task<ActionResult> DeleteBill([FromBody] IdRequest request)
 		{
+			if (request is null || request.Id == Guid.Empty)
+			{
+				return BadRequest("Id Required");
+			}
+
 			var bill = await context.Bills.FirstOrDefaultAsync(b => b.Id == request.Id);
-			if (bill == null)
+			if (bill is null)
 			{
 				return NotFound("Bill Not Found");
 			}

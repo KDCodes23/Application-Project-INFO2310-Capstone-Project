@@ -99,6 +99,32 @@
     ]
   },
   {
+    "ContainingType": "HealthHorizon_API.Controllers.AIChatController",
+    "Method": "GetPatientChatLogs",
+    "RelativePath": "api/AIChat/patient-chat-logs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.AIChatLog, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
     "Method": "GetAllAppointments",
     "RelativePath": "api/Appointment",
@@ -168,6 +194,32 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
+    "Method": "GetDoctorAppointments",
+    "RelativePath": "api/Appointment/doctor-appointments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.Appointment, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
     "Method": "GetAppointment",
     "RelativePath": "api/Appointment/get-appointment",
     "HttpMethod": "GET",
@@ -183,6 +235,32 @@
     "ReturnTypes": [
       {
         "Type": "HealthHorizon_API.Models.Entities.Appointment",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AppointmentController",
+    "Method": "GetPatientAppointments",
+    "RelativePath": "api/Appointment/patient-appointments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.Appointment, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -285,7 +363,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "bill",
+        "Name": "newBill",
         "Type": "HealthHorizon_API.Models.Entities.Bill",
         "IsRequired": true
       }
@@ -301,7 +379,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "bill",
+        "Name": "newBill",
         "Type": "HealthHorizon_API.Models.Entities.Bill",
         "IsRequired": true
       }
@@ -707,7 +785,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "prescription",
+        "Name": "newPrescription",
         "Type": "HealthHorizon_API.Models.Entities.Prescription",
         "IsRequired": true
       }
@@ -723,7 +801,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "prescription",
+        "Name": "newPrescription",
         "Type": "HealthHorizon_API.Models.Entities.Prescription",
         "IsRequired": true
       }
@@ -927,7 +1005,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "staff",
+        "Name": "newStaff",
         "Type": "HealthHorizon_API.Models.Entities.Staff",
         "IsRequired": true
       }
@@ -1061,6 +1139,110 @@
     "ReturnTypes": [
       {
         "Type": "HealthHorizon_API.Models.Entities.StaffRole",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.TimeSlotController",
+    "Method": "GetAllTimeSlots",
+    "RelativePath": "api/TimeSlot",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.TimeSlot, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.TimeSlotController",
+    "Method": "GetTimeSlot",
+    "RelativePath": "api/TimeSlot",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HealthHorizon_API.Models.Entities.TimeSlot",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.TimeSlotController",
+    "Method": "UpdateTimeSlot",
+    "RelativePath": "api/TimeSlot",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newTimeSlot",
+        "Type": "HealthHorizon_API.Models.DTOs.TimeSlotDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.TimeSlotController",
+    "Method": "DeleteTimeSlot",
+    "RelativePath": "api/TimeSlot",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.TimeSlotController",
+    "Method": "GetPatientTimeSlots",
+    "RelativePath": "api/TimeSlot/patient-slots",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.TimeSlot, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
