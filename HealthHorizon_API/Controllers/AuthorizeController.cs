@@ -186,7 +186,7 @@ namespace HealthHorizon_API.Controllers
                 var result = await signInManager.PasswordSignInAsync(user, request.Password, false, false);
                 if (!result.Succeeded) return Unauthorized();
 
-                var token = jwtTokenService.GenerateJwtTokenAsync(user);
+                var token = await jwtTokenService.GenerateJwtTokenAsync(user);
 				var role = (await userManager.GetRolesAsync(user)).FirstOrDefault();
 
 				if (role == "doctor")
@@ -208,7 +208,7 @@ namespace HealthHorizon_API.Controllers
 					id = patient.Id;
 				}
 
-				return Ok(new
+				return Ok(new LoginResponse
 				{
 					Token = token,
 					Role = role,

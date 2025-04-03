@@ -1,6 +1,5 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
-using HealthHorizon_API.Models.UtilityModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,14 +33,14 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize]
 		[HttpGet("get-prescription")]
-		public async Task<ActionResult<Prescription>> GetPrescription([FromBody] IdRequest request)
+		public async Task<ActionResult<Prescription>> GetPrescription([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty)
+			if (id == Guid.Empty)
 			{
 				return BadRequest("Id Required");
 			}
 
-			var prescription = await context.Prescriptions.Include(p => p.Appointment).FirstOrDefaultAsync(p => p.Id == request.Id);
+			var prescription = await context.Prescriptions.Include(p => p.Appointment).FirstOrDefaultAsync(p => p.Id == id);
 			if (prescription is null)
 			{
 				return NotFound("Prescription Not Found");
@@ -91,14 +90,14 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin, doctor")]
 		[HttpDelete]
-		public async Task<ActionResult> DeletePrescription([FromBody] IdRequest request)
+		public async Task<ActionResult> DeletePrescription([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty)
+			if (id == Guid.Empty)
 			{
 				return BadRequest("Id Required");
 			}
 
-			var prescription = await context.Prescriptions.FirstOrDefaultAsync(p => p.Id == request.Id);
+			var prescription = await context.Prescriptions.FirstOrDefaultAsync(p => p.Id == id);
 			if (prescription is null)
 			{
 				return NotFound("Prescription Not Found");

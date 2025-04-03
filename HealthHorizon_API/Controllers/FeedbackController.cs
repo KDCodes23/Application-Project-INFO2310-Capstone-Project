@@ -32,14 +32,14 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin, doctor")]
 		[HttpGet("get-feedback")]
-		public async Task<ActionResult<Feedback>> GetFeedback([FromBody] IdRequest request)
+		public async Task<ActionResult<Feedback>> GetFeedback([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty)
+			if (id == Guid.Empty)
 			{
 				return BadRequest("Id Required");
 			}
 
-			var feedback = await context.Feedbacks.FirstOrDefaultAsync(f => f.Id == request.Id);
+			var feedback = await context.Feedbacks.FirstOrDefaultAsync(f => f.Id == id);
 			if (feedback is null)
 			{
 				return NotFound("Feedback Not Found");
@@ -86,14 +86,14 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		[HttpDelete("delete-feedback")]
-		public async Task<ActionResult> DeleteFeedback([FromBody] IdRequest request)
+		public async Task<ActionResult> DeleteFeedback([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty)
+			if (id == Guid.Empty)
 			{
 				return BadRequest("Id Required");
 			}
 
-			var feedback = await context.Feedbacks.FirstOrDefaultAsync(fb => fb.Id == request.Id);
+			var feedback = await context.Feedbacks.FirstOrDefaultAsync(fb => fb.Id == id);
 			if (feedback is null)
 			{
 				return NotFound("Feedback Not Found");

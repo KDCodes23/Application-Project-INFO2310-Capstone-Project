@@ -32,43 +32,20 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize]
 		[HttpGet("get-patient")]
-        public async Task<ActionResult<StaffRole>> GetPatient([FromBody] IdRequest request)
+        public async Task<ActionResult<StaffRole>> GetPatient([FromQuery] Guid id)
         {
-            if (request is null || request.Id == Guid.Empty)
+            if (id == Guid.Empty)
             {
                 return BadRequest("Id Required");
             }
 
-            var patient = await context.Patients.Include(p => p.Address).FirstOrDefaultAsync(x => x.Id == request.Id);
+            var patient = await context.Patients.Include(p => p.Address).FirstOrDefaultAsync(x => x.Id == id);
             if (patient is null)
             {
                 return NotFound("Patient Not Found");
             }
 
             return Ok(patient);
-        }
-
-		//[Authorize(Roles = "admin, doctor, staff")]
-		[HttpPost]
-        public async Task<ActionResult> PostPatient([FromBody] Patient newPatient)
-        {
-            if (newPatient is null)
-            {
-                return BadRequest("Patient Data Required");
-            }
-
-			newPatient.Address = new Address
-            {
-                Street = newPatient.Address.Street,
-                City = newPatient.Address.City,
-                ProvinceOrState = newPatient.Address.ProvinceOrState,
-                Country = newPatient.Address.Country,
-                PostalCode = newPatient.Address.PostalCode
-            };
-		
-            await context.Patients.AddAsync(newPatient);
-            await context.SaveChangesAsync();
-            return Created();
         }
 
 		//[Authorize(Roles = "admin, patient")]
@@ -98,14 +75,14 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		[HttpDelete("delete-patient")]
-        public async Task<ActionResult> DeletePatient([FromBody] IdRequest request)
+        public async Task<ActionResult> DeletePatient([FromQuery] Guid id)
         {
-            if (request is null || request.Id == Guid.Empty)
+            if (id == Guid.Empty)
             {
                 return BadRequest("Id Required");
             }
 
-            var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == request.Id);
+            var patient = await context.Patients.FirstOrDefaultAsync(x => x.Id == id);
             if (patient is null)
             {
                 return NotFound("Patient Not Found");

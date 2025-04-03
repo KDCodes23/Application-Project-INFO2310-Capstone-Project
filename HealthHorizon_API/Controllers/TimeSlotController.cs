@@ -1,7 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.DTOs;
 using HealthHorizon_API.Models.Entities;
-using HealthHorizon_API.Models.UtilityModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,22 +24,22 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpGet("patient-slots")]
-		public async Task<ActionResult<List<TimeSlot>>> GetPatientTimeSlots([FromBody] IdRequest request)
+		public async Task<ActionResult<List<TimeSlot>>> GetPatientTimeSlots([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty) return BadRequest("Patient Id Required");
+			if (id == Guid.Empty) return BadRequest("Patient Id Required");
 
-			var timeSlots = await context.TimeSlots.Include(ts => ts.Schedule).Where(ts => ts.PatientId == request.Id).ToListAsync();
+			var timeSlots = await context.TimeSlots.Include(ts => ts.Schedule).Where(ts => ts.PatientId == id).ToListAsync();
 			if (timeSlots is null) return NotFound("Time Slots Not Found");
 
 			return Ok(timeSlots);
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<TimeSlot>> GetTimeSlot([FromBody] IdRequest request)
+		public async Task<ActionResult<TimeSlot>> GetTimeSlot([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty) return BadRequest("Id Required");
+			if (id == Guid.Empty) return BadRequest("Id Required");
 
-			var timeSlot = await context.TimeSlots.Include(ts => ts.Schedule).FirstOrDefaultAsync(ts => ts.Id == request.Id);
+			var timeSlot = await context.TimeSlots.Include(ts => ts.Schedule).FirstOrDefaultAsync(ts => ts.Id == id);
 			if (timeSlot is null) return NotFound("Time Slot Not Found");
 
 			return Ok(timeSlot);
@@ -66,11 +65,11 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpDelete]
-		public async Task<ActionResult> DeleteTimeSlot([FromBody] IdRequest request)
+		public async Task<ActionResult> DeleteTimeSlot([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty) return BadRequest("Id Required");
+			if (id == Guid.Empty) return BadRequest("Id Required");
 
-			var timeSlot = await context.TimeSlots.FindAsync(request.Id);
+			var timeSlot = await context.TimeSlots.FindAsync(id);
 			if (timeSlot is null) return NotFound("Time Slot Not Found");
 
 			context.TimeSlots.Remove(timeSlot);

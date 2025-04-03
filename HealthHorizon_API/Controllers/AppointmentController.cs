@@ -1,6 +1,5 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
-using HealthHorizon_API.Models.UtilityModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,14 +31,14 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpGet("doctor-appointments")]
-		public async Task<ActionResult<List<Appointment>>> GetDoctorAppointments([FromBody] IdRequest request)
+		public async Task<ActionResult<List<Appointment>>> GetDoctorAppointments([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty)
+			if (id == Guid.Empty)
 			{
 				return BadRequest("Id Required");
 			}
 
-			var appointments = await context.Appointments.Include(a => a.TimeSlot).Include(a => a.Doctor).Include(a => a.Patient).Where(a => a.DoctorId == request.Id).ToListAsync();
+			var appointments = await context.Appointments.Include(a => a.TimeSlot).Include(a => a.Doctor).Include(a => a.Patient).Where(a => a.DoctorId == id).ToListAsync();
 			if (appointments is null)
 			{
 				return NotFound("Appointments Not Found");
@@ -49,14 +48,14 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpGet("patient-appointments")]
-		public async Task<ActionResult<List<Appointment>>> GetPatientAppointments([FromBody] IdRequest request)
+		public async Task<ActionResult<List<Appointment>>> GetPatientAppointments([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty)
+			if (id == Guid.Empty)
 			{
 				return BadRequest("Id Required");
 			}
 
-			var appointments = await context.Appointments.Include(a => a.TimeSlot).Include(a => a.Doctor).Include(a => a.Patient).Where(a => a.PatientId == request.Id).ToListAsync();
+			var appointments = await context.Appointments.Include(a => a.TimeSlot).Include(a => a.Doctor).Include(a => a.Patient).Where(a => a.PatientId == id).ToListAsync();
 			if (appointments is null)
 			{
 				return NotFound("Appointments Not Found");
@@ -67,14 +66,14 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize]
 		[HttpGet("get-appointment")]
-		public async Task<ActionResult<Appointment>> GetAppointment([FromBody] IdRequest request)
+		public async Task<ActionResult<Appointment>> GetAppointment([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty)
+			if (id == Guid.Empty)
 			{
 				return BadRequest("Id Required");
 			}
 
-			var appointment = await context.Appointments.Include(a => a.Doctor).Include(a => a.Patient).FirstOrDefaultAsync(a => a.Id == request.Id);
+			var appointment = await context.Appointments.Include(a => a.Doctor).Include(a => a.Patient).FirstOrDefaultAsync(a => a.Id == id);
 			if (appointment is null)
 			{
 				return NotFound("Appointment Not Found");
@@ -124,14 +123,14 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin, doctor")]
 		[HttpDelete("delete-appointment")]
-		public async Task<ActionResult> DeleteAppointment([FromBody] IdRequest request)
+		public async Task<ActionResult> DeleteAppointment([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty)
+			if (id == Guid.Empty)
 			{
 				return BadRequest("Id Required");
 			}
 
-			var appointment = await context.Appointments.FirstOrDefaultAsync(a => a.Id == request.Id);
+			var appointment = await context.Appointments.FirstOrDefaultAsync(a => a.Id == id);
 			if (appointment is null)
 			{
 				return NotFound("Appointment Not Found");

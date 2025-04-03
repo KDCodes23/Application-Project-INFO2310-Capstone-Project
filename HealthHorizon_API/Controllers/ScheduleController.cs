@@ -1,7 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.DTOs;
 using HealthHorizon_API.Models.Entities;
-using HealthHorizon_API.Models.UtilityModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,11 +24,11 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpGet("Doctor")]
-		public async Task<ActionResult<List<Schedule>>> GetDoctorSchedules([FromBody] IdRequest request)
+		public async Task<ActionResult<List<Schedule>>> GetDoctorSchedules([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty) return BadRequest("Id Required");
+			if (id == Guid.Empty) return BadRequest("Id Required");
 
-			var schedules = await context.Schedules.Include(s => s.TimeSlots).Where(s => s.DoctorId == request.Id).ToListAsync();
+			var schedules = await context.Schedules.Include(s => s.TimeSlots).Where(s => s.DoctorId == id).ToListAsync();
 			if (schedules is null) return NotFound("No Schedules Found For That Doctor.");
 
 			return Ok(schedules);
@@ -108,11 +107,11 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpDelete]
-		public async Task<ActionResult> DeleteSchedule([FromBody] IdRequest request)
+		public async Task<ActionResult> DeleteSchedule([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty) return BadRequest("Id Required");
+			if (id == Guid.Empty) return BadRequest("Id Required");
 
-			var schedule = await context.Schedules.Include(s => s.TimeSlots).FirstOrDefaultAsync(s => s.Id == request.Id);
+			var schedule = await context.Schedules.Include(s => s.TimeSlots).FirstOrDefaultAsync(s => s.Id == id);
 			if (schedule is null) return NotFound("Schedule Not Found");
 
 			context.TimeSlots.RemoveRange(schedule.TimeSlots);

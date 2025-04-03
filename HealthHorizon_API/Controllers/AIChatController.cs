@@ -31,14 +31,14 @@ namespace HealthHorizon_API.Controllers
 		}
 
 		[HttpGet("patient-chat-logs")]
-		public async Task<ActionResult<List<AIChatLog>>> GetPatientChatLogs([FromBody] IdRequest request)
+		public async Task<ActionResult<List<AIChatLog>>> GetPatientChatLogs([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty)
+			if (id == Guid.Empty)
 			{
 				return BadRequest("Id Requred");
 			}
 
-			var logs = await context.AIChatLogs.Include(l => l.Patient).Where(l => l.PatientId == request.Id).ToListAsync();
+			var logs = await context.AIChatLogs.Include(l => l.Patient).Where(l => l.PatientId == id).ToListAsync();
 			if (logs is null)
 			{
 				return NotFound("Chat Logs Not Found");
@@ -49,14 +49,14 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin, patient")]
 		[HttpGet("get-chat-log")]
-		public async Task<ActionResult<AIChatLog>> GetAiChatLog([FromBody] IdRequest request)
+		public async Task<ActionResult<AIChatLog>> GetAiChatLog([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty)
+			if (id == Guid.Empty)
 			{
 				return BadRequest("Id Requred");
 			}
 
-			var log = await context.AIChatLogs.Include(l => l.Patient).FirstOrDefaultAsync(l => l.Id == request.Id);
+			var log = await context.AIChatLogs.Include(l => l.Patient).FirstOrDefaultAsync(l => l.Id == id);
 			if (log is null)
 			{
 				return NotFound("Chat Log Not Found");
@@ -104,14 +104,14 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		[HttpDelete("{id:int}")]
-		public async Task<ActionResult> DeleteAiChatLog([FromBody] IdRequest request)
+		public async Task<ActionResult> DeleteAiChatLog([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty)
+			if (id == Guid.Empty)
 			{
 				return BadRequest("Id Requred");
 			}
 
-			var log = await context.AIChatLogs.FirstOrDefaultAsync(l => l.Id == request.Id);
+			var log = await context.AIChatLogs.FirstOrDefaultAsync(l => l.Id == id);
 			if (log is null)
 			{
 				return NotFound("Chat Log Data Required");

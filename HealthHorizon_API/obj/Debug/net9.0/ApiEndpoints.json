@@ -60,9 +60,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       },
       {
         "Name": "id",
@@ -81,9 +81,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -107,9 +107,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -185,9 +185,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -201,9 +201,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -227,9 +227,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -253,9 +253,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -405,9 +405,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -421,9 +421,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -460,22 +460,6 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
-    "Method": "PostDoctor",
-    "RelativePath": "api/Doctor",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "newDocotor",
-        "Type": "HealthHorizon_API.Models.Entities.Doctor",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.DoctorController",
     "Method": "UpdateDoctor",
     "RelativePath": "api/Doctor",
     "HttpMethod": "PUT",
@@ -499,9 +483,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -515,9 +499,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -593,9 +577,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -609,9 +593,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -668,22 +652,6 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.PatientController",
-    "Method": "PostPatient",
-    "RelativePath": "api/Patient",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "newPatient",
-        "Type": "HealthHorizon_API.Models.Entities.Patient",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.PatientController",
     "Method": "UpdatePatient",
     "RelativePath": "api/Patient",
     "HttpMethod": "PUT",
@@ -707,9 +675,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -723,9 +691,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -769,9 +737,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -827,9 +795,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -843,9 +811,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -905,9 +873,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -953,9 +921,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -992,22 +960,6 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.StaffController",
-    "Method": "PostStaff",
-    "RelativePath": "api/Staff",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "staff",
-        "Type": "HealthHorizon_API.Models.Entities.Staff",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.StaffController",
     "Method": "UpdateStaff",
     "RelativePath": "api/Staff",
     "HttpMethod": "PUT",
@@ -1031,9 +983,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -1047,9 +999,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -1125,9 +1077,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -1141,9 +1093,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -1187,9 +1139,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -1229,9 +1181,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -1245,9 +1197,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "HealthHorizon_API.Models.UtilityModels.IdRequest",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [

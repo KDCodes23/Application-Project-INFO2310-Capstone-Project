@@ -1,6 +1,5 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
-using HealthHorizon_API.Models.UtilityModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,14 +31,14 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize]
 		[HttpGet("get-bill")]
-		public async Task<ActionResult<Bill>> GetBill([FromBody] IdRequest request)
+		public async Task<ActionResult<Bill>> GetBill([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty)
+			if (id == Guid.Empty)
 			{
 				return BadRequest("Id Required");
 			}
 
-			var bill = await context.Bills.Include(b => b.Appointment).FirstOrDefaultAsync(b => b.Id == request.Id);
+			var bill = await context.Bills.Include(b => b.Appointment).FirstOrDefaultAsync(b => b.Id == id);
 			if (bill is null)
 			{
 				return NotFound("Bill Not Found");
@@ -89,14 +88,14 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		[HttpDelete("delete-bill")]
-		public async Task<ActionResult> DeleteBill([FromBody] IdRequest request)
+		public async Task<ActionResult> DeleteBill([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty)
+			if (id == Guid.Empty)
 			{
 				return BadRequest("Id Required");
 			}
 
-			var bill = await context.Bills.FirstOrDefaultAsync(b => b.Id == request.Id);
+			var bill = await context.Bills.FirstOrDefaultAsync(b => b.Id == id);
 			if (bill is null)
 			{
 				return NotFound("Bill Not Found");

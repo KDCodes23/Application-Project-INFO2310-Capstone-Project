@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HealthHorizon_API.Models.Entities;
 using HealthHorizon_API.Models.UtilityModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HealthHorizon_API.Controllers
 {
@@ -17,7 +18,7 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
-		//[Authorize(Roles = "admin, doctor, staff")]
+		[Authorize(Roles = "admin, doctor, staff")]
 		[HttpGet]
 		public async Task<ActionResult<List<StaffRole>>> GetAllDoctors()
 		{
@@ -31,33 +32,19 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin, doctor, staff")]
 		[HttpGet("get-doctor")]
-		public async Task<ActionResult<StaffRole>> GetDoctor([FromBody] IdRequest request)
+		public async Task<ActionResult<StaffRole>> GetDoctor([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty)
+			if (id == Guid.Empty)
 			{
 				return BadRequest("Id Required");
 			}
 
-			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == request.Id);
+			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == id);
 			if (doctor is null)
 			{
 				return NotFound("Doctor Not Found");
 			}
 			return Ok(doctor);
-		}
-
-		//[Authorize(Roles = "admin")]
-		[HttpPost]
-		public async Task<ActionResult> PostDoctor([FromBody] Doctor newDocotor)
-		{
-			if (newDocotor is null)
-			{
-				return BadRequest("Doctor Data Required");
-			}
-
-			await context.Doctors.AddAsync(newDocotor);
-			await context.SaveChangesAsync();
-			return Created();
 		}
 
 		//[Authorize(Roles = "admin, doctor")]
@@ -91,14 +78,14 @@ namespace HealthHorizon_API.Controllers
 
 		//[Authorize(Roles = "admin")]
 		[HttpDelete("delete-doctor")]
-		public async Task<ActionResult> DeleteDoctor([FromBody] IdRequest request)
+		public async Task<ActionResult> DeleteDoctor([FromQuery] Guid id)
 		{
-			if (request is null || request.Id == Guid.Empty)
+			if (id == Guid.Empty)
 			{
 				return BadRequest("Id Required");
 			}
 
-			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == request.Id);
+			var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.Id == id);
 			if (doctor is null)
 			{
 				return NotFound("Doctor Not Found");
