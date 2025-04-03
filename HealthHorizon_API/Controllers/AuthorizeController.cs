@@ -99,18 +99,8 @@ namespace HealthHorizon_API.Controllers
                 {
                     return BadRequest(new { message = "User creation failed", errors = result.Errors });
                 }
-
+				
                 await userManager.AddToRoleAsync(user, "patient");
-
-				Patient patient = new Patient
-				{
-					FirstName = request.Patient.FirstName,
-                    LastName = request.Patient.LastName,
-                    DateOfBirth = request.Patient.DateOfBirth,
-					PhoneNumber = request.Patient.PhoneNumber,
-                    Gender = request.Patient.Gender,
-					UserId = user.Id
-				};
 
 				Address address = new Address
 				{
@@ -118,19 +108,27 @@ namespace HealthHorizon_API.Controllers
 					City = request.Patient.Address.City,
 					ProvinceOrState = request.Patient.Address.ProvinceOrState,
 					Country = request.Patient.Address.Country,
-					PostalCode = request.Patient.Address.PostalCode,
-					PatientId = patient.Id
+					PostalCode = request.Patient.Address.PostalCode
 				};
 
 				await context.Addresses.AddAsync(address);
+				await context.SaveChangesAsync();
 
-				patient.AddressId = address.Id;
+				Patient patient = new Patient
+				{
+					FirstName = request.Patient.FirstName,
+                    LastName = request.Patient.LastName,
+                    DateOfBirth = request.Patient.DateOfBirth,
+					PhoneNumber = request.Patient.PhoneNumber,
+					AddressId = address.Id,
+					Gender = request.Patient.Gender,
+					UserId = user.Id
+				};
 
 				await context.Patients.AddAsync(patient);
 				await context.SaveChangesAsync();
 
-                return Created();
-
+				return Created();
             }
             catch (Exception ex)
             {
@@ -144,16 +142,10 @@ namespace HealthHorizon_API.Controllers
 		[HttpPost("register-staff")]
 		public async Task<ActionResult> RegisterStaff([FromBody] Register request)
 		{
-			if (request.Staff is null)
-			{
-				return BadRequest();
-			}
+			if (request.Staff is null) return BadRequest();
 
 			var existingUser = await userManager.FindByEmailAsync(request.Email);
-			if (existingUser != null)
-			{
-				return BadRequest();
-			}
+			if (existingUser != null) return BadRequest();
 
 			var user = new IdentityUser
 			{
@@ -164,10 +156,7 @@ namespace HealthHorizon_API.Controllers
 			};
 
 			var result = await userManager.CreateAsync(user, request.Password);
-			if (!result.Succeeded)
-			{
-				return BadRequest();
-			}
+			if (!result.Succeeded) return BadRequest();
 
 			await userManager.AddToRoleAsync(user, "staff");
 
@@ -176,8 +165,7 @@ namespace HealthHorizon_API.Controllers
 				Name= request.Staff.Name,
 				PhoneNumber= request.Staff.PhoneNumber,
 				RoleId = request.Staff.RoleId,
-				UserId = user.Id,
-				User = user
+				UserId = user.Id
 			};
 
 			await context.StaffMembers.AddAsync(staff);
@@ -193,43 +181,30 @@ namespace HealthHorizon_API.Controllers
 			{
 				Guid id = Guid.Empty;
                 var user = await userManager.FindByEmailAsync(request.Email);
-                if (user is null)
-                {
-                    return NotFound();
-                }
+                if (user is null) return NotFound("User Not Found");
+
                 var result = await signInManager.PasswordSignInAsync(user, request.Password, false, false);
-                if (!result.Succeeded)
-                {
-                    return Unauthorized();
-                }
+                if (!result.Succeeded) return Unauthorized();
+
                 var token = jwtTokenService.GenerateJwtTokenAsync(user);
 				var role = (await userManager.GetRolesAsync(user)).FirstOrDefault();
 
 				if (role == "doctor")
 				{
 					var doctor = await context.Doctors.FirstOrDefaultAsync(d => d.UserId == user.Id);
-					if (doctor is null)
-					{
-						return NotFound("Doctor does not exist");
-					}
+					if (doctor is null) return NotFound("Doctor does not exist");
 					id = doctor.Id;
 				}
 				else if (role == "staff")
 				{
 					var staff = await context.StaffMembers.FirstOrDefaultAsync(d => d.UserId == user.Id);
-					if (staff is null)
-					{
-						return NotFound("Staff member does not exist.");
-					}
+					if (staff is null) return NotFound("Staff member does not exist.");
 					id = staff.Id;
 				}
 				else if (role == "patient")
 				{
 					var patient = await context.Patients.FirstOrDefaultAsync(d => d.UserId == user.Id);
-					if (patient is null)
-					{
-						return NotFound("Patient does not exist.");
-					}
+					if (patient is null) return NotFound("Patient does not exist.");
 					id = patient.Id;
 				}
 
@@ -245,5 +220,34 @@ namespace HealthHorizon_API.Controllers
                 return StatusCode(500, new { message = "Login failed", errors = ex.Message });
             }
         }
+
+		[HttpDelete]
+		public async Task<ActionResult> DeleteAllUsers()
+		{
+			try
+			{
+				var users = userManager.Users.ToList();
+
+				foreach (var user in users)
+				{
+					var result = await userManager.DeleteAsync(user);
+					if (!result.Succeeded)
+					{
+						return BadRequest(new
+						{
+							message = $"Failed to delete user: {user.Email}",
+							errors = result.Errors
+						});
+					}
+				}
+
+				return Ok(new { message = $"{users.Count} users deleted successfully." });
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error: {ex.Message}");
+				return StatusCode(500, new { message = "Internal server error", error = ex.Message });
+			}
+		}
 	}
 }

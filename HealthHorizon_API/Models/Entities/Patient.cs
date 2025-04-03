@@ -15,13 +15,12 @@ namespace HealthHorizon_API.Models.Entities
 		[Required]
 		public string Gender { get; set; } = string.Empty;
 		[Required]
-		public DateOnly DateOfBirth { get; set; }
+		public DateOnly? DateOfBirth { get; set; }
 		[Required]
 		public string PhoneNumber { get; set; } = string.Empty;
 
-		[Required]
-		public Guid AddressId { get; set; }
-		public Address Address { get; set; } = null!;
+		public Guid? AddressId { get; set; }
+		public Address? Address { get; set; } = null!;
 
 		[ForeignKey("ApplicationUser")]
 		public string UserId { get; set; } = string.Empty;

@@ -16,9 +16,5 @@ namespace HealthHorizon_API.Models.Entities
 		public string Country { get; set; } = string.Empty;
 		[Required]
 		public string PostalCode { get; set; } = string.Empty;
-
-		[Required]
-		public Guid PatientId { get; set; }
-        public Patient? Patient { get; set; } = null;
 	}
 }

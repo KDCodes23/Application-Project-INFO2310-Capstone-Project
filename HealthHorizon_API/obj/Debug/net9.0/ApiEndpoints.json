@@ -272,6 +272,16 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.AuthorizeController",
+    "Method": "DeleteAllUsers",
+    "RelativePath": "api/Authorize",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthHorizon_API.Controllers.AuthorizeController",
     "Method": "Login",
     "RelativePath": "api/Authorize/login",
     "HttpMethod": "POST",

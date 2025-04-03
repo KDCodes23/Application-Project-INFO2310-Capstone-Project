@@ -13,7 +13,7 @@ namespace HealthHorizon_API.Models.Entities
 		[Required]
 		public string PhoneNumber { get; set; } = string.Empty;
 
-		public Guid RoleId { get; set; }
+		public Guid? RoleId { get; set; }
 		public StaffRole? Role { get; set; } = null;
 
 		[ForeignKey("ApplicationUser")]

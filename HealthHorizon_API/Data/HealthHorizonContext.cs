@@ -54,8 +54,8 @@ namespace HealthHorizon_API.Data
 
 			modelBuilder.Entity<Patient>()
 				.HasOne(p => p.Address)
-				.WithOne(a => a.Patient)
-				.HasForeignKey<Patient>(p => p.AddressId)
+				.WithMany()
+				.HasForeignKey(p => p.AddressId)
 				.OnDelete(DeleteBehavior.Restrict);
 
 			modelBuilder.Entity<Staff>()
