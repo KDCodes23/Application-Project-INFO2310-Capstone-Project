@@ -1,5 +1,6 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -86,16 +87,35 @@ namespace HealthHorizon_API.Controllers
 		[HttpPost]
 		public async Task<ActionResult> PostAppointment([FromBody] Appointment appointment)
 		{
-			if (appointment is null)
+			if (appointment == null)
 			{
 				return BadRequest("Appointment Data Required");
 			}
 
+			var timeSlot = await context.TimeSlots
+				.FirstOrDefaultAsync(ts => ts.Id == appointment.TimeSlotId);
+
+			if (timeSlot == null)
+			{
+				return NotFound($"Time Slot with ID {appointment.TimeSlotId} not found");
+			}
+
+			if (!timeSlot.IsAvailible)
+			{
+				return Conflict("Time Slot is already booked.");
+			}
+
+			timeSlot.IsAvailible = false;
+
+			context.TimeSlots.Update(timeSlot);
+			await context.SaveChangesAsync();
+
 			await context.Appointments.AddAsync(appointment);
 			await context.SaveChangesAsync();
 
-            return Created();
-        }
+			return CreatedAtAction(nameof(PostAppointment), new { id = appointment.Id }, appointment);
+		}
+
 
 		//[Authorize(Roles = "admin, doctor")]
 		[HttpPut]
@@ -118,8 +138,8 @@ namespace HealthHorizon_API.Controllers
 			appointmentDB.PatientId = appointment.PatientId;
 
 			await context.SaveChangesAsync();
-            return Ok("Appointment Updated");
-        }
+			return Ok("Appointment Updated");
+		}
 
 		//[Authorize(Roles = "admin, doctor")]
 		[HttpDelete("delete-appointment")]
@@ -139,7 +159,7 @@ namespace HealthHorizon_API.Controllers
 			context.Appointments.Remove(appointment);
 			await context.SaveChangesAsync();
 
-            return Ok("Appointment Deleted");
-        }
+			return Ok("Appointment Deleted");
+		}
 	}
 }
