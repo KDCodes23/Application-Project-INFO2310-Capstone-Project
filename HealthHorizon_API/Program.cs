@@ -25,28 +25,33 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 
 builder.Services.AddScoped<IEmailSender<IdentityUser>, EmailService>();
 
-builder.Services.AddAuthorization();
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
-                    ValidAudience = builder.Configuration["JwtSettings:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]))
-                }
+builder.Services.AddAuthentication(x =>
+    {
+        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    }
+).AddJwtBearer(options =>
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+        ValidAudience = builder.Configuration["JwtSettings:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]))
+    }
 );
 
+builder.Services.AddAuthorization();
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins", policy =>
         {
-                    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-                });
+            policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+        });
 });
 
 var app = builder.Build();

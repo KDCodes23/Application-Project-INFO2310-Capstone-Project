@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HealthHorizon_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+813c5672517ba1aa34b526a96fc25f3c6925bb57")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a830ecc317ef45df880b3ba82b4fbfa96e154aff")]
 [assembly: System.Reflection.AssemblyProductAttribute("HealthHorizon_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HealthHorizon_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

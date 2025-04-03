@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HealthHorizon_API.Models.Entities;
-using HealthHorizon_API.Models.UtilityModels;
 using Microsoft.AspNetCore.Authorization;
 
 namespace HealthHorizon_API.Controllers
@@ -18,7 +17,7 @@ namespace HealthHorizon_API.Controllers
 			this.context = context;
 		}
 
-		[Authorize(Roles = "admin, doctor, staff")]
+		//[Authorize(Roles = "admin")]
 		[HttpGet]
 		public async Task<ActionResult<List<StaffRole>>> GetAllDoctors()
 		{
