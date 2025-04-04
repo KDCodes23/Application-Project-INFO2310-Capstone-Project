@@ -249,5 +249,48 @@ namespace HealthHorizon_API.Controllers
 				return StatusCode(500, new { message = "Internal server error", error = ex.Message });
 			}
 		}
-	}
+
+
+        // Get patient by ID
+        [HttpGet("get-patient/{id}")]
+        public async Task<ActionResult<Patient>> GetPatientById(Guid id)
+        {
+            try
+            {
+                var patient = await context.Patients
+                    .Include(p => p.Address) // Optionally include related data
+                    .FirstOrDefaultAsync(p => p.Id == id);
+
+                if (patient is null)
+                    return NotFound("Patient not found");
+
+                return Ok(patient);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error retrieving patient", error = ex.Message });
+            }
+        }
+
+        // Get doctor by ID
+        [HttpGet("get-doctor/{id}")]
+        public async Task<ActionResult<Doctor>> GetDoctorById(Guid id)
+        {
+            try
+            {
+                var doctor = await context.Doctors
+                    .FirstOrDefaultAsync(d => d.Id == id);
+
+                if (doctor is null)
+                    return NotFound("Doctor not found");
+
+                return Ok(doctor);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error retrieving doctor", error = ex.Message });
+            }
+        }
+
+    }
 }

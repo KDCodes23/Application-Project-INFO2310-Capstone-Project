@@ -1049,35 +1049,14 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.TimeSlotController",
-    "Method": "BookTimeSlot",
-    "RelativePath": "api/TimeSlot/{timeSlotId}/book",
+    "Method": "CreateDoctorTimeSlots",
+    "RelativePath": "api/TimeSlot/schedule/doctor/{doctorId}/all",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "timeSlotId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "dto",
-        "Type": "HealthHorizon_API.Models.DTOs.AppointmentDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.TimeSlotController",
-    "Method": "GetAvailableTimeSlots",
-    "RelativePath": "api/TimeSlot/schedule/{scheduleId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "scheduleId",
+        "Name": "doctorId",
         "Type": "System.Guid",
         "IsRequired": true
       }

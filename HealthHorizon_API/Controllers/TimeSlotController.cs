@@ -86,5 +86,35 @@ namespace HealthHorizon_API.Controllers
 
             return timeSlots;
         }
+
+        // Endpoint to get available time slots for a specific doctor on a selected date
+        [HttpGet("schedule/doctor/{doctorId}")]
+        public async Task<IActionResult> GetAvailableTimeSlotsForSelectedDate([FromRoute] Guid doctorId, [FromQuery] DateOnly date) // Accepting date as a query parameter
+        {
+
+            if (doctorId == Guid.Empty || date == DateOnly.MinValue)
+            {
+                return BadRequest("Invalid doctor or date");
+            }
+
+            var schedules = await context.Schedules
+                .Where(s => s.DoctorId == doctorId && s.Date == date)
+                .Include(s => s.TimeSlots) // Include related timeslots
+                .ToListAsync();
+
+            var availableTimeSlots = schedules
+                .SelectMany(s => s.TimeSlots)
+                .Where(ts => ts.IsAvailable)
+                .Select(ts => new
+                {
+                    TimeSlotId = ts.Id,
+                    Start = ts.Start,
+                    End = ts.End,
+                    IsAvailable = ts.IsAvailable
+                })
+                .ToList();
+
+            return Ok(availableTimeSlots);
+        }
     }
 }

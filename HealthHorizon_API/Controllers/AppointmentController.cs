@@ -56,8 +56,14 @@ namespace HealthHorizon_API.Controllers
 				return BadRequest("Id Required");
 			}
 
-			var appointments = await context.Appointments.Include(a => a.TimeSlot).Include(a => a.Doctor).Include(a => a.Patient).Where(a => a.PatientId == id).ToListAsync();
-			if (appointments is null)
+			var appointments = await context.Appointments
+				.Include(a => a.TimeSlot)
+				.Include(a => a.Doctor)
+				.Include(a => a.Patient)
+				.Where(a => a.PatientId == id)
+				.ToListAsync();
+
+			if (appointments is null || !appointments.Any())
 			{
 				return NotFound("Appointments Not Found");
 			}
@@ -141,25 +147,39 @@ namespace HealthHorizon_API.Controllers
 			return Ok("Appointment Updated");
 		}
 
-		//[Authorize(Roles = "admin, doctor")]
-		[HttpDelete("delete-appointment")]
-		public async Task<ActionResult> DeleteAppointment([FromQuery] Guid id)
-		{
-			if (id == Guid.Empty)
-			{
-				return BadRequest("Id Required");
-			}
+        //[Authorize(Roles = "admin, doctor")]
+        [HttpDelete("delete-appointment")]
+        public async Task<ActionResult> DeleteAppointment([FromQuery] Guid id)
+        {
+            if (id == Guid.Empty)
+            {
+                return BadRequest("Id Required");
+            }
 
-			var appointment = await context.Appointments.FirstOrDefaultAsync(a => a.Id == id);
-			if (appointment is null)
-			{
-				return NotFound("Appointment Not Found");
-			}
+            var appointment = await context.Appointments
+                .Include(a => a.TimeSlot) // Make sure to include the related TimeSlot
+                .FirstOrDefaultAsync(a => a.Id == id);
 
-			context.Appointments.Remove(appointment);
-			await context.SaveChangesAsync();
+            if (appointment is null)
+            {
+                return NotFound("Appointment Not Found");
+            }
 
-			return Ok("Appointment Deleted");
-		}
-	}
+            // Update the IsAvailable property of the related TimeSlot
+            if (appointment.TimeSlot != null)
+            {
+                appointment.TimeSlot.IsAvailable = true;
+                context.Entry(appointment.TimeSlot).State = EntityState.Modified; // Mark the TimeSlot as modified
+            }
+
+            // Remove the appointment from the database
+            context.Appointments.Remove(appointment);
+
+            // Save the changes to the database
+            await context.SaveChangesAsync();
+
+            return Ok("Appointment and TimeSlot updated and appointment deleted");
+        }
+
+    }
 }
