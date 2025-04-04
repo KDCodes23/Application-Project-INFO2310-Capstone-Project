@@ -100,12 +100,12 @@ namespace HealthHorizon_API.Controllers
 				return NotFound($"Time Slot with ID {appointment.TimeSlotId} not found");
 			}
 
-			if (!timeSlot.IsAvailible)
+			if (!timeSlot.IsAvailable)
 			{
 				return Conflict("Time Slot is already booked.");
 			}
 
-			timeSlot.IsAvailible = false;
+			timeSlot.IsAvailable = false;
 
 			context.TimeSlots.Update(timeSlot);
 			await context.SaveChangesAsync();

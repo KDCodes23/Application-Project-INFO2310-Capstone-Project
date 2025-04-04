@@ -830,15 +830,21 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.ScheduleController",
-    "Method": "GetAllSchedules",
-    "RelativePath": "api/Schedule",
+    "Method": "GetScheduleById",
+    "RelativePath": "api/Schedule/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.Schedule, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "HealthHorizon_API.Models.Entities.Schedule",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -850,44 +856,17 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.ScheduleController",
-    "Method": "PostSchedule",
-    "RelativePath": "api/Schedule",
+    "Method": "AddSchedule",
+    "RelativePath": "api/Schedule/doctor/{doctorId}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "scheduleDTO",
-        "Type": "HealthHorizon_API.Models.DTOs.ScheduleDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.ScheduleController",
-    "Method": "DeleteSchedule",
-    "RelativePath": "api/Schedule",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
+        "Name": "doctorId",
         "Type": "System.Guid",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.ScheduleController",
-    "Method": "UpdateScheduleDate",
-    "RelativePath": "api/Schedule/change-date",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
+        "IsRequired": true
+      },
       {
         "Name": "scheduleDTO",
         "Type": "HealthHorizon_API.Models.DTOs.ScheduleDTO",
@@ -895,48 +874,6 @@
       }
     ],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.ScheduleController",
-    "Method": "UpdateScheduleDoctor",
-    "RelativePath": "api/Schedule/change-doctor",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "scheduleDTO",
-        "Type": "HealthHorizon_API.Models.DTOs.ScheduleDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.ScheduleController",
-    "Method": "GetDoctorSchedules",
-    "RelativePath": "api/Schedule/Doctor",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.Schedule, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.StaffController",
@@ -1112,61 +1049,20 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.TimeSlotController",
-    "Method": "GetAllTimeSlots",
-    "RelativePath": "api/TimeSlot",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.TimeSlot, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.TimeSlotController",
-    "Method": "GetTimeSlot",
-    "RelativePath": "api/TimeSlot",
-    "HttpMethod": "GET",
+    "Method": "BookTimeSlot",
+    "RelativePath": "api/TimeSlot/{timeSlotId}/book",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "timeSlotId",
         "Type": "System.Guid",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
+        "IsRequired": true
+      },
       {
-        "Type": "HealthHorizon_API.Models.Entities.TimeSlot",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.TimeSlotController",
-    "Method": "UpdateTimeSlot",
-    "RelativePath": "api/TimeSlot",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "newTimeSlot",
-        "Type": "HealthHorizon_API.Models.DTOs.TimeSlotDTO",
+        "Name": "dto",
+        "Type": "HealthHorizon_API.Models.DTOs.AppointmentDTO",
         "IsRequired": true
       }
     ],
@@ -1174,44 +1070,18 @@
   },
   {
     "ContainingType": "HealthHorizon_API.Controllers.TimeSlotController",
-    "Method": "DeleteTimeSlot",
-    "RelativePath": "api/TimeSlot",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthHorizon_API.Controllers.TimeSlotController",
-    "Method": "GetPatientTimeSlots",
-    "RelativePath": "api/TimeSlot/patient-slots",
+    "Method": "GetAvailableTimeSlots",
+    "RelativePath": "api/TimeSlot/schedule/{scheduleId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "scheduleId",
         "Type": "System.Guid",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[HealthHorizon_API.Models.Entities.TimeSlot, HealthHorizon_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   }
 ]

@@ -52,7 +52,13 @@ namespace HealthHorizon_API.Data
 				.HasForeignKey(ts => ts.ScheduleId)
 				.OnDelete(DeleteBehavior.Restrict);
 
-			modelBuilder.Entity<Patient>()
+            modelBuilder.Entity<TimeSlot>()
+				.HasOne(ts => ts.Doctor)
+				.WithMany()
+				.HasForeignKey(ts => ts.DoctorId)
+				.OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Patient>()
 				.HasOne(p => p.Address)
 				.WithMany()
 				.HasForeignKey(p => p.AddressId)

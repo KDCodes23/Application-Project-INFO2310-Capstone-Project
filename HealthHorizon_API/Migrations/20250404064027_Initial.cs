@@ -347,19 +347,19 @@ namespace HealthHorizon_API.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Start = table.Column<TimeOnly>(type: "time", nullable: false),
                     End = table.Column<TimeOnly>(type: "time", nullable: false),
-                    IsAvailible = table.Column<bool>(type: "bit", nullable: false),
-                    PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false),
+                    DoctorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ScheduleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TimeSlots", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TimeSlots_Patients_PatientId",
-                        column: x => x.PatientId,
-                        principalTable: "Patients",
+                        name: "FK_TimeSlots_Doctors_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctors",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_TimeSlots_Schedules_ScheduleId",
                         column: x => x.ScheduleId,
@@ -1153,9 +1153,9 @@ namespace HealthHorizon_API.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TimeSlots_PatientId",
+                name: "IX_TimeSlots_DoctorId",
                 table: "TimeSlots",
-                column: "PatientId");
+                column: "DoctorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TimeSlots_ScheduleId",

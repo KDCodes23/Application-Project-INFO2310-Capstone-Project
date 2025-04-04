@@ -369,14 +369,14 @@ namespace HealthHorizon_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("DoctorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<TimeOnly>("End")
                         .HasColumnType("time");
 
-                    b.Property<bool>("IsAvailible")
+                    b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
-
-                    b.Property<Guid>("PatientId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ScheduleId")
                         .HasColumnType("uniqueidentifier");
@@ -386,7 +386,7 @@ namespace HealthHorizon_API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PatientId");
+                    b.HasIndex("DoctorId");
 
                     b.HasIndex("ScheduleId");
 
@@ -1666,10 +1666,10 @@ namespace HealthHorizon_API.Migrations
 
             modelBuilder.Entity("HealthHorizon_API.Models.Entities.TimeSlot", b =>
                 {
-                    b.HasOne("HealthHorizon_API.Models.Entities.Patient", "Patient")
+                    b.HasOne("HealthHorizon_API.Models.Entities.Doctor", "Doctor")
                         .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("HealthHorizon_API.Models.Entities.Schedule", "Schedule")
@@ -1678,7 +1678,7 @@ namespace HealthHorizon_API.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Patient");
+                    b.Navigation("Doctor");
 
                     b.Navigation("Schedule");
                 });

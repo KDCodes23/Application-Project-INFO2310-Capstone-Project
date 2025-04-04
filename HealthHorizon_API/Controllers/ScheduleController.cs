@@ -1,6 +1,7 @@
 ﻿using HealthHorizon_API.Data;
 using HealthHorizon_API.Models.DTOs;
 using HealthHorizon_API.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,132 +13,82 @@ namespace HealthHorizon_API.Controllers
 	{
 		private readonly HealthHorizonContext context;
 
-		public ScheduleController(HealthHorizonContext context) => this.context = context;
+        public ScheduleController(HealthHorizonContext context)
+        {
+            this.context = context;
+        }
 
-		[HttpGet]
-		public async Task<ActionResult<List<Schedule>>> GetAllSchedules()
-		{
-			var schedules = await context.Schedules.Include(s => s.TimeSlots).ToListAsync();
-			if (schedules is null) return NotFound("No Schedules Found");
 
-			return Ok(schedules);
-		}
+        [HttpPost("doctor/{doctorId}")]
+        public async Task<IActionResult> AddSchedule(Guid doctorId, [FromBody] ScheduleDTO scheduleDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid schedule data.");
+            }
 
-		[HttpGet("Doctor")]
-		public async Task<ActionResult<List<Schedule>>> GetDoctorSchedules([FromQuery] Guid id)
-		{
-			if (id == Guid.Empty) return BadRequest("Id Required");
+            if (scheduleDTO == null)
+                return BadRequest("Schedule data is required.");
 
-			var schedules = await context.Schedules.Include(s => s.TimeSlots).Where(s => s.DoctorId == id).ToListAsync();
-			if (schedules is null) return NotFound("No Schedules Found For That Doctor.");
+            if (scheduleDTO.Start >= scheduleDTO.End)
+                return BadRequest("Invalid schedule data.");
 
-			return Ok(schedules);
-		}
+            var doctor = await context.Doctors.FindAsync(doctorId);
+            if (doctor == null)
+                return NotFound("Doctor not found.");
 
-		[HttpPost]
-		public async Task<ActionResult> PostSchedule([FromBody] ScheduleDTO scheduleDTO)
-		{
-			if (scheduleDTO is null) return BadRequest("Data Is Null");
+            var newSchedule = new Schedule
+            {
+                Date = scheduleDTO.Date,
+                Start = scheduleDTO.Start,
+                End = scheduleDTO.End,
+                DoctorId = doctorId
+            };
 
-			var doctor = await context.Doctors.FirstOrDefaultAsync(d => d.Id == scheduleDTO.DoctorId);
+            context.Schedules.Add(newSchedule);
+            await context.SaveChangesAsync();
 
-			if (scheduleDTO.Id == Guid.Empty || scheduleDTO.Date == DateOnly.MinValue || scheduleDTO.Start >= scheduleDTO.End || doctor is null)
-				return BadRequest("Schedule Data Required");
+            // Removed code for generating time slots
 
-			Schedule newSchedule = new Schedule
-			{
-				Date = scheduleDTO.Date,
-				Start = scheduleDTO.Start,
-				End = scheduleDTO.End,
-				DoctorId = scheduleDTO.DoctorId
-			};
+            return CreatedAtAction(nameof(GetScheduleById), new { id = newSchedule.Id }, newSchedule);
+        }
 
-			if ((int)(scheduleDTO.End - scheduleDTO.Start).TotalHours < 1) 
-				return BadRequest("Invalid Time Span");
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Schedule>> GetScheduleById(Guid id)
+        {
+            var schedule = await context.Schedules
+                .Include(s => s.TimeSlots)
+                .FirstOrDefaultAsync(s => s.Id == id);
 
-			await context.Schedules.AddAsync(newSchedule);
-			await context.SaveChangesAsync();
-			await CreateTimeSlots(newSchedule);
+            if (schedule == null)
+                return NotFound("Schedule not found.");
 
-			return Created();
-		}
+            return Ok(schedule);
+        }
 
-		[HttpPut("change-doctor")]
-		public async Task<ActionResult> UpdateScheduleDoctor([FromBody] ScheduleDTO scheduleDTO)
-		{
-			if (scheduleDTO is null) return BadRequest("Data Is Null");
+        private List<TimeSlot> GenerateTimeSlots(Schedule schedule)
+        {
+            var timeSlots = new List<TimeSlot>();
+            var currentTime = schedule.Start;
 
-			var schedule = await context.Schedules.FirstOrDefaultAsync(s => s.Id == scheduleDTO.Id);
-			if (schedule is null) return NotFound("Schedule Does Not Exist");
+            while (currentTime < schedule.End)
+            {
+                var endTime = currentTime.Add(TimeSpan.FromMinutes(30)); // Assuming 30-minute slots
+                if (endTime > schedule.End)
+                    break;
 
-			var doctor = await context.Doctors.FirstOrDefaultAsync(d => d.Id == scheduleDTO.DoctorId);
+                timeSlots.Add(new TimeSlot
+                {
+                    Start = currentTime,
+                    End = endTime,
+                    ScheduleId = schedule.Id,
+                    IsAvailable = true
+                });
 
-			if (scheduleDTO.Id == Guid.Empty || scheduleDTO.Date == DateOnly.MinValue || scheduleDTO.Start >= scheduleDTO.End || doctor is null)
-				return BadRequest("Invalid Schedule Data");
+                currentTime = endTime;
+            }
 
-			schedule.DoctorId = scheduleDTO.Id;
-			await context.SaveChangesAsync();
-
-			return Ok("Scheduled Docotr Updated");
-		}
-
-		[HttpPut("change-date")]
-		public async Task<ActionResult> UpdateScheduleDate([FromBody] ScheduleDTO scheduleDTO)
-		{
-			if (scheduleDTO is null) return BadRequest("Data Is Null");
-
-			var schedule = await context.Schedules.Include(s => s.TimeSlots).FirstOrDefaultAsync(s => s.Id == scheduleDTO.Id);
-			if (schedule is null) return NotFound("Schedule Does Not Exist");
-
-			var doctor = await context.Doctors.FirstOrDefaultAsync(d => d.Id == scheduleDTO.DoctorId);
-
-			if (scheduleDTO.Id == Guid.Empty || scheduleDTO.Date == DateOnly.MinValue || scheduleDTO.Start >= scheduleDTO.End || doctor is null)
-				return BadRequest("Schedule Data Required");
-
-			schedule.Date = scheduleDTO.Date;
-			schedule.Start = scheduleDTO.Start;
-			schedule.End = scheduleDTO.End;
-
-			context.TimeSlots.RemoveRange(schedule.TimeSlots);
-
-			await CreateTimeSlots(schedule);
-			await context.SaveChangesAsync();
-
-			return Ok("Schedule Date Updated");
-		}
-
-		[HttpDelete]
-		public async Task<ActionResult> DeleteSchedule([FromQuery] Guid id)
-		{
-			if (id == Guid.Empty) return BadRequest("Id Required");
-
-			var schedule = await context.Schedules.Include(s => s.TimeSlots).FirstOrDefaultAsync(s => s.Id == id);
-			if (schedule is null) return NotFound("Schedule Not Found");
-
-			context.TimeSlots.RemoveRange(schedule.TimeSlots);
-			context.Schedules.Remove(schedule);
-			await context.SaveChangesAsync();
-
-			return Ok("Schedule Deleted");
-		}
-
-		private async Task CreateTimeSlots(Schedule schedule)
-		{
-			int slots = (int)(schedule.End - schedule.Start).TotalHours;
-			int start = (int)schedule.Start.ToTimeSpan().TotalHours;
-			int end = start + 1;
-
-			for (int i = 0; i < slots; i++)
-			{
-				await context.TimeSlots.AddAsync(new TimeSlot 
-				{
-					Start = new TimeOnly(start, 0), 
-					End = new TimeOnly(end, 0),
-					ScheduleId = schedule.Id
-				});
-				start++;
-				end++;
-			}
-		}
-	}
+            return timeSlots;
+        }
+    }
 }

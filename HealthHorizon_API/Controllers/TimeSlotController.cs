@@ -12,70 +12,79 @@ namespace HealthHorizon_API.Controllers
 	{
 		private readonly HealthHorizonContext context;
 
-		public TimeSlotController(HealthHorizonContext context) => this.context = context;
-
-		[HttpGet]
-		public async Task<ActionResult<List<TimeSlot>>> GetAllTimeSlots()
+		public TimeSlotController(HealthHorizonContext context)
 		{
-			var timeSlots = await context.TimeSlots.ToListAsync();
-			if (timeSlots is null) return NotFound("Time Slots Not Found");
-
-			return Ok(timeSlots);
+			this.context = context;
 		}
 
-		[HttpGet("patient-slots")]
-		public async Task<ActionResult<List<TimeSlot>>> GetPatientTimeSlots([FromQuery] Guid id)
-		{
-			if (id == Guid.Empty) return BadRequest("Patient Id Required");
+        [HttpPost("schedule/doctor/{doctorId}/all")]
+        public async Task<IActionResult> CreateDoctorTimeSlots([FromRoute] Guid doctorId)
+        {
+            // Fetch the doctor's schedule to verify their availability
+            var doctorSchedule = await context.Schedules
+                .FirstOrDefaultAsync(s => s.DoctorId == doctorId);
 
-			var timeSlots = await context.TimeSlots.Include(ts => ts.Schedule).Where(ts => ts.PatientId == id).ToListAsync();
-			if (timeSlots is null) return NotFound("Time Slots Not Found");
+            if (doctorSchedule == null)
+            {
+                return NotFound("Doctor's schedule not found.");
+            }
 
-			return Ok(timeSlots);
-		}
+            // Generate time slots based on the schedule's start and end times
+            var timeSlots = GenerateTimeSlots(doctorSchedule);
 
-		[HttpGet]
-		public async Task<ActionResult<TimeSlot>> GetTimeSlot([FromQuery] Guid id)
-		{
-			if (id == Guid.Empty) return BadRequest("Id Required");
+            // Check if the schedule record already exists, if not create a new schedule
+            var schedule = await context.Schedules
+                .FirstOrDefaultAsync(s => s.DoctorId == doctorId);
 
-			var timeSlot = await context.TimeSlots.Include(ts => ts.Schedule).FirstOrDefaultAsync(ts => ts.Id == id);
-			if (timeSlot is null) return NotFound("Time Slot Not Found");
+            if (schedule == null)
+            {
+                // Create a new schedule for the doctor if it doesn't exist
+                schedule = new Schedule
+                {
+                    DoctorId = doctorId,
+                    Start = doctorSchedule.Start,
+                    End = doctorSchedule.End
+                };
+                context.Schedules.Add(schedule);
+                await context.SaveChangesAsync();
+            }
 
-			return Ok(timeSlot);
-		}
+            // Set the ScheduleId for each time slot
+            foreach (var timeSlot in timeSlots)
+            {
+                timeSlot.ScheduleId = schedule.Id; // Link to the schedule's ID
+            }
 
-		[HttpPut]
-		public async Task<ActionResult> UpdateTimeSlot([FromBody] TimeSlotDTO newTimeSlot)
-		{
-			if (newTimeSlot is null) return BadRequest("Time Slot Data Required");
+            // Save the generated time slots to the database
+            await context.TimeSlots.AddRangeAsync(timeSlots);
+            await context.SaveChangesAsync();
 
-			var timeSlotDB = await context.TimeSlots.FindAsync(newTimeSlot.Id);
-			if (timeSlotDB is null) return NotFound("Time Slot Not Found");
+            // Return a response with the created time slots
+            return CreatedAtAction(nameof(CreateDoctorTimeSlots), new { doctorId = doctorId }, timeSlots);
+        }
 
-			timeSlotDB.Start = newTimeSlot.Start;
-			timeSlotDB.End = newTimeSlot.End;
-			timeSlotDB.IsAvailible = newTimeSlot.IsAvailible;
-			timeSlotDB.PatientId = newTimeSlot.PatientId;
-			timeSlotDB.ScheduleId = newTimeSlot.ScheduleId;
 
-			await context.SaveChangesAsync();
+        // Helper method to generate time slots from the doctor's schedule
+        private List<TimeSlot> GenerateTimeSlots(Schedule schedule)
+        {
+            var timeSlots = new List<TimeSlot>();
+            var startTime = schedule.Start;
+            var endTime = schedule.End;
 
-			return Created();
-		}
+            // Generate 1-hour time slots between the start and end time
+            while (startTime < endTime)
+            {
+                timeSlots.Add(new TimeSlot
+                {
+                    DoctorId = schedule.DoctorId,
+                    Start = startTime,
+                    End = startTime.AddHours(1)
+                });
 
-		[HttpDelete]
-		public async Task<ActionResult> DeleteTimeSlot([FromQuery] Guid id)
-		{
-			if (id == Guid.Empty) return BadRequest("Id Required");
+                startTime = startTime.AddHours(1);
+            }
 
-			var timeSlot = await context.TimeSlots.FindAsync(id);
-			if (timeSlot is null) return NotFound("Time Slot Not Found");
-
-			context.TimeSlots.Remove(timeSlot);
-			await context.SaveChangesAsync();
-
-			return Ok("TimeSlot Deleted");
-		}
-	}
+            return timeSlots;
+        }
+    }
 }
